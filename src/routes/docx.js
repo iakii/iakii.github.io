@@ -7,12 +7,13 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import Editor from '@monaco-editor/react';
+import Editor from "@monaco-editor/react";
 import { Button, Space, Typography, Upload, message } from "antd";
 import art from "../core/template";
 import { createFileRoute } from "@tanstack/react-router";
+import printMgr from "../core/utils";
 
-export const Route = createFileRoute('/docx')({
+export const Route = createFileRoute("/docx")({
   component: WordTab,
 });
 
@@ -21,7 +22,6 @@ export const Route = createFileRoute('/docx')({
  * @param {Object} props
  * @param {string} props.wordParams - Word 参数 JSON 字符串
  * @param {function(string):void} props.setWordParams - 设置 Word 参数的方法
- * @param {string} props.wordPreviewHtml - Word 预览 HTML
  * @param {function():void} props.onPreview - 触发预览的方法
  * @param {function():void} props.onPrint - 触发打印的方法
  * @param {function(File):void} props.setWordFile - 设置 Word 文件的方法
@@ -32,8 +32,6 @@ export default function WordTab(props) {
     wordParams,
     setWordParams,
     wordPreviewHtml,
-    onPreview,
-    onPrint,
     setWordFile,
     onWordFilePreview,
   } = props;
@@ -48,7 +46,9 @@ export default function WordTab(props) {
   // 格式化 JSON
   const handleFormat = () => {
     if (editorRef.current) {
-      const action = editorRef.current.getAction('editor.action.formatDocument');
+      const action = editorRef.current.getAction(
+        "editor.action.formatDocument"
+      );
       if (action) action.run();
     }
   };
@@ -113,8 +113,12 @@ export default function WordTab(props) {
             <Button
               type="primary"
               icon={<PrinterOutlined />}
-              onClick={onPrint}
-              disabled={!wordPreviewHtml}
+              onClick={() =>
+                printMgr.print("html", {
+                  html: artPreviewHtml || wordPreviewHtml,
+                })
+              }
+              disabled={!artPreviewHtml}
             >
               打印
             </Button>
@@ -139,10 +143,12 @@ export default function WordTab(props) {
             contextmenu: true,
             formatOnPaste: true,
             formatOnType: true,
-            selectOnLineNumbers: true
+            selectOnLineNumbers: true,
           }}
           onChange={(v) => setWordParams(v)}
-          onMount={(editor) => { editorRef.current = editor; }}
+          onMount={(editor) => {
+            editorRef.current = editor;
+          }}
         />
 
         <div style={{ marginTop: 24 }}>

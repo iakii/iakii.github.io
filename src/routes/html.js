@@ -43,26 +43,44 @@ const exampleParams = `{
     { "key": 10, "name": "王十二", "age": 50, "address": "南京", "department": "市场部", "position": "总监", "phone": "13800000010", "email": "wangshier@example.com", "entryDate": "2010-12-01", "jobId": "1010", "status": "在职", "remark": "公司元老" }
   ]
 }`;
-const exampleTemplate = `
-<div style="text-align:center;font-size:22px;font-weight:bold;margin-bottom:20px;">员工信息表</div>
-<table border="1" style="width:100%;border-collapse:collapse;">
-  <thead>
-    <tr>
-      {{each columns}}
-        <th>{{$value.title}}</th>
-      {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{each dataSource as item}}
-      <tr>
-        {{each columns as col}}
-          <td>{{item[col.dataIndex]}}</td>
+const exampleTemplate = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <style>
+      body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+        margin:0;padding:0;
+        font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif;
+      }
+      table{width:100%;border-collapse:collapse;}
+      th,td{border:1px solid #000;text-align:left;}
+    </style>
+  </head>
+  <body>
+    <div style="text-align:center;font-size:22px;font-weight:bold;margin-bottom:20px;">员工信息表</div>
+    <table border="1" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          {{each columns}}
+            <th>{{$value.title}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{each dataSource as item}}
+          <tr>
+            {{each columns as col}}
+              <td>{{item[col.dataIndex]}}</td>
+            {{/each}}
+          </tr>
         {{/each}}
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </body>
+</html>
+
 `;
 
 
@@ -190,3 +208,7 @@ export default function HtmlTab(props) {
     </ProCard>
   );
 }
+
+
+
+

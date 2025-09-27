@@ -228,7 +228,7 @@ const tempHtml = `
         font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif;
         font-size:12pt;
       }
-      body{padding:20px;line-height: 2; max-width: 1200px;margin: 0 auto;}
+      body{padding:20px;line-height: 2;margin: 0 auto;}
       h1, .title, .heading1 { font-size: 24pt; font-weight: bold; margin: 1em 0 0.5em 0; }
       h2, .subtitle, .heading2 { font-size: 20pt; font-weight: bold; margin: 1em 0 0.5em 0; }
       h3, .heading3 { font-size: 16pt; font-weight: bold; margin: 1em 0 0.5em 0; }
