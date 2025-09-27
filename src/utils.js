@@ -1,23 +1,24 @@
 const { snapdom } = require("./snapdom.mjs");
 import docToHtml from "./docToHtml";
-import "./index.css";
+// import "./index.css";
 
-const rootEl = document.querySelector("#root");
-if (rootEl) {
-  rootEl.innerHTML = `
-  <div class="content">
-    <h1>Vanilla Rsbuild</h1>
-    <p>Start building amazing things with Rsbuild.</p>
-    <button class="btn" id='print'>打印PDF</button>
-    <button class="btn" id='change'>change</button>
-    <button class="btn" id='snapshot'>截图</button>
-    <button class="btn" id='word'>Word</button>
-  </div>
-`;
-}
+// const rootEl = document.querySelector("#root");
+// if (rootEl) {
+//   rootEl.innerHTML = `
+//   <div class="content">
+//     <h1>Vanilla Rsbuild</h1>
+//     <p>Start building amazing things with Rsbuild.</p>
+//     <button class="btn" id='print'>打印PDF</button>
+//     <button class="btn" id='change'>change</button>
+//     <button class="btn" id='snapshot'>截图</button>
+//     <button class="btn" id='word'>Word</button>
+//   </div>
+// `;
+// }
 
-async function snapshotFunc() {
-  const html = `
+export default class printMgr {
+  static async snapshotFunc() {
+    const html = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -104,11 +105,10 @@ async function snapshotFunc() {
     </body>
     </html>
   `;
-  const img = await printMgr.snapshotHtmlToImg(html);
-  printMgr.print("html", { html: `<img class='img' src="${img.src}"/>` });
-}
+    const img = await printMgr.snapshotHtmlToImg(html);
+    printMgr.print("html", { html: `<img class='img' src="${img.src}"/>` });
+  }
 
-export default class printMgr {
   static getIframe(): HTMLIFrameElement {
     let existed = !!document.querySelector("#print-iframe");
     let iframe: HTMLIFrameElement;
@@ -220,8 +220,6 @@ export default class printMgr {
   }
 }
 
-const snapshot = document.querySelector("#snapshot");
-snapshot?.addEventListener("click", snapshotFunc);
 
 const btn = document.querySelector("#print");
 btn?.addEventListener("click", function () {
@@ -231,18 +229,15 @@ btn?.addEventListener("click", function () {
 
 const word = document.querySelector("#word");
 word?.addEventListener("click", async function () {
-
   const arrayBuffer = await fetch("123.docx").then((res) => res.arrayBuffer());
-
 
   docToHtml(arrayBuffer)
     .then(function (resHtml: string) {
       console.log(111, resHtml);
 
-
       if (resHtml) {
-         printMgr.print("html", { html: resHtml });
-         return;
+        printMgr.print("html", { html: resHtml });
+        return;
       }
       // 遮罩层
       const overlay = document.createElement("div");
@@ -272,7 +267,8 @@ word?.addEventListener("click", async function () {
       content.style.padding = "8mm 8mm 16mm";
       content.style.transform = "scale(0.85)";
       content.style.opacity = "0";
-      content.style.transition = "transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s";
+      content.style.transition =
+        "transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s";
 
       // 关闭按钮
       const closeBtn = document.createElement("button");
@@ -290,7 +286,6 @@ word?.addEventListener("click", async function () {
         document.body.removeChild(overlay);
       });
       overlay.appendChild(closeBtn);
-
 
       const print = document.createElement("button");
       print.innerText = "打印";
