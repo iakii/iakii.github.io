@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+// 从URL参数获取tab key，没有则返回默认pdf
+function getTabFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('tab') || 'pdf';
+}
+import React, { useCallback, useEffect, useState } from "react";
 import docToHtml from "./docToHtml";
 import "./index.css";
 import printMgr from "./utils";
@@ -82,13 +87,27 @@ export default function App() {
     if (htmlPreview) printMgr?.print("html", { html: htmlPreview });
   };
 
+  // 切换Tab时，更新URL参数
+  const handleTabChange = useCallback((key) => {
+    setActiveTab(key);
+    const params = new URLSearchParams(window.location.search);
+    params.set('tab', key);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, '', newUrl);
+  }, []);
+
+  // 监听URL变化（如用户手动修改tab参数或浏览器前进后退）
+  useEffect(() => {
+    setActiveTab(getTabFromUrl()||'pdf');
+  }, []);
+
   return (
     <ProCard
       title="多功能打印示例"
       tabs={{
         type: "card",
         activeKey: activeTab,
-        onChange: setActiveTab,
+        onChange: handleTabChange,
         items: [
           {
             key: "pdf",

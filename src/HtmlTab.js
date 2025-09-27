@@ -4,7 +4,7 @@ import {
   PrinterOutlined,
 } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
-import Editor from '@monaco-editor/react';
+import Editor from "@monaco-editor/react";
 import { Button, Space, Typography } from "antd";
 import template from "./template";
 import printMgr from "./utils";
@@ -80,18 +80,18 @@ export default function HtmlTab(props) {
   return (
     <ProCard split="vertical" ghost bordered style={{ minHeight: 600 }}>
       <ProCard
-      headerBordered
+        headerBordered
         title={
           <span>
             <FileTextOutlined style={{ color: "#faad14", marginRight: 8 }} />
             Html模板参数与预览
           </span>
         }
-         colSpan={15}
+        colSpan={15}
         defaultCollapsed={false}
         style={{ flex: 1 }}
         extra={
-          <Space >
+          <Space>
             <Button
               onClick={() => {
                 setHtmlParams(exampleParams);
@@ -126,7 +126,7 @@ export default function HtmlTab(props) {
           value={htmlParams}
           options={{
             fontSize: 15,
-            minimap: { enabled: false },
+            minimap: { enabled: true },
             fontFamily: "monospace",
             scrollBeyondLastLine: false,
           }}
@@ -146,7 +146,7 @@ export default function HtmlTab(props) {
           value={htmlTemplate}
           options={{
             fontSize: 15,
-            minimap: { enabled: false },
+            minimap: { enabled: true },
             fontFamily: "monospace",
             scrollBeyondLastLine: false,
           }}
@@ -154,7 +154,7 @@ export default function HtmlTab(props) {
         />
       </ProCard>
       <ProCard
-      headerBordered
+        headerBordered
         title={<Typography.Text strong>预览</Typography.Text>}
         bodyStyle={{
           padding: 0,
