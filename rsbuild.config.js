@@ -1,5 +1,6 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { tanstackRouter } from '@tanstack/router-plugin/rspack'
 
 export default defineConfig({
   plugins: [
@@ -7,25 +8,17 @@ export default defineConfig({
   ],
   source: {
     entry: {
-      index: "./src/main.js",
+      index: "./src/index.jsx",
     },
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: {
-          loader: "builtin:swc-loader",
-          options: {
-            jsc: {
-              parser: {
-                syntax: "ecmascript",
-                jsx: true,
-              },
-            },
-          },
-        },
-      },
-    ],
+  tools: {
+    rspack: {
+      plugins: [
+        tanstackRouter({
+          target: 'react',
+          autoCodeSplitting: true,
+        }),
+      ],
+    },
   },
 });

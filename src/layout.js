@@ -1,21 +1,20 @@
-// 从URL参数获取tab key，没有则返回默认pdf
 function getTabFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get('tab') || 'pdf';
 }
-import React, { useCallback, useEffect, useState } from "react";
-import docToHtml from "./docToHtml";
-import "./index.css";
-import printMgr from "./utils";
-import PdfTab from "./PdfTab";
-import WordTab from "./WordTab";
-import HtmlTab from "./HtmlTab";
 import { ProCard } from "@ant-design/pro-components";
 import "antd/dist/reset.css";
+import { useCallback, useEffect, useState } from "react";
+import docToHtml from "./core/docToHtml";
+import printMgr from "./core/utils";
+import "./index.css";
+import WordTab from "./routes/docx";
+import HtmlTab from "./routes/html";
+import PdfTab from "./routes/pdf";
 
 
 
-export default function App() {
+export default function Layout() {
   const [activeTab, setActiveTab] = useState("pdf");
 
   // Word 文件上传后立即预览

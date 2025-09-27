@@ -1,3 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router"
 import {
   FilePdfOutlined,
   PrinterOutlined,
@@ -5,6 +6,13 @@ import {
 } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { Button, message, Space, Upload } from "antd";
+
+
+
+
+export const Route = createFileRoute('/pdf')({
+  component: PdfTab,
+});
 
 export default function PdfTab(props) {
   const { pdfUrl, onFile, onPrint } = props;

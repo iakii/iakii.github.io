@@ -9,7 +9,12 @@ import {
 import { ProCard } from "@ant-design/pro-components";
 import Editor from '@monaco-editor/react';
 import { Button, Space, Typography, Upload, message } from "antd";
-import art from "./template";
+import art from "../core/template";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute('/docx')({
+  component: WordTab,
+});
 
 /**
  * WordTab 组件
@@ -69,7 +74,6 @@ export default function WordTab(props) {
       const params = JSON.parse(wordParams);
       const html = art.render(wordPreviewHtml, params);
       console.log(wordPreviewHtml, params, html);
-
       setArtPreviewHtml(html);
     } catch (e) {
       setArtPreviewHtml(

@@ -1,21 +1,5 @@
 const { snapdom } = require("./snapdom.mjs");
 import docToHtml from "./docToHtml";
-// import "./index.css";
-
-// const rootEl = document.querySelector("#root");
-// if (rootEl) {
-//   rootEl.innerHTML = `
-//   <div class="content">
-//     <h1>Vanilla Rsbuild</h1>
-//     <p>Start building amazing things with Rsbuild.</p>
-//     <button class="btn" id='print'>打印PDF</button>
-//     <button class="btn" id='change'>change</button>
-//     <button class="btn" id='snapshot'>截图</button>
-//     <button class="btn" id='word'>Word</button>
-//   </div>
-// `;
-// }
-
 export default class printMgr {
   static async snapshotFunc() {
     const html = `

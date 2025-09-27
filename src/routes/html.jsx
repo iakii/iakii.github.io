@@ -1,3 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router"
 import {
   EyeOutlined,
   FileTextOutlined,
@@ -6,8 +7,13 @@ import {
 import { ProCard } from "@ant-design/pro-components";
 import Editor from "@monaco-editor/react";
 import { Button, Space, Typography } from "antd";
-import template from "./template";
-import printMgr from "./utils";
+import template from "../core/template";
+import printMgr from "../core/utils";
+import { useState } from "react";
+
+export const Route = createFileRoute('/html')({
+  component: HtmlTab,
+});
 
 // 文件顶部
 const exampleParams = `{
@@ -59,7 +65,6 @@ const exampleTemplate = `
 </table>
 `;
 
-import { useState } from "react";
 
 export default function HtmlTab(props) {
   const { htmlParams, setHtmlParams, htmlTemplate, setHtmlTemplate } = props;
