@@ -190,7 +190,7 @@ function escapeHtml(str) {
 }
 
 export default async function docToHtml(document) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     mammoth
       .convertToHtml(
         { arrayBuffer: document },

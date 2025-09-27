@@ -111,9 +111,9 @@ export default class printMgr {
 
   static getIframe() {
     let existed = !!document.querySelector("#print-iframe");
-    let iframe: HTMLIFrameElement;
+    let iframe;
     if (existed) {
-      iframe = document.querySelector("#print-iframe") as HTMLIFrameElement;
+      iframe = document.querySelector("#print-iframe")  ;
     } else {
       iframe = document.createElement("iframe");
       iframe.id = "print-iframe";

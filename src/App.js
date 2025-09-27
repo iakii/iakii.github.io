@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import docToHtml from "./docToHtml";
 import "./index.css";
 import printMgr from "./utils";
@@ -9,11 +8,7 @@ import HtmlTab from "./HtmlTab";
 import { ProCard } from "@ant-design/pro-components";
 import "antd/dist/reset.css";
 
-const tabList = [
-  { key: "pdf", label: "打印PDF" },
-  { key: "word", label: "打印Word" },
-  { key: "html", label: "打印Html模板" },
-];
+
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("pdf");
