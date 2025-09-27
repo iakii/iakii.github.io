@@ -109,7 +109,7 @@ export default class printMgr {
     printMgr.print("html", { html: `<img class='img' src="${img.src}"/>` });
   }
 
-  static getIframe(): HTMLIFrameElement {
+  static getIframe() {
     let existed = !!document.querySelector("#print-iframe");
     let iframe: HTMLIFrameElement;
     if (existed) {
@@ -124,11 +124,11 @@ export default class printMgr {
   }
 
   static print(
-    type: "html" | "pdf",
-    options: { html?: string; pdf?: string | Blob }
+    type,
+    options
   ) {
     const iframe = printMgr.getIframe();
-    function doPrint(cleanup?: () => void) {
+  function doPrint(cleanup) {
       setTimeout(() => {
         try {
           iframe.contentWindow?.print();
@@ -187,7 +187,7 @@ export default class printMgr {
     }
   }
 
-  static async snapshotHtmlToImg(html: string): Promise<HTMLImageElement> {
+  static async snapshotHtmlToImg(html) {
     // 创建隐藏 iframe
     const iframe = document.createElement("iframe");
     iframe.style.zIndex = "-1";
@@ -232,7 +232,7 @@ word?.addEventListener("click", async function () {
   const arrayBuffer = await fetch("123.docx").then((res) => res.arrayBuffer());
 
   docToHtml(arrayBuffer)
-    .then(function (resHtml: string) {
+  .then(function (resHtml) {
       console.log(111, resHtml);
 
       if (resHtml) {

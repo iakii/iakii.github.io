@@ -62,12 +62,8 @@ const exampleTemplate = `
 
 import { useState } from "react";
 
-export default function HtmlTab({
-  htmlParams,
-  setHtmlParams,
-  htmlTemplate,
-  setHtmlTemplate,
-}) {
+export default function HtmlTab(props) {
+  const { htmlParams, setHtmlParams, htmlTemplate, setHtmlTemplate } = props;
   const [htmlPreview, setHtmlPreview] = useState("");
   // 新增：art-template 渲染逻辑
   const handlePreview = () => {

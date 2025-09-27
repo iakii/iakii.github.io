@@ -4,12 +4,9 @@ import mammoth from "mammoth";
  * @description 将 Word document 对象转为 HTML，所有样式写在 style 上
  * @param {*} document Word 解析后的对象
  * @returns {string} HTML 字符串
+ *
  */
 async function documentToHtml(document) {
-  if (!document.children || document.children.length === 0) {
-    // 空文档，插入一行空行
-    return '<p style="height:1em">&nbsp;</p>';
-  }
   const htmlArr = await Promise.all((document.children || []).map(nodeToHtml));
   return htmlArr.join("");
 }
@@ -247,12 +244,11 @@ const tempHtml = `
       .text-right{text-align: right;}
       .underline{text-decoration: underline;}
       table {width: 100%;margin-bottom: 1rem;color: #212529;box-sizing: border-box;}
-      table, th, td {border: 1px solid black;border-collapse: collapse; /* 移除单元格之间的间隔 */}
+      table, th, td {border: 1px solid black;border-collapse: collapse;}
       td {padding: 0 10px;}
       .empty {height: 1em;}
     </style>
   </head>
   <body></body>
 </html>
-
 `;

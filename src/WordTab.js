@@ -11,15 +11,19 @@ import {
 } from "@ant-design/icons";
 import art from "./template";
 
-export default function WordTab({
-  wordParams,
-  setWordParams,
-  wordPreviewHtml,
-  onPreview,
-  onPrint,
-  setWordFile,
-  onWordFilePreview,
-}) {
+/**
+ * WordTab 组件
+ * @param {Object} props
+ * @param {string} props.wordParams - Word 参数 JSON 字符串
+ * @param {function(string):void} props.setWordParams - 设置 Word 参数的方法
+ * @param {string} props.wordPreviewHtml - Word 预览 HTML
+ * @param {function():void} props.onPreview - 触发预览的方法
+ * @param {function():void} props.onPrint - 触发打印的方法
+ * @param {function(File):void} props.setWordFile - 设置 Word 文件的方法
+ * @param {function(File):void} props.onWordFilePreview - Word 文件上传后预览的方法
+ */
+export default function WordTab(props) {
+  const { wordParams, setWordParams, wordPreviewHtml, onPreview, onPrint, setWordFile, onWordFilePreview } = props;
   const [artPreviewHtml, setArtPreviewHtml] = useState("");
   // 示例参数
   const exampleParams =

@@ -3,7 +3,8 @@ import { Card, Button, Upload, message, Space } from "antd";
 import { UploadOutlined, FilePdfOutlined, PrinterOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 
-export default function PdfTab({ pdfUrl, onFile, onPrint }) {
+export default function PdfTab(props) {
+  const { pdfUrl, onFile, onPrint } = props;
   const uploadProps = {
     accept: "application/pdf",
     showUploadList: false,
