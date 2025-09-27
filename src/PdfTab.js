@@ -1,7 +1,6 @@
-import React from "react";
-import { Card, Button, Upload, message, Space } from "antd";
-import { UploadOutlined, FilePdfOutlined, PrinterOutlined } from "@ant-design/icons";
+import { FilePdfOutlined, PrinterOutlined, UploadOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
+import { Button, message, Space, Upload } from "antd";
 
 export default function PdfTab(props) {
   const { pdfUrl, onFile, onPrint } = props;
@@ -25,7 +24,7 @@ export default function PdfTab(props) {
       extra={
         <Space>
             <Upload {...uploadProps}>
-            <Button icon={<UploadOutlined />} block style={{ marginBottom: 16 }}>选择PDF文件</Button>
+            <Button icon={<UploadOutlined />} block  >选择PDF文件</Button>
           </Upload>
           <Button
             type="primary"
@@ -33,7 +32,6 @@ export default function PdfTab(props) {
             onClick={onPrint}
             disabled={!pdfUrl}
             block
-            style={{ marginBottom: 16 }}
           >
             打印PDF
           </Button>

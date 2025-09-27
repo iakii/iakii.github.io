@@ -17,14 +17,11 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.2",
     "@ant-design/pro-components": "^2.8.10",
+    "@monaco-editor/react": "^4.7.0",
     "@rsbuild/plugin-react": "^1.4.1",
-    "@zumer/snapdom": "^1.9.11",
     "antd": "^5.27.4",
-    "art-template": "^4.13.4",
     "mammoth": "file:./mammoth",
-    "monaco-editor": "^0.53.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-monaco-editor": "^0.59.0"
+    "react-dom": "^19.1.1"
   }
 }

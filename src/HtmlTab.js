@@ -1,14 +1,13 @@
-import React from "react";
-import template from "./template";
-import MonacoEditor from "react-monaco-editor";
-import { Card, Button, Space, Typography } from "antd";
-import { ProCard } from "@ant-design/pro-components";
-import printMgr from "./utils";
 import {
-  FileTextOutlined,
   EyeOutlined,
+  FileTextOutlined,
   PrinterOutlined,
 } from "@ant-design/icons";
+import { ProCard } from "@ant-design/pro-components";
+import Editor from '@monaco-editor/react';
+import { Button, Space, Typography } from "antd";
+import template from "./template";
+import printMgr from "./utils";
 
 // 文件顶部
 const exampleParams = `{
@@ -78,7 +77,6 @@ export default function HtmlTab(props) {
       );
     }
   };
-
   return (
     <ProCard split="vertical" ghost bordered style={{ minHeight: 600 }}>
       <ProCard
@@ -89,7 +87,7 @@ export default function HtmlTab(props) {
             Html模板参数与预览
           </span>
         }
-        collapsible
+         colSpan={15}
         defaultCollapsed={false}
         style={{ flex: 1 }}
         extra={
@@ -120,7 +118,7 @@ export default function HtmlTab(props) {
         bodyStyle={{ padding: 24 }}
       >
         <Typography.Text strong>参数设置 (JSON)</Typography.Text>
-        <MonacoEditor
+        <Editor
           height={500}
           width="100%"
           language="json"
@@ -140,7 +138,7 @@ export default function HtmlTab(props) {
         >
           模板 (支持&#123;&#123;变量&#125;&#125;、art-template语法)
         </Typography.Text>
-        <MonacoEditor
+        <Editor
           height={500}
           width="100%"
           language="html"
@@ -159,7 +157,7 @@ export default function HtmlTab(props) {
       headerBordered
         title={<Typography.Text strong>预览</Typography.Text>}
         bodyStyle={{
-          padding: 16,
+          padding: 0,
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-start",

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import MonacoEditor from "react-monaco-editor";
-import { Card, Button, Space, Typography, Upload, message } from "antd";
-import { ProCard } from "@ant-design/pro-components";
+import { useRef, useState } from "react";
 import {
-  FileWordOutlined,
   EyeOutlined,
+  FileAddOutlined,
+  FileWordOutlined,
   PrinterOutlined,
   UploadOutlined,
-  FileAddOutlined,
 } from "@ant-design/icons";
+import { ProCard } from "@ant-design/pro-components";
+import Editor from '@monaco-editor/react';
+import { Button, Space, Typography, Upload, message } from "antd";
 import art from "./template";
 
 /**
@@ -23,11 +23,30 @@ import art from "./template";
  * @param {function(File):void} props.onWordFilePreview - Word 文件上传后预览的方法
  */
 export default function WordTab(props) {
-  const { wordParams, setWordParams, wordPreviewHtml, onPreview, onPrint, setWordFile, onWordFilePreview } = props;
+  const {
+    wordParams,
+    setWordParams,
+    wordPreviewHtml,
+    onPreview,
+    onPrint,
+    setWordFile,
+    onWordFilePreview,
+  } = props;
   const [artPreviewHtml, setArtPreviewHtml] = useState("");
   // 示例参数
   const exampleParams =
     '{\n  "title": "示例标题",\n  "author": "张三",\n  "date": "2025-09-27"\n}';
+
+  // monaco editor 实例用 useRef
+  const editorRef = useRef(null);
+
+  // 格式化 JSON
+  const handleFormat = () => {
+    if (editorRef.current) {
+      const action = editorRef.current.getAction('editor.action.formatDocument');
+      if (action) action.run();
+    }
+  };
 
   const uploadProps = {
     accept:
@@ -60,7 +79,7 @@ export default function WordTab(props) {
   };
 
   return (
-    <ProCard split="vertical" ghost bordered style={{ minHeight: 600 }}>
+    <ProCard layout="column" ghost bordered style={{ minHeight: 600 }}>
       <ProCard
         headerBordered
         title={
@@ -69,51 +88,60 @@ export default function WordTab(props) {
             Word 参数与预览
           </span>
         }
-        collapsible
-        defaultCollapsed={false}
-        style={{ flex: 1 }}
+        colSpan={15}
         bodyStyle={{ padding: 24 }}
+        extra={
+          <Space>
+            <Upload {...uploadProps}>
+              <Button icon={<UploadOutlined />} block>
+                选择Word文件
+              </Button>
+            </Upload>
+            <Button
+              icon={<FileAddOutlined />}
+              onClick={() => setWordParams(exampleParams)}
+            >
+              示例参数
+            </Button>
+            <Button icon={<EyeOutlined />} onClick={handleArtPreview}>
+              设置参数预览
+            </Button>
+            <Button
+              type="primary"
+              icon={<PrinterOutlined />}
+              onClick={onPrint}
+              disabled={!wordPreviewHtml}
+            >
+              打印
+            </Button>
+          </Space>
+        }
       >
         <Typography.Text strong>参数设置 (JSON)</Typography.Text>
-        <MonacoEditor
+        <Button size="small" style={{ marginBottom: 8 }} onClick={handleFormat}>
+          格式化
+        </Button>
+        <Editor
           height={500}
           width="100%"
           language="json"
           theme="vs-dark"
           value={wordParams}
           options={{
-            fontSize: 15,
-            minimap: { enabled: false },
+            fontSize: 16,
+            minimap: { enabled: true },
             fontFamily: "monospace",
             scrollBeyondLastLine: false,
+            contextmenu: true,
+            formatOnPaste: true,
+            formatOnType: true,
+            selectOnLineNumbers: true
           }}
           onChange={(v) => setWordParams(v)}
+          onMount={(editor) => { editorRef.current = editor; }}
         />
-        <Space style={{ marginTop: 12 }}>
-          <Button
-            icon={<FileAddOutlined />}
-            onClick={() => setWordParams(exampleParams)}
-          >
-            示例参数
-          </Button>
-          <Button icon={<EyeOutlined />} onClick={handleArtPreview}>
-            设置参数预览
-          </Button>
-          <Button
-            type="primary"
-            icon={<PrinterOutlined />}
-            onClick={onPrint}
-            disabled={!wordPreviewHtml}
-          >
-            打印
-          </Button>
-        </Space>
+
         <div style={{ marginTop: 24 }}>
-          <Upload {...uploadProps}>
-            <Button icon={<UploadOutlined />} block>
-              选择Word文件
-            </Button>
-          </Upload>
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
             选择文件后自动预览，支持.docx
           </Typography.Text>
@@ -130,6 +158,7 @@ export default function WordTab(props) {
           overflow: "auto",
           height: "100%",
         }}
+        colSpan={8}
         style={{
           background: "#fff",
           borderRadius: 8,
