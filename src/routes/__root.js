@@ -1,4 +1,5 @@
-import { ProLayout } from "@ant-design/pro-components";
+import { LogoutOutlined } from "@ant-design/icons";
+import { ProLayout, SettingDrawer } from "@ant-design/pro-components";
 import {
   Outlet,
   createRootRoute,
@@ -6,7 +7,8 @@ import {
   useNavigate,
   useRouter,
 } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { Dropdown } from "antd";
+import { useMemo, useState } from "react";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -16,6 +18,16 @@ function RootComponent() {
   const { routeTree } = useRouter();
 
   const { pathname } = useLocation();
+
+  const [settings, setSetting] = useState({
+    fixSiderbar: true,
+    layout: "side",
+    splitMenus: false,
+    navTheme: "light",
+    contentWidth: "Fluid",
+    colorPrimary: "#F5222D",
+    siderMenuType: "sub",
+  });
 
   const navigate = useNavigate();
 
@@ -35,21 +47,81 @@ function RootComponent() {
 
   return (
     <ProLayout
+      fixSiderbar
       menu={{ request: () => menus }}
       menuProps={{
-        selectedKeys: [pathname],
-        onClick: (e) => {
-          navigate({ to: e.key });
+        onClick: (e) => navigate({ to: e.key }),
+      }}
+      siderWidth={156}
+      token={{
+        bgLayout: "#f6f6f7",
+
+        header: {
+          colorBgHeader: "#292f33",
+          colorHeaderTitle: "#fff",
+          colorTextMenu: "#dfdfdf",
+          colorTextMenuSecondary: "#dfdfdf",
+          colorTextMenuSelected: "#fff",
+          colorBgMenuItemSelected: "#22272b",
+          colorTextMenuActive: "rgba(255,255,255,0.85)",
+          colorTextRightActionsItem: "#dfdfdf",
         },
+        colorTextAppListIconHover: "#fff",
+        colorTextAppListIcon: "#dfdfdf",
+        // sider: {
+        //   colorMenuBackground: "#292f33",
+        //   colorMenuItemDivider: "#dfdfdf",
+        //   colorBgMenuItemHover: "#dfdfdf",
+        //   colorBgMenuItemSelected: "#dfdfdf",
+        //   colorTextMenu: "#dfdfdf",
+        //   colorTextMenuSelected: "#292f33",
+        //   colorTextMenuActive: "#fff",
+        // },
       }}
-      onChange={(e) => {
-        console.log("onChange", e);
-      }}
-      title="文件打印"
+      contentStyle={{ padding: 0 }}
+      title="小小工具箱"
       logo={"/favicon.png"}
       style={{ minHeight: "100vh" }}
+      location={{
+        pathname,
+      }}
+      avatarProps={{
+        src: "https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg",
+        size: "small",
+        title: "七妮妮",
+        render: (props, dom) => {
+          return (
+            <Dropdown
+              menu={{
+                items: [
+                  {
+                    key: "logout",
+                    icon: <LogoutOutlined />,
+                    label: "退出登录",
+                  },
+                ],
+              }}
+            >
+              {dom}
+            </Dropdown>
+          );
+        },
+      }}
+      {...settings}
+      id='test-pro-layout'
     >
       <Outlet />
+
+      <SettingDrawer
+        pathname={pathname}
+        enableDarkTheme
+        getContainer={() => document.getElementById("test-pro-layout")}
+        settings={settings}
+        onSettingChange={(changeSetting) => {
+          setSetting(changeSetting);
+        }}
+        disableUrlParams={false}
+      />
     </ProLayout>
   );
 }

@@ -1,3 +1,4 @@
+import { PrinterFilled } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
 import "antd/dist/reset.css";
@@ -8,14 +9,13 @@ import "../index.css";
 import WordTab from "./docx";
 import HtmlTab from "./html";
 import PdfTab from "./pdf";
-import { HomeFilled } from "@ant-design/icons";
 
 export const Route = createFileRoute("/")({
   component: Layout,
 
   staticData: {
-    name: "首页",
-    icon: <HomeFilled />,
+    name: "打印",
+    icon: <PrinterFilled />,
     index: 0,
   },
 });
@@ -115,6 +115,7 @@ export default function Layout() {
   return (
     <ProCard
       title="多功能打印示例"
+      headerBordered
       tabs={{
         type: "card",
         activeKey: activeTab,
