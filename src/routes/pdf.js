@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router";
 import {
   FilePdfOutlined,
   PrinterOutlined,
@@ -7,10 +7,7 @@ import {
 import { ProCard } from "@ant-design/pro-components";
 import { Button, message, Space, Upload } from "antd";
 
-
-
-
-export const Route = createFileRoute('/pdf')({
+export const Route = createFileRoute("/pdf")({
   component: PdfTab,
 });
 
@@ -62,7 +59,7 @@ export default function PdfTab(props) {
       <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
         <div
           style={{
-            width: "100vw",
+            width: "100%",
             height: "297mm",
             background: "#fafafa",
             border: "1px solid #ccc",
@@ -88,20 +85,18 @@ export default function PdfTab(props) {
               }}
             />
           ) : (
-            <Upload {...uploadProps}>
-              <span
-                style={{
-                  color: "#bbb",
-                  display: "flex",
-                  width: "100%",
-                  height: "100%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                请先选择PDF文件进行预览
-              </span>
-            </Upload>
+            <span
+              style={{
+                color: "#bbb",
+                display: "flex",
+                width: "100%",
+                height: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              请先选择PDF文件进行预览
+            </span>
           )}
         </div>
       </div>
