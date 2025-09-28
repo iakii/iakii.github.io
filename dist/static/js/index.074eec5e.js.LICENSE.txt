@@ -1,3 +1,0 @@
-/*! art-template@4.13.2 for browser | https://github.com/goofychris/art-template */
-
-/*! art-template@runtime | https://github.com/goofychris/art-template */

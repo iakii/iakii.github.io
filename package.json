@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://iakii.github.io/print-js/",
   "scripts": {
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.4",
@@ -15,7 +18,8 @@
     "@rsbuild/plugin-less": "^1.5.0",
     "@tanstack/router-plugin": "^1.132.7",
     "eslint": "^9.36.0",
-    "eslint-plugin-react": "^7.37.5"
+    "eslint-plugin-react": "^7.37.5",
+    "gh-pages": "^6.3.0"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.2",
