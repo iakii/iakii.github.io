@@ -12,7 +12,8 @@ import {
   SolutionOutlined,
   SwapOutlined,
 } from "@ant-design/icons";
-import { ProCard, ProList } from "@ant-design/pro-components";
+import { ProCard } from "@ant-design/pro-components";
+import { Menu } from "antd";
 import { createFileRoute } from "@tanstack/react-router";
 import { Spin } from "antd";
 import { useEffect, useRef, useState } from "react";
@@ -23,24 +24,6 @@ export const Route = createFileRoute("/docs")({
     name: "资源目录",
     icon: <RestTwoTone />,
     index: 3,
-  },
-  meta: { title: "资源目录 - iAkii的个人资源目录" },
-  // 添加cdn
-  head: {
-    scripts: [
-      {
-        src: "https://cdn.tailwindcss.com/3.4.1",
-        crossOrigin: "anonymous",
-      },
-    ],
-    styles: [
-      {
-        href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css",
-        integrity:
-          "sha512-dNmEQz5N4d7e6e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e5z1Z5f5e==",
-        crossOrigin: "anonymous",
-      },
-    ],
   },
 });
 
@@ -59,40 +42,6 @@ const iconMap = {
 };
 
 const list = [
-  {
-    title: "开发助手",
-    icon: "fa-code",
-    items: [
-      {
-        title: "处理JSON字符串的JavaScript数据",
-        url: "/tools/json_js/",
-        type: "开发助手",
-        icon: "fa-file-code",
-        date: "2025.05.18",
-      },
-      {
-        title: "处理JSON字符串转TS模型",
-        url: "/tools/json2ts/",
-        type: "开发助手",
-        icon: "fa-exchange-alt",
-        date: "2025.05.18",
-      },
-      {
-        title: "处理JSON字符串转Dart模型",
-        url: "/tools/json2dart/",
-        type: "开发助手",
-        icon: "fab fa-android",
-        date: "2025.05.18",
-      },
-      {
-        title: "解析YAML文件",
-        url: "/tools/parse_yaml/",
-        type: "开发助手",
-        icon: "fa-cog",
-        date: "2025.05.18",
-      },
-    ],
-  },
   {
     title: "医疗常识",
     icon: "fa-heartbeat",
@@ -155,46 +104,24 @@ function RouteComponent() {
       direction="row"
       bodyStyle={{ background: "#f6f6f7", padding: 0 }}
     >
-      <ProCard colSpan={4}>
-        {list.map((item) => (
-          <ProList
-            tableStyle={{ width: 200 }}
-            key={item.title}
-            cardProps={{
-              headerBordered: true,
-              title: item.title,
-            }}
-            rowKey="title"
-            dataSource={item.items}
-            showActions="hover"
-            onRow={(row) => {
-              return {
-                onClick: () => {
-                  setLoading(true);
-                  setIframeSrc(row.url);
-                },
-              };
-            }}
-            metas={{
-              title: {
-                dataIndex: "title",
-                render: (dom, row) => <a>{dom}</a>,
-              },
-              avatar: {
-                render: (_, row) => iconMap[row.icon],
-              },
-              description: {
-                render: (_, row) => row.type + row.date,
-              },
-              onClick: (_, row) => {
-                alert(row.url);
-              },
-            }}
-            style={{ background: "transparent" }}
-            bordered={false}
-            split
-          />
-        ))}
+      <ProCard colSpan={"200px"} bodyStyle={{ padding: 0 }}>
+        <Menu
+          mode="inline"
+          items={list.map((group) => ({
+            key: group.title,
+            label: group.title,
+            type: "group",
+            children: group.items.map((item) => ({
+              key: item.url,
+              icon: iconMap[item.icon],
+              label: item.title,
+            })),
+          }))}
+          onClick={({ key }) => {
+            setLoading(true);
+            setIframeSrc(key);
+          }}
+        />
       </ProCard>
 
       <ProCard ghost>

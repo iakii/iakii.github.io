@@ -1,3 +1,5 @@
+// 通用 hooks：获取 url 查询参数
+
 import { LogoutOutlined } from "@ant-design/icons";
 import { ProLayout, SettingDrawer } from "@ant-design/pro-components";
 import {
@@ -8,11 +10,29 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { Dropdown } from "antd";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 export const Route = createRootRoute({
-  component: RootComponent,
+  component: RootAppComponent,
 });
+
+export function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => {
+    const params = new URLSearchParams(search);
+    const obj = {};
+    for (const [key, value] of params.entries()) {
+      obj[key] = value;
+    }
+    return obj;
+  }, [search]);
+}
+
+function RootAppComponent() {
+  const { ref = "normal" } = useQuery();
+
+  return ref === "app" ? <Outlet /> : <RootComponent />;
+}
 
 function RootComponent() {
   const { routeTree } = useRouter();
@@ -36,8 +56,8 @@ function RootComponent() {
       .map((x) => x.options || {})
       .filter((x) => x.staticData && Object.keys(x.staticData).length)
       .sort((a, b) => {
-        const aHasIndex = typeof a.staticData.index === 'number';
-        const bHasIndex = typeof b.staticData.index === 'number';
+        const aHasIndex = typeof a.staticData.index === "number";
+        const bHasIndex = typeof b.staticData.index === "number";
         if (aHasIndex && bHasIndex) {
           return a.staticData.index - b.staticData.index;
         } else if (aHasIndex) {
@@ -121,7 +141,7 @@ function RootComponent() {
         },
       }}
       {...settings}
-      id='test-pro-layout'
+      id="test-pro-layout"
     >
       <Outlet />
 
