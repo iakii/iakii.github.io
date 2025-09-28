@@ -9,12 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as PrintRouteImport } from './routes/print'
 import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as HtmlRouteImport } from './routes/html'
 import { Route as DocxRouteImport } from './routes/docx'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+})
+const PrintRoute = PrintRouteImport.update({
+  id: '/print',
+  path: '/print',
+  getParentRoute: () => rootRouteImport,
+})
 const PdfRoute = PdfRouteImport.update({
   id: '/pdf',
   path: '/pdf',
@@ -47,5 +59,7 @@ const rootRouteChildren = {
   DocxRoute: DocxRoute,
   HtmlRoute: HtmlRoute,
   PdfRoute: PdfRoute,
+  PrintRoute: PrintRoute,
+  ToolsRoute: ToolsRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

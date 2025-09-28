@@ -25,7 +25,7 @@ function RootComponent() {
     splitMenus: false,
     navTheme: "light",
     contentWidth: "Fluid",
-    colorPrimary: "#F5222D",
+    colorPrimary: "#088844",
     siderMenuType: "sub",
   });
 
@@ -35,6 +35,19 @@ function RootComponent() {
     return (routeTree.children || [])
       .map((x) => x.options || {})
       .filter((x) => x.staticData && Object.keys(x.staticData).length)
+      .sort((a, b) => {
+        const aHasIndex = typeof a.staticData.index === 'number';
+        const bHasIndex = typeof b.staticData.index === 'number';
+        if (aHasIndex && bHasIndex) {
+          return a.staticData.index - b.staticData.index;
+        } else if (aHasIndex) {
+          return -1;
+        } else if (bHasIndex) {
+          return 1;
+        } else {
+          return 0;
+        }
+      })
       .map((x) => {
         return {
           icon: x.staticData.icon,
