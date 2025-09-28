@@ -99,7 +99,11 @@ export default function Layout() {
   // 切换Tab时，更新URL参数
   const handleTabChange = useCallback((key) => {
     setActiveTab(key);
-    location.hash = location.hash.split("?")[0] + `?tab=${key}`;
+    // 保留原有hash参数，仅更新tab参数
+    const [hashPath, hashQuery = ""] = location.hash.slice(1).split("?");
+    const params = new URLSearchParams(hashQuery);
+    params.set("tab", key);
+    location.hash = `#${hashPath}?${params.toString()}`;
   }, []);
 
   // 监听URL变化（如用户手动修改tab参数或浏览器前进后退）
