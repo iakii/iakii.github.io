@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>护理质量检查标准化流程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .process-card {
+            transition: transform 0.2s ease;
+        }
+        .process-card:hover {
+            transform: translateY(-2px);
+        }
+        .mermaid {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="max-w-4xl mx-auto px-4 py-8">
+    <header class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">护理质量检查标准化流程</h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">科学系统的护理质量评估体系，确保患者安全与护理服务品质</p>
+    </header>
+
+    <section class="mb-16">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="p-6 md:p-8">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
+                    <i class="fas fa-project-diagram text-blue-500 mr-3"></i> 全流程概览
+                </h2>
+                <div class="mermaid">
+                    graph LR
+                    A[准备阶段] --> B[现场检查] --> C[数据分析] --> D[反馈改进] --> E[持续追踪]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-16">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 md:p-8">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
+                    <i class="fas fa-sitemap text-blue-500 mr-3"></i> 详细流程图解
+                </h2>
+                <div class="mermaid">
+                    graph TD
+                    A[开始] --> B[检查前准备]
+                    B --> B1[制定检查标准]
+                    B --> B2[组建检查小组]
+                    B --> B3[准备检查工具]
+                    B --> C[实施检查]
+                    
+                    C --> C1[环境与设备检查]
+                    C1 --> C11[病房环境]
+                    C1 --> C12[急救设备]
+                    C1 --> C13[常规设备]
+                    
+                    C --> C2[护理过程检查]
+                    C2 --> C21[分级护理措施]
+                    C2 --> C22[操作规范性]
+                    C2 --> C23[医嘱执行]
+                    
+                    C --> C3[护理记录检查]
+                    C3 --> C31[文书完整性]
+                    C3 --> C32[记录及时性]
+                    C3 --> C33[评估准确性]
+                    
+                    C --> C4[患者评估]
+                    C4 --> C41[满意度调查]
+                    C4 --> C42[健康教育]
+                    C4 --> C43[自理能力]
+                    
+                    C --> D[数据分析]
+                    D --> D1[指标计算]
+                    D --> D2[问题分类]
+                    D --> D3[根因分析]
+                    
+                    D --> E[反馈改进]
+                    E --> E1[书面报告]
+                    E --> E2[质量分析会]
+                    E --> E3[整改方案]
+                    
+                    E --> F[持续追踪]
+                    F --> F1[效果验证]
+                    F --> F2[标准修订]
+                    F --> F3[经验推广]
+                    F --> G[结束]
+                    
+                    style A fill:#4CAF50,color:white
+                    style G fill:#9E9E9E,color:white
+                    style B,C,D,E,F fill:#2196F3,color:white
+                    style C1,C2,C3,C4 fill:#FFC107
+                    style D1,D2,D3 fill:#FF9800
+                    style E1,E2,E3 fill:#8BC34A
+                    style F1,F2,F3 fill:#607D8B
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
+            <i class="fas fa-palette text-blue-500 mr-3"></i> 流程颜色编码说明
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-green-500">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">开始/结束节点</h3>
+                <p class="text-slate-600">流程的起点与终点</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-green-500 mr-2"></span>
+                    <span class="text-sm text-slate-500">绿色标识</span>
+                </div>
+            </div>
+            
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-blue-500">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">主要流程阶段</h3>
+                <p class="text-slate-600">核心工作环节</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-blue-500 mr-2"></span>
+                    <span class="text-sm text-slate-500">蓝色标识</span>
+                </div>
+            </div>
+            
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-yellow-500">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">现场检查环节</h3>
+                <p class="text-slate-600">实际评估内容</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-yellow-500 mr-2"></span>
+                    <span class="text-sm text-slate-500">黄色标识</span>
+                </div>
+            </div>
+            
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-orange-500">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">数据分析环节</h3>
+                <p class="text-slate-600">问题识别与分类</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-orange-500 mr-2"></span>
+                    <span class="text-sm text-slate-500">橙色标识</span>
+                </div>
+            </div>
+            
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-green-400">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">反馈环节</h3>
+                <p class="text-slate-600">改进建议与方案</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-green-400 mr-2"></span>
+                    <span class="text-sm text-slate-500">浅绿色标识</span>
+                </div>
+            </div>
+            
+            <div class="process-card bg-white rounded-lg shadow-sm p-5 border-l-4 border-gray-500">
+                <h3 class="font-medium text-lg text-slate-800 mb-2">追踪环节</h3>
+                <p class="text-slate-600">效果验证与标准化</p>
+                <div class="mt-3 flex items-center">
+                    <span class="inline-block w-4 h-4 rounded-full bg-gray-500 mr-2"></span>
+                    <span class="text-sm text-slate-500">深灰色标识</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
+            <i class="fas fa-lightbulb text-blue-500 mr-3"></i> 流程优化建议
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 md:p-8">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-expand text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-lg text-slate-800 mb-1">子流程扩展</h3>
+                            <p class="text-slate-600">在各检查环节(如分级护理措施)下继续展开更详细的操作步骤</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-shapes text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-lg text-slate-800 mb-1">决策节点</h3>
+                            <p class="text-slate-600">添加菱形符号表示不合格项目的处理路径与判断标准</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-clock text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-lg text-slate-800 mb-1">时间标注</h3>
+                            <p class="text-slate-600">显示各环节建议耗时，帮助优化资源配置</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-sm text-slate-500 mt-12 pt-6 border-t border-slate-200">
+        <p class="mt-1">最后更新时间为2025-05-30，星期五</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>

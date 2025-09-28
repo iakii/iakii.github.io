@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医嘱频次缩写指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 标题部分 -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">医嘱频次缩写指南</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">医疗专业人员常用的药物使用频率缩写及其含义</p>
+            <div class="w-24 h-1 bg-blue-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <!-- 简介卡片 -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 card">
+            <div class="flex items-start">
+                <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                    <i class="fas fa-info-circle text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">关于频次缩写</h3>
+                    <p class="text-gray-700">频次缩写通常基于拉丁文，如"q"代表"每"(quaque)，"d"代表"日"(die)。具体用药时间可能进一步细化，如"bid_8-16"表示每日两次(8:00和16:00)。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 每日频次 -->
+        <div class="mb-10">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-bold">1</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">每日频次</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg mr-3">qd</span>
+                        <span class="text-gray-600">Quaque Die</span>
+                    </div>
+                    <p class="text-gray-700">每日一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg mr-3">bid</span>
+                        <span class="text-gray-600">Bis In Die</span>
+                    </div>
+                    <p class="text-gray-700">每日两次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg mr-3">tid</span>
+                        <span class="text-gray-600">Ter In Die</span>
+                    </div>
+                    <p class="text-gray-700">每日三次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg mr-3">qid</span>
+                        <span class="text-gray-600">Quater In Die</span>
+                    </div>
+                    <p class="text-gray-700">每日四次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg mr-3">qod</span>
+                        <span class="text-gray-600">Quaque Omnis Die</span>
+                    </div>
+                    <p class="text-gray-700">隔日一次</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 每小时/间隔频次 -->
+        <div class="mb-10">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-bold">2</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">每小时/间隔频次</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-lg mr-3">qh</span>
+                        <span class="text-gray-600">Quaque Hora</span>
+                    </div>
+                    <p class="text-gray-700">每小时一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-lg mr-3">q2h/q3h/q4h</span>
+                    </div>
+                    <p class="text-gray-700">每2/3/4小时一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-lg mr-3">q6h/q8h/q12h</span>
+                    </div>
+                    <p class="text-gray-700">每6/8/12小时一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-lg mr-3">q1/2h</span>
+                    </div>
+                    <p class="text-gray-700">每30分钟一次</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 每周频次 -->
+        <div class="mb-10">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-bold">3</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">每周频次</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg mr-3">qw</span>
+                        <span class="text-gray-600">Quaque Week</span>
+                    </div>
+                    <p class="text-gray-700">每周一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg mr-3">biw</span>
+                    </div>
+                    <p class="text-gray-700">每周两次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg mr-3">tiw</span>
+                    </div>
+                    <p class="text-gray-700">每周三次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-lg mr-3">qow</span>
+                    </div>
+                    <p class="text-gray-700">隔周一次</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特定时间频次 -->
+        <div class="mb-10">
+            <div class="flex items-center mb-6">
+                <div class="bg-yellow-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-bold">4</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">特定时间频次</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-3 py-1 rounded-lg mr-3">qm</span>
+                        <span class="text-gray-600">Quaque Matutina</span>
+                    </div>
+                    <p class="text-gray-700">每晨一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-3 py-1 rounded-lg mr-3">qn</span>
+                        <span class="text-gray-600">Quaque Nocte</span>
+                    </div>
+                    <p class="text-gray-700">每晚一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-3 py-1 rounded-lg mr-3">hs</span>
+                        <span class="text-gray-600">Hora Somni</span>
+                    </div>
+                    <p class="text-gray-700">睡前一次</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-3 py-1 rounded-lg mr-3">ac</span>
+                        <span class="text-gray-600">Ante Cibum</span>
+                    </div>
+                    <p class="text-gray-700">饭前</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-3 py-1 rounded-lg mr-3">pc</span>
+                        <span class="text-gray-600">Post Cibum</span>
+                    </div>
+                    <p class="text-gray-700">饭后</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 其他特殊频次 -->
+        <div class="mb-10">
+            <div class="flex items-center mb-6">
+                <div class="bg-red-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-bold">5</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">其他特殊频次</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-red-100 text-red-800 font-bold px-3 py-1 rounded-lg mr-3">prn</span>
+                        <span class="text-gray-600">Pro Re Nata</span>
+                    </div>
+                    <p class="text-gray-700">必要时使用（长期备用）</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-red-100 text-red-800 font-bold px-3 py-1 rounded-lg mr-3">sos</span>
+                        <span class="text-gray-600">Si Opus Sit</span>
+                    </div>
+                    <p class="text-gray-700">需要时使用（限一次，12小时内有效）</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-5 card">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-red-100 text-red-800 font-bold px-3 py-1 rounded-lg mr-3">st</span>
+                        <span class="text-gray-600">Statim</span>
+                    </div>
+                    <p class="text-gray-700">立即执行</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 补充说明 -->
+        <div class="bg-blue-50 rounded-xl p-6 mb-8">
+            <h3 class="font-bold text-lg text-blue-800 mb-4 flex items-center">
+                <i class="fas fa-lightbulb text-blue-600 mr-2"></i> 补充说明
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>频次缩写通常基于拉丁文，如"q"代表"每"(quaque)，"d"代表"日"(die)。</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>具体用药时间可能进一步细化，如"bid_8-16"表示每日两次(8:00和16:00)。</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <span>如需完整列表或更详细的解释，可参考临床医嘱手册或相关医疗文档。</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-gray-200">
+            <p class="mt-1">最后更新时间为2025-05-15 ，星期四</p>
+        </div>
+    </div>
+</body>
+</html>
