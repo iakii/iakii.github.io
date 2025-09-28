@@ -10,7 +10,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { Dropdown } from "antd";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 
 export const Route = createRootRoute({
   component: RootAppComponent,
@@ -39,7 +39,7 @@ function RootComponent() {
 
   const { pathname } = useLocation();
 
-  const [settings, setSetting] = useState({
+  const defaultSettings = {
     fixSiderbar: true,
     layout: "side",
     splitMenus: false,
@@ -47,7 +47,21 @@ function RootComponent() {
     contentWidth: "Fluid",
     colorPrimary: "#088844",
     siderMenuType: "sub",
+  };
+  const [settings, setSetting] = useState(() => {
+    try {
+      const local = localStorage.getItem('pro_layout_settings');
+      return local ? JSON.parse(local) : defaultSettings;
+    } catch {
+      return defaultSettings;
+    }
   });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('pro_layout_settings', JSON.stringify(settings));
+    } catch {}
+  }, [settings]);
 
   const navigate = useNavigate();
 
@@ -153,7 +167,7 @@ function RootComponent() {
         onSettingChange={(changeSetting) => {
           setSetting(changeSetting);
         }}
-        disableUrlParams={false}
+        disableUrlParams={true}
       />
     </ProLayout>
   );

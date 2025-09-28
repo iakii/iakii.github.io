@@ -93,18 +93,13 @@ export default function Layout() {
     setHtmlPreview(html);
   };
   const handleHtmlPrint = () => {
-    console.log(2, htmlPreview);
-
     if (htmlPreview) printMgr?.print("html", { html: htmlPreview });
   };
 
   // 切换Tab时，更新URL参数
   const handleTabChange = useCallback((key) => {
     setActiveTab(key);
-    const params = new URLSearchParams(window.location.search);
-    params.set("tab", key);
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, "", newUrl);
+    location.hash = location.hash.split("?")[0] + `?tab=${key}`;
   }, []);
 
   // 监听URL变化（如用户手动修改tab参数或浏览器前进后退）
@@ -164,7 +159,7 @@ export default function Layout() {
           },
         ],
       }}
-      bodyStyle={{ padding: 0  }}
+      bodyStyle={{ padding: 0 }}
     />
   );
 }
