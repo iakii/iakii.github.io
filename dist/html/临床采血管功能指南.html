@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床采血管功能指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .tube-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tube-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .order-step {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .order-step:before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+        .order-step:last-child:before {
+            display: none;
+        }
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 标题部分 -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">临床采血管功能指南</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">标准化采血管颜色与用途详解 · 基于国际标准与临床实践</p>
+        </div>
+
+        <!-- 采血管卡片网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <!-- 紫色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-purple-600">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">紫色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">EDTA-K₂或EDTA-K₃（乙二胺四乙酸盐）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">通过螯合钙离子阻止血液凝固，保持血细胞形态完整</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <p class="text-gray-700">血常规、血型鉴定、糖化血红蛋白(HbA1c)、网织红细胞计数</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-red-600">禁忌</p>
+                            <p class="text-red-700">不适用于凝血功能、钙/钾/钠离子检测及PCR试验</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 红色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-red-600">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">红色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">无（普通管）或促凝剂（快速管）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">自然凝固分离血清，或加速凝血（快速管）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li><span class="font-medium">普通管</span>：生化检测（肝功能、肾功能、电解质）、免疫学检测</li>
+                                <li><span class="font-medium">快速管</span>：急诊生化项目（如心肌酶、淀粉酶）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 浅蓝色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-blue-400">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">浅蓝色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">3.2%枸橼酸钠（抗凝剂与血液比例1:9）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">通过结合钙离子抑制凝血，专用于凝血功能检测</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <p class="text-gray-700">凝血酶原时间(PT)、活化部分凝血活酶时间(APTT)、纤维蛋白原测定</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 绿色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-green-600">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">绿色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">肝素锂/钠（直接抑制凝血酶）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">抗凝并保持血浆成分稳定</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li><span class="font-medium">普通绿管</span>：血气分析、红细胞压积、急诊生化</li>
+                                <li><span class="font-medium">浅绿管</span>：含分离胶，快速分离血浆用于电解质、BNP检测</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-red-600">禁忌</p>
+                            <p class="text-red-700">过量肝素干扰白细胞计数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 灰色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-gray-500">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">灰色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">氟化钠（抑制糖酵解）+草酸钾/肝素钠</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">防止血糖降解，稳定血糖浓度</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <p class="text-gray-700">血糖、乳酸检测，尤其适合糖尿病筛查</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-red-600">禁忌</p>
+                            <p class="text-red-700">不可用于尿素酶法测尿素</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 黑色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-gray-900">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">黑色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">3.8%枸橼酸钠（抗凝剂与血液比例1:4）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">抗凝并稀释血液，专用于血沉检测</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg">
+                            <p class="text-sm font-medium text-yellow-700">注意</p>
+                            <p class="text-yellow-800">抗凝剂过量会导致血沉假性升高</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 黄色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-yellow-500">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">黄色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">惰性分离胶+促凝剂</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">功能</p>
+                            <p class="text-gray-700">快速分离血清，避免溶血</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <p class="text-gray-700">急诊化学发光检测（如甲状腺功能、肿瘤标志物）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 深蓝色管 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-blue-800">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">深蓝色采血管</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">添加剂</p>
+                            <p class="text-gray-700">肝素钠/EDTA（无微量元素污染）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">用途</p>
+                            <p class="text-gray-700">重金属（铅、汞）、毒理学检测</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他特殊颜色 -->
+            <div class="tube-card bg-white rounded-xl shadow-md overflow-hidden border-l-8 border-indigo-500">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">其他特殊颜色</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">棕色管</p>
+                            <p class="text-gray-700">铅检测专用（含EDTA）</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">粉红/白色管</p>
+                            <p class="text-gray-700">用于血培养或特殊分子检测</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 采血顺序部分 -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-12">
+            <div class="flex items-center mb-6">
+                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white mr-4">
+                    <i class="fas fa-sort-amount-down"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">采血管使用顺序指南</h2>
+            </div>
+            <p class="text-gray-600 mb-6">根据国际标准(CLSI H3-A6)和临床指南，推荐的采血顺序如下：</p>
+
+            <div class="space-y-6">
+                <div class="order-step">
+                    <div class="step-number bg-blue-600">1</div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-1">血培养瓶</h4>
+                        <p class="text-gray-700">优先采集以避免污染</p>
+                    </div>
+                </div>
+
+                <div class="order-step">
+                    <div class="step-number bg-blue-400">2</div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-1">凝血管（浅蓝）</h4>
+                        <p class="text-gray-700">确保凝血功能检测准确性</p>
+                    </div>
+                </div>
+
+                <div class="order-step">
+                    <div class="step-number bg-red-400">3</div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-red-800 mb-1">血清管（红/黄）</h4>
+                        <p class="text-gray-700">用于生化、免疫学检测</p>
+                    </div>
+                </div>
+
+                <div class="order-step">
+                    <div class="step-number bg-green-400">4</div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-1">肝素管（绿）</h4>
+                        <p class="text-gray-700">血气分析、急诊生化</p>
+                    </div>
+                </div>
+
+                <div class="order-step">
+                    <div class="step-number bg-purple-400">5</div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-purple-800 mb-1">EDTA管（紫）</h4>
+                        <p class="text-gray-700">血常规、血型鉴定</p>
+                    </div>
+                </div>
+
+                <div class="order-step">
+                    <div class="step-number bg-gray-400">6</div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-1">血糖管（灰）</h4>
+                        <p class="text-gray-700">血糖、乳酸检测</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 总结部分 -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white mr-4">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">关键总结</h2>
+            </div>
+            <div class="space-y-4 text-gray-700">
+                <p>采血管颜色标准化（如ISO 6710）旨在减少操作错误。选择时需根据检测项目匹配添加剂功能，并注意采血顺序以避免交叉污染。</p>
+                <p>如需完整列表或特殊用途采血管信息，可进一步查阅相关标准或医疗机构手册。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p class="mt-1">最后更新时间为2025-05-15，星期四</p>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 懒加载效果
+        document.addEventListener("DOMContentLoaded", function() {
+            const tubeCards = document.querySelectorAll('.tube-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            tubeCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

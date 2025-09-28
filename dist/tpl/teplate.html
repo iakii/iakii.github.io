@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    <style>
+                       body, table {
+                   margin: 0 !important;
+                   padding: 0 !important;
+                   	font-family:  "NSimSun", "宋体", "NSimSun", "新宋体", serif;
+
+
+                 }
+                        @media print {
+                          html,
+                          body {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                          }
+
+
+                        @page {
+                          size: A4 {{data.landscape || 'portrait' }};
+                          margin: 8mm 8mm 16mm 8mm;
+                          @bottom-center {
+                            content: "第" counter(page) "页 / 共" counter(pages) "页";
+                            font-size: 12px;
+                          }
+                        }
+            }
+                       table {
+                              	margin: 0 auto;
+                              	width: 100%;
+                              	text-align: center;
+                              	border-collapse: collapse;
+                              	table-layout: fixed;
+                                font-size: 13px;
+                                   border-right: 2px solid #444 !important;
+                              }
+
+                              table, tr, td, th {
+                          page-break-inside: avoid;
+                        }
+                        tbody {
+                          page-break-after: auto;
+                        }
+
+                              table td, table th {
+                                border: 1px solid #444;
+                                border-right: 1px solid #444;
+                                text-align: center;
+                                vertical-align: middle;
+                                color: #222222;
+                              }
+                              table tr td:last-child, table tr th:last-child {
+                                border-right-width: 1px !important;
+                              }
+                              table thead td {
+                                font-weight: bold;
+                                  color: #000000;
+                                  /* 解决字体加粗在预览中失效bug，利用阴影代誉 */
+      text-shadow: 0.15pt 0px 0px black,
+      0.25pt 0px 0px black,
+      0.35pt 0px 0px black,
+      -0.25pt 0px 0px black,
+      0px 0.25pt 0px black,
+      0px -0.25pt 0px black;
+
+                              }
+                              table th {
+                                color: #222222;
+                              }
+
+                          td pre {
+                              	white-space: pre-wrap;
+                              	text-align: left;
+                              	padding: 0 2mm;
+                              }
+    </style>
+  </head>
+  <body>
+    <table style="page-break-after: always">
+      <thead>
+        <tr>
+          <td style="width: 32px">索引</td>
+          {{each data.options.columns as col}}
+          <td style="width: {{col.width}};">
+            <strong>{{col.title}}</strong>
+          </td>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{each data.records as row i}}
+        <tr>
+          <td>
+            <span
+              style="
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                border-radius: 50%;
+                background-color: rgb(165, 165, 165);
+                color: black;
+                font-size: 13px;
+                text-align: center;
+              "
+            >
+              {{i + 1}}
+            </span>
+          </td>
+          {{each data.options.columns as col}}
+          <td>
+            {{if col.valueType ==='avatar'}}
+            <img
+              src="{{row[col.dataIndex]}}"
+              style="height: 14px; border-radius: 50%"
+            />
+            {{else if col.valueType !=='avatar'}}
+            <pre>{{row[col.field]||row[col.dataIndex]}} {{/if}}</pre>
+          </td>
+          {{/each}}
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </body>
+</html>

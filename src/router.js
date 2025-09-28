@@ -14,6 +14,7 @@ import { Route as PrintRouteImport } from './routes/print'
 import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as HtmlRouteImport } from './routes/html'
 import { Route as DocxRouteImport } from './routes/docx'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -42,6 +43,11 @@ const DocxRoute = DocxRouteImport.update({
   path: '/docx',
   getParentRoute: () => rootRouteImport,
 })
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+})
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -56,6 +62,7 @@ const IndexRoute = IndexRouteImport.update({
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DocsRoute: DocsRoute,
   DocxRoute: DocxRoute,
   HtmlRoute: HtmlRoute,
   PdfRoute: PdfRoute,
