@@ -1,12 +1,15 @@
 import { defineConfig, rspack } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/rspack";
-
 import { pluginLess } from "@rsbuild/plugin-less";
 import { pluginBabel } from "@rsbuild/plugin-babel";
 
 export default defineConfig({
   plugins: [pluginReact(), pluginLess(), pluginBabel()],
+  html: {
+    favicon: "favicon.png",
+    title: "小小工具箱",
+  },
   source: {
     entry: {
       index: "./src/index.js",
@@ -25,7 +28,6 @@ export default defineConfig({
       ],
     },
   },
-
   dev: {
     hmr: true,
     progressBar: true,
@@ -53,7 +55,6 @@ export default defineConfig({
       },
     ],
   },
-
   optimization: {
     splitChunks: {
       minSize: 0,
