@@ -29,6 +29,7 @@
     "@tanstack/react-router": "^1.132.7",
     "@tanstack/react-router-devtools": "^1.132.11",
     "antd": "^5.27.4",
+    "jspdf": "^3.0.3",
     "mammoth": "file:./mammoth",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

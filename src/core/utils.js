@@ -1,33 +1,14 @@
 const { snapdom } = require("./snapdom.mjs");
 import docToHtml from "./docToHtml";
+
 export default class printMgr {
   static async snapshotFunc(html, params = { landscape: "portrait" }) {
     const size =
-      params.landscape === "landscape"
-        ? "width:296mm;"
-        : "width:209mm;";
-    const htmls = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body {
-          font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif;
-        }
-      </style>
-    </head>
-    <body>
-    ${html}
-    </body>
-    </html>
-  `;
-    const img = await printMgr.snapshotHtmlToImg(htmls, params.landscape);
-
-    document.body.appendChild(img)
-
+      params.landscape === "landscape" ? "width:296mm;" : "width:209mm;";
+    const img = await printMgr.snapshotHtmlToImg(html, params);
     printMgr.print("html", {
-      html: `<img style="${size};object-fit:contain" src="${img.src}"/>`,
-      landscape: params.landscape,
+      html: `<div class="img" style="${size}"><img src="${img.src}" style="width:100%;height:auto;"/></div>`,
+      ...params,
     });
   }
 
@@ -67,51 +48,8 @@ export default class printMgr {
     if (type === "html" && options.html) {
       iframe.onload = () => doPrint();
       iframe.contentDocument?.open();
-
-      const size =
-        options.landscape === "landscape"
-          ? "width:297mm;height:210mm;"
-          : "width: 210mm;height: 297mm;";
-
-      iframe.contentDocument?.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Print</title>
-          <style>
-             .img {
-              ${size}
-             }
-             @page {
-              size: A4 ${options.landscape || "portrait"};
-              ${size}
-              @bottom-center {
-                content: "第" counter(page) "页 / 共" counter(pages) "页";
-                font-size: 12px;
-                color:grey;
-              }
-              @top-left {
-                content: "打印时间：${new Date().toLocaleString()}";
-                color:grey;
-                font-size: 12px;
-              }
-             }
-             body {
-              margin: 0;
-              padding: 0;
-              background: #fff;
-              ${size}
-              color: #000;
-              font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif;
-              font-size: 14px;
-            }
-          </style>
-        </head>
-        <body>
-          ${options.html}
-        </body>
-        </html>
-      `);
+      const htmlContent = printMgr._generateHtml(options.html, options);
+      iframe.contentDocument?.write(htmlContent);
       iframe.contentDocument?.close();
     } else if (type === "pdf" && options.pdf) {
       if (typeof options.pdf === "string") {
@@ -125,37 +63,34 @@ export default class printMgr {
     }
   }
 
-  static async snapshotHtmlToImg(html, landscape = "portrait") {
+  static async snapshotHtmlToImg(html, options = { landscape: "portrait" }) {
     // 创建隐藏 iframe
     const iframe = document.createElement("iframe");
     iframe.style.zIndex = "-1";
     iframe.style.position = "fixed";
-    // iframe.style.top = "-9999px";
-    // iframe.style.left = "-9999px";
-    iframe.style.top = "0";
-    iframe.style.left = "0";
+    iframe.style.top = "-9999px";
+    iframe.style.left = "-9999px";
+    // iframe.style.top = "0";
+    // iframe.style.left = "0";
     iframe.style.border = "0";
-    // iframe.style.background = "green";
-    // iframe.style.padding= "8mm 8mm 16mm";
-    if (landscape === "landscape") {
+    iframe.style.background = "white";
+    if (options.landscape === "landscape") {
       iframe.style.width = "297mm";
-      iframe.style.height = "190mm";
+      iframe.style.minHeight = "190mm";
     } else {
       iframe.style.width = "210mm";
       iframe.style.minHeight = "287mm";
     }
     document.documentElement.insertBefore(iframe, document.body);
-
-
     // 内容写入
     return new Promise((resolve, reject) => {
       iframe.onload = async function () {
         setTimeout(async () => {
           try {
-            const image = await snapdom.toPng(iframe, {
-              embedFonts: false,
+            const image = await snapdom.toPng(iframe.contentDocument.body, {
+              embedFonts: true,
               type: "svg",
-              dpr: 2,
+              dpr: 3,
             });
             resolve(image);
           } catch (err) {
@@ -166,17 +101,53 @@ export default class printMgr {
         }, 20);
       };
       iframe.contentDocument?.open();
-      iframe.contentDocument?.write(html);
+      const htmlContent = printMgr._generateHtml(html, options);
+      iframe.contentDocument?.write(htmlContent);
       iframe.contentDocument?.close();
+
     });
+  }
+  static _generateHtml(html, options) {
+    const size =
+      options.landscape === "landscape"
+        ? "width:297mm;height:210mm;"
+        : "width: 210mm;height: 297mm;";
+
+    const showPageSize = options.showPageSize
+      ? `@bottom-center { content: "第" counter(page) "页 / 共" counter(pages) "页";font-size: 12px; color:grey; } `
+      : "";
+
+    const showPrintTime = options.showPrintTime
+      ? `@top-left { content: "打印时间：${new Date().toLocaleString()}";color:grey; font-size: 12px;`
+      : "";
+
+    return `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Print</title>
+          <style>
+            table { border-collapse: collapse; }
+            table thead th { font-weight: bold; -webkit-text-stroke: 0.4px; }
+            th, td { padding: 0 4px; text-align: left; font-size: 14px; }
+            @page { size: A4 ${options.landscape || "portrait"}; ${size} ${showPageSize} ${showPrintTime} }
+            body { margin: 0; padding: 0; background: #fff; ${size} color: #000; font-family: '新宋', '宋体-简'; font-size: 14px; }
+            .font-500-bold { font-weight: 500; -webkit-text-stroke: 0.2px; }
+            .font-600-bold { font-weight: 600; -webkit-text-stroke: 0.3px; }
+            .font-700-bold { font-weight: 700; -webkit-text-stroke: 0.4px; }
+            .font-800-bold { font-weight: 800; -webkit-text-stroke: 0.5px; }
+            .font-900-bold { font-weight: 900; -webkit-text-stroke: 0.6px; }
+            .font-bold { font-weight: bold; -webkit-text-stroke: 0.4px; }
+          </style>
+        </head>
+        <body>
+          ${html}
+        </body>
+        </html>
+      `;
   }
 }
 
-const btn = document.querySelector("#print");
-btn?.addEventListener("click", function () {
-  console.log(3333);
-  printMgr.print("pdf", { pdf: "/123.pdf" });
-});
 
 const word = document.querySelector("#word");
 word?.addEventListener("click", async function () {
