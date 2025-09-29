@@ -114,11 +114,11 @@ export default class printMgr {
         : "width: 210mm;height: 297mm;";
 
     const showPageSize = options.showPageSize
-      ? `@bottom-center { content: "第" counter(page) "页 / 共" counter(pages) "页";font-size: 12px; color:grey; } `
+      ? `@bottom-center { content: "第" counter(page) "页 / 共" counter(pages) "页";font-size: 12px; color:grey;font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; } `
       : "";
 
     const showPrintTime = options.showPrintTime
-      ? `@top-left { content: "打印时间：${new Date().toLocaleString()}";color:grey; font-size: 12px;`
+      ? `@top-left { content: "打印时间：${new Date().toLocaleString()}";color:grey; font-size: 12px;font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; } `
       : "";
 
     return `
@@ -127,11 +127,11 @@ export default class printMgr {
         <head>
           <title>Print</title>
           <style>
-            table { border-collapse: collapse; }
+            body { margin: 0; padding: 0; background: #fff; ${size} color: #000; font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; font-size: 14px; }
+            table { border-collapse: collapse; font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; }
             table thead th { font-weight: bold; -webkit-text-stroke: 0.4px; }
             th, td { padding: 0 4px; text-align: left; font-size: 14px; }
             @page { size: A4 ${options.landscape || "portrait"}; ${size} ${showPageSize} ${showPrintTime} }
-            body { margin: 0; padding: 0; background: #fff; ${size} color: #000; font-family: '新宋', '宋体-简'; font-size: 14px; }
             .font-500-bold { font-weight: 500; -webkit-text-stroke: 0.2px; }
             .font-600-bold { font-weight: 600; -webkit-text-stroke: 0.3px; }
             .font-700-bold { font-weight: 700; -webkit-text-stroke: 0.4px; }

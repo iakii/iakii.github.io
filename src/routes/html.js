@@ -207,7 +207,8 @@ export default function HtmlTab(props) {
               onClick={() => {
                 const params = JSON.parse(htmlParams);
 
-                htmlPreview && printMgr.snapshotFunc(htmlPreview, params.printConfig||{});
+                htmlPreview &&
+                  printMgr.snapshotFunc(htmlPreview, params.printConfig || {});
                 console.log("print html", htmlPreview);
               }}
               disabled={!htmlPreview}
@@ -237,7 +238,14 @@ export default function HtmlTab(props) {
           strong
           style={{ margin: "16px 0 8px", display: "block" }}
         >
-          模板 (支持&#123;&#123;变量&#125;&#125;、art-template语法)
+          模板 (支持&#123;&#123;变量&#125;&#125;、
+          <a
+            href="https://goofychris.github.io/art-template/docs/syntax.html#Condition"
+            target="_blank"
+          >
+            art-template
+          </a>
+          语法)
         </Typography.Text>
         <Editor
           height={500}
@@ -250,7 +258,9 @@ export default function HtmlTab(props) {
             minimap: { enabled: true },
             fontFamily: "monospace",
             scrollBeyondLastLine: false,
+            padding: 12,
           }}
+
           onChange={(v) => setHtmlTemplate(v)}
         />
       </ProCard>

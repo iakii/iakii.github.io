@@ -1,4 +1,4 @@
-import { PrinterFilled } from "@ant-design/icons";
+import { PrinterFilled, PrinterTwoTone } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
 import "antd/dist/reset.css";
@@ -9,13 +9,14 @@ import "../index.css";
 import WordTab from "./docx";
 import HtmlTab from "./html";
 import PdfTab from "./pdf";
+import { PrintV1Compoent } from "./print";
 
 export const Route = createFileRoute("/")({
   component: Layout,
 
   staticData: {
     name: "打印",
-    icon: <PrinterFilled />,
+    icon: <PrinterTwoTone />,
     index: 0,
   },
 });
@@ -121,6 +122,21 @@ export default function Layout() {
         onChange: handleTabChange,
         items: [
           {
+            key: "html",
+            label: "打印Html模板",
+            children: (
+              <HtmlTab
+                htmlParams={htmlParams}
+                setHtmlParams={setHtmlParams}
+                htmlTemplate={htmlTemplate}
+                setHtmlTemplate={setHtmlTemplate}
+                htmlPreview={htmlPreview}
+                onPreview={handleHtmlPreview}
+                onPrint={handleHtmlPrint}
+              />
+            ),
+          },
+          {
             key: "pdf",
             label: "打印PDF",
             children: (
@@ -146,21 +162,15 @@ export default function Layout() {
               />
             ),
           },
+
           {
-            key: "html",
-            label: "打印Html模板",
+            key: "v1print",
+            label: "打印v1版本",
             children: (
-              <HtmlTab
-                htmlParams={htmlParams}
-                setHtmlParams={setHtmlParams}
-                htmlTemplate={htmlTemplate}
-                setHtmlTemplate={setHtmlTemplate}
-                htmlPreview={htmlPreview}
-                onPreview={handleHtmlPreview}
-                onPrint={handleHtmlPrint}
-              />
+               <PrintV1Compoent />
             ),
           },
+
         ],
       }}
       bodyStyle={{ padding: 0 }}
