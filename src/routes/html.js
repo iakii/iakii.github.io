@@ -1,15 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  EyeOutlined,
-  FileTextOutlined,
-  PrinterOutlined,
-} from "@ant-design/icons";
+import { EyeOutlined, PrinterOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import Editor from "@monaco-editor/react";
-import { Button, Space, Typography } from "antd";
+import { createFileRoute } from "@tanstack/react-router";
+import { Button, message, Space, Typography } from "antd";
+import { useRef, useState } from "react";
 import template from "../core/template";
-import printMgr from "../core/utils";
-import { useState } from "react";
+import printMgr, { showPreviewModal } from "../core/utils";
 
 export const Route = createFileRoute("/html")({
   component: HtmlTab,
@@ -161,67 +157,93 @@ export default function HtmlTab(props) {
       );
     }
   };
+  // monaco editor 实例用 useRef
+  const editorRef = useRef(null);
+  // 格式化 JSON
+  const handleFormat = () => {
+    if (editorRef.current) {
+      const action = editorRef.current.getAction(
+        "editor.action.formatDocument"
+      );
+      if (action) action.run();
+    }
+  };
+
   return (
-    <ProCard split="vertical" ghost bordered style={{ minHeight: 600 }}>
+    <ProCard
+      size="small"
+      split="vertical"
+      ghost
+      bordered
+      headerBordered
+      extra={
+        <Space>
+          <Button
+            size="small"
+            onClick={() => {
+              setHtmlParams(exampleParams);
+              setHtmlTemplate(exampleTemplate);
+            }}
+          >
+            示例复杂表格
+          </Button>
+          <Button size="small" icon={<EyeOutlined />} onClick={handlePreview}>
+            设置参数预览
+          </Button>
+          <Button
+            size="small"
+            type="primary"
+            icon={<PrinterOutlined />}
+            onClick={() => {
+              const params = JSON.parse(htmlParams);
+              htmlPreview &&
+                printMgr.print("html", {
+                  html: htmlPreview,
+                  ...(params.printConfig || {}),
+                });
+              console.log("print html", htmlPreview);
+            }}
+            disabled={!htmlPreview}
+          >
+            打印
+          </Button>
+
+          <Button
+            type="primary"
+            size="small"
+            icon={<PrinterOutlined />}
+            onClick={() => {
+              const params = JSON.parse(htmlParams);
+              htmlPreview &&
+                printMgr.snapshotFunc(htmlPreview, params.printConfig || {});
+              console.log("print html", htmlPreview);
+            }}
+            disabled={!htmlPreview}
+          >
+            截图并打印
+          </Button>
+
+          <Button
+            size="small"
+            icon={<EyeOutlined />}
+            disabled={!htmlPreview}
+            style={{ marginRight: 16 }}
+            onClick={() => showPreviewModal(htmlPreview)}
+          >
+            预览
+          </Button>
+        </Space>
+      }
+    >
       <ProCard
+        colSpan={12}
         headerBordered
-        title={
-          <span>
-            <FileTextOutlined style={{ color: "#faad14", marginRight: 8 }} />
-            Html模板参数与预览
-          </span>
-        }
-        extra={
-          <Space>
-            <Button
-              onClick={() => {
-                setHtmlParams(exampleParams);
-                setHtmlTemplate(exampleTemplate);
-              }}
-            >
-              示例复杂表格
-            </Button>
-            <Button icon={<EyeOutlined />} onClick={handlePreview}>
-              设置参数预览
-            </Button>
-            <Button
-              type="primary"
-              icon={<PrinterOutlined />}
-              onClick={() => {
-                const params = JSON.parse(htmlParams);
-                htmlPreview &&
-                  printMgr.print("html", {
-                    html: htmlPreview,
-                    ...(params.printConfig || {}),
-                  });
-                console.log("print html", htmlPreview);
-              }}
-              disabled={!htmlPreview}
-            >
-              打印
-            </Button>
-
-            <Button
-              type="primary"
-              icon={<PrinterOutlined />}
-              onClick={() => {
-                const params = JSON.parse(htmlParams);
-
-                htmlPreview &&
-                  printMgr.snapshotFunc(htmlPreview, params.printConfig || {});
-                console.log("print html", htmlPreview);
-              }}
-              disabled={!htmlPreview}
-            >
-              截图并打印
-            </Button>
-          </Space>
-        }
-        bodyStyle={{ padding: 24 }}
+        size="small"
+        bodyStyle={{ padding: 0 }}
+        title={<Typography.Text strong>参数设置 (JSON)</Typography.Text>}
       >
-        <Typography.Text strong>参数设置 (JSON)</Typography.Text>
         <Editor
-          height={500}
+          height="calc(100vh - 300px)"
           width="100%"
           language="json"
           theme="vs-dark"
@@ -234,21 +256,48 @@ export default function HtmlTab(props) {
           }}
           onChange={(v) => setHtmlParams(v)}
         />
-        <Typography.Text
-          strong
-          style={{ margin: "16px 0 8px", display: "block" }}
-        >
-          模板 (支持&#123;&#123;变量&#125;&#125;、
-          <a
-            href="https://goofychris.github.io/art-template/docs/syntax.html#Condition"
-            target="_blank"
+      </ProCard>
+
+      <ProCard
+        headerBordered
+        colSpan={12}
+        bodyStyle={{ padding: 0 }}
+        size="small"
+        title={
+          <Typography.Text strong>
+            模板 (支持&#123;&#123;变量&#125;&#125;、
+            <a
+              href="https://goofychris.github.io/art-template/docs/syntax.html#Condition"
+              target="_blank"
+            >
+              art-template
+            </a>
+            语法)
+          </Typography.Text>
+        }
+        extra={
+          <Button
+            disabled={htmlTemplate.includes("<!DOCTYPE html>")}
+            size="small"
+            type="primary"
+            style={{ fontSize: 12 }}
+            onClick={() => {
+              const params = JSON.parse(htmlParams);
+              const htmlTemplates = printMgr._generateHtml(
+                htmlTemplate,
+                params.printConfig || {}
+              );
+              setHtmlTemplate(htmlTemplates);
+              handleFormat();
+              message.success("已生成完整HTML，可点击预览查看");
+            }}
           >
-            art-template
-          </a>
-          语法)
-        </Typography.Text>
+            设置Html
+          </Button>
+        }
+      >
         <Editor
-          height={500}
+          height="calc(100vh - 300px)"
           width="100%"
           language="html"
           theme="vs-dark"
@@ -258,41 +307,12 @@ export default function HtmlTab(props) {
             minimap: { enabled: true },
             fontFamily: "monospace",
             scrollBeyondLastLine: false,
-            padding: 12,
           }}
-
           onChange={(v) => setHtmlTemplate(v)}
-        />
-      </ProCard>
-      <ProCard
-        headerBordered
-        title={<Typography.Text strong>预览</Typography.Text>}
-        bodyStyle={{
-          padding: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-        }}
-        style={{
-          background: "#fff",
-          borderRadius: 8,
-          minHeight: 300,
-          width: "210mm",
-        }}
-      >
-        <div
-          style={{
-            background: "#fff",
-            width: "210mm",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-            borderRadius: 8,
-            padding: 24,
-            fontFamily:
-              "'宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif",
+          onMount={(editor) => {
+            editorRef.current = editor;
           }}
-        >
-          <div dangerouslySetInnerHTML={{ __html: htmlPreview }} />
-        </div>
+        />
       </ProCard>
     </ProCard>
   );

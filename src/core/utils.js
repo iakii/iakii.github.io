@@ -48,7 +48,9 @@ export default class printMgr {
     if (type === "html" && options.html) {
       iframe.onload = () => doPrint();
       iframe.contentDocument?.open();
-      const htmlContent = printMgr._generateHtml(options.html, options);
+      const htmlContent = options.html.includes("<!DOCTYPE html>")
+        ? options.html
+        : printMgr._generateHtml(options.html, options);
       iframe.contentDocument?.write(htmlContent);
       iframe.contentDocument?.close();
     } else if (type === "pdf" && options.pdf) {
@@ -104,7 +106,6 @@ export default class printMgr {
       const htmlContent = printMgr._generateHtml(html, options);
       iframe.contentDocument?.write(htmlContent);
       iframe.contentDocument?.close();
-
     });
   }
   static _generateHtml(html, options) {
@@ -148,102 +149,103 @@ export default class printMgr {
   }
 }
 
-
 const word = document.querySelector("#word");
 word?.addEventListener("click", async function () {
   const arrayBuffer = await fetch("123.docx").then((res) => res.arrayBuffer());
 
   docToHtml(arrayBuffer)
-    .then(function (resHtml) {
-      console.log(111, resHtml);
-
-      if (resHtml) {
-        printMgr.print("html", { html: resHtml });
-        return;
-      }
-      // 遮罩层
-      const overlay = document.createElement("div");
-      overlay.style.position = "fixed";
-      overlay.style.top = "0";
-      overlay.style.left = "0";
-      overlay.style.width = "100vw";
-      overlay.style.height = "100vh";
-      overlay.style.background = "rgba(0,0,0,0.6)";
-      overlay.style.zIndex = "9999";
-      overlay.style.display = "flex";
-      overlay.style.alignItems = "center";
-      overlay.style.justifyContent = "center";
-      overlay.style.transition = "opacity 0.3s";
-      overlay.style.opacity = "0";
-
-      // 内容区
-      const content = document.createElement("div");
-      content.innerHTML = resHtml;
-      content.style.width = "210mm";
-      content.style.height = "297mm";
-      content.style.background = "#fff";
-      content.style.borderRadius = "8px";
-      content.style.boxShadow = "0 0 24px rgba(0,0,0,0.25)";
-      content.style.position = "relative";
-      content.style.overflow = "auto";
-      content.style.padding = "8mm 8mm 16mm";
-      content.style.transform = "scale(0.85)";
-      content.style.opacity = "0";
-      content.style.transition =
-        "transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s";
-
-      // 关闭按钮
-      const closeBtn = document.createElement("button");
-      closeBtn.innerText = "关闭";
-      closeBtn.style.padding = "8px 32px";
-      closeBtn.style.background = "#d60000";
-      closeBtn.style.color = "#fff";
-      closeBtn.style.border = "none";
-      closeBtn.style.borderRadius = "4px";
-      closeBtn.style.cursor = "pointer";
-      closeBtn.style.fontSize = "16px";
-      closeBtn.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
-      closeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        document.body.removeChild(overlay);
-      });
-      overlay.appendChild(closeBtn);
-
-      const print = document.createElement("button");
-      print.innerText = "打印";
-      print.style.padding = "8px 32px";
-      print.style.background = "#2915ddff";
-      print.style.color = "#fff";
-      print.style.border = "none";
-      print.style.borderRadius = "4px";
-      print.style.cursor = "pointer";
-      print.style.fontSize = "16px";
-      print.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
-      print.addEventListener("click", (e) => {
-        e.stopPropagation();
-        printMgr.print("html", { html: resHtml });
-      });
-      overlay.appendChild(print);
-
-      // 点击遮罩关闭
-      overlay.addEventListener("click", () => {
-        document.body.removeChild(overlay);
-      });
-      content.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-
-      overlay.appendChild(content);
-      document.body.appendChild(overlay);
-
-      // 弹出动画
-      setTimeout(() => {
-        overlay.style.opacity = "1";
-        content.style.transform = "scale(1)";
-        content.style.opacity = "1";
-      }, 10);
-    })
+    .then(function (resHtml) {})
     .catch(function (err) {
       console.log(err);
     });
 });
+
+export function showPreviewModal(resHtml) {
+  console.log(111, resHtml);
+
+  // if (resHtml) {
+  //   printMgr.print("html", { html: resHtml });
+  //   return;
+  // }
+  // 遮罩层
+  const overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100vw";
+  overlay.style.height = "100vh";
+  overlay.style.background = "rgba(0,0,0,0.6)";
+  overlay.style.zIndex = "9999";
+  overlay.style.display = "flex";
+  overlay.style.alignItems = "center";
+  overlay.style.justifyContent = "center";
+  overlay.style.transition = "opacity 0.3s";
+  overlay.style.opacity = "0";
+
+  // 内容区
+  const content = document.createElement("div");
+  content.innerHTML = resHtml;
+  content.style.width = "210mm";
+  content.style.height = "297mm";
+  content.style.background = "#fff";
+  content.style.borderRadius = "8px";
+  content.style.boxShadow = "0 0 24px rgba(0,0,0,0.25)";
+  content.style.position = "relative";
+  content.style.overflow = "auto";
+  content.style.padding = "8mm 8mm 16mm";
+  content.style.transform = "scale(0.85)";
+  content.style.opacity = "0";
+  content.style.transition =
+    "transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s";
+
+  // 关闭按钮
+  const closeBtn = document.createElement("button");
+  closeBtn.innerText = "关闭";
+  closeBtn.style.padding = "8px 32px";
+  closeBtn.style.background = "#d60000";
+  closeBtn.style.color = "#fff";
+  closeBtn.style.border = "none";
+  closeBtn.style.borderRadius = "4px";
+  closeBtn.style.cursor = "pointer";
+  closeBtn.style.fontSize = "16px";
+  closeBtn.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    document.body.removeChild(overlay);
+  });
+  overlay.appendChild(closeBtn);
+
+  const print = document.createElement("button");
+  print.innerText = "打印";
+  print.style.padding = "8px 32px";
+  print.style.background = "#2915ddff";
+  print.style.color = "#fff";
+  print.style.border = "none";
+  print.style.borderRadius = "4px";
+  print.style.cursor = "pointer";
+  print.style.fontSize = "16px";
+  print.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+  print.addEventListener("click", (e) => {
+    e.stopPropagation();
+    printMgr.print("html", { html: resHtml });
+  });
+  overlay.appendChild(print);
+
+  // 点击遮罩关闭
+  overlay.addEventListener("click", () => {
+    document.body.removeChild(overlay);
+  });
+  content.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  overlay.appendChild(content);
+  document.body.appendChild(overlay);
+
+  // 弹出动画
+  setTimeout(() => {
+    overlay.style.opacity = "1";
+    content.style.transform = "scale(1)";
+    content.style.opacity = "1";
+  }, 10);
+}

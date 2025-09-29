@@ -1,4 +1,4 @@
-import { PrinterFilled, PrinterTwoTone } from "@ant-design/icons";
+import { PrinterTwoTone } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
 import "antd/dist/reset.css";
@@ -23,11 +23,11 @@ export const Route = createFileRoute("/")({
 // 从URL参数获取tab key，没有则返回默认pdf
 function getTabFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("tab") || "pdf";
+  return params.get("tab") || "html";
 }
 
 export default function Layout() {
-  const [activeTab, setActiveTab] = useState("pdf");
+  const [activeTab, setActiveTab] = useState("html");
 
   // Word 文件上传后立即预览
   const handleWordFilePreview = async (file) => {
