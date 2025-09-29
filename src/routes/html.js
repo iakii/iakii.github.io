@@ -1,3 +1,14 @@
+// 预览渲染逻辑抽取
+function handlePreviewFn(htmlParams, htmlTemplate, setHtmlPreview) {
+  try {
+    const params = JSON.parse(htmlParams);
+    const html = template.render(htmlTemplate, params);
+    console.log(1111, params, html);
+    setHtmlPreview(html);
+  } catch (e) {
+    setHtmlPreview(`<div style='color:red'>参数或模板错误: ${e.message}</div>`);
+  }
+}
 import { EyeOutlined, PrinterOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import Editor from "@monaco-editor/react";
@@ -144,19 +155,6 @@ const exampleTemplate = `<div style="text-align:center;font-size:32px;margin-bot
 export default function HtmlTab(props) {
   const { htmlParams, setHtmlParams, htmlTemplate, setHtmlTemplate } = props;
   const [htmlPreview, setHtmlPreview] = useState("");
-  // 新增：art-template 渲染逻辑
-  const handlePreview = () => {
-    try {
-      const params = JSON.parse(htmlParams);
-      const html = template.render(htmlTemplate, params);
-      console.log(1111, params, html);
-      setHtmlPreview(html);
-    } catch (e) {
-      setHtmlPreview(
-        `<div style='color:red'>参数或模板错误: ${e.message}</div>`
-      );
-    }
-  };
   // monaco editor 实例用 useRef
   const editorRef = useRef(null);
   // 格式化 JSON
@@ -187,7 +185,7 @@ export default function HtmlTab(props) {
           >
             示例复杂表格
           </Button>
-          <Button size="small" icon={<EyeOutlined />} onClick={handlePreview}>
+          <Button size="small" icon={<EyeOutlined />} onClick={() => handlePreviewFn(htmlParams, htmlTemplate, setHtmlPreview)}>
             设置参数预览
           </Button>
           <Button
