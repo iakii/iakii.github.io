@@ -1,14 +1,4 @@
-// 预览渲染逻辑抽取
-function handlePreviewFn(htmlParams, htmlTemplate, setHtmlPreview) {
-  try {
-    const params = JSON.parse(htmlParams);
-    const html = template.render(htmlTemplate, params);
-    console.log(1111, params, html);
-    setHtmlPreview(html);
-  } catch (e) {
-    setHtmlPreview(`<div style='color:red'>参数或模板错误: ${e.message}</div>`);
-  }
-}
+import { saveAs } from "file-saver";
 import { EyeOutlined, PrinterOutlined } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import Editor from "@monaco-editor/react";
@@ -17,6 +7,7 @@ import { Button, message, Space, Typography } from "antd";
 import { useRef, useState } from "react";
 import template from "../core/template";
 import printMgr, { showPreviewModal } from "../core/utils";
+import { asBlob } from "html-docx-js-extends";
 
 export const Route = createFileRoute("/html")({
   component: HtmlTab,
@@ -166,6 +157,29 @@ export default function HtmlTab(props) {
       if (action) action.run();
     }
   };
+  // 预览渲染逻辑抽取
+  function handlePreviewFn() {
+    try {
+      const params = JSON.parse(htmlParams);
+      const html = template.render(htmlTemplate, params);
+      console.log(1111, params, html);
+      setHtmlPreview(html);
+    } catch (e) {
+      setHtmlPreview(
+        `<div style='color:red'>参数或模板错误: ${e.message}</div>`
+      );
+    }
+  }
+  const exportToDocx = () => {
+    const { printConfig = {} } = JSON.parse(htmlParams);
+    console.log(2222, printConfig);
+
+    asBlob(htmlPreview, {
+      orientation: printConfig.landscape || "portrait",
+    }).then((data) => {
+      saveAs(data, Date.now() + ".docx"); // save as docx file
+    }); //
+  };
 
   return (
     <ProCard
@@ -185,7 +199,7 @@ export default function HtmlTab(props) {
           >
             示例复杂表格
           </Button>
-          <Button size="small" icon={<EyeOutlined />} onClick={() => handlePreviewFn(htmlParams, htmlTemplate, setHtmlPreview)}>
+          <Button size="small" icon={<EyeOutlined />} onClick={handlePreviewFn}>
             设置参数预览
           </Button>
           <Button
@@ -219,6 +233,16 @@ export default function HtmlTab(props) {
             disabled={!htmlPreview}
           >
             截图并打印
+          </Button>
+
+          <Button
+            type="primary"
+            size="small"
+            icon={<PrinterOutlined />}
+            onClick={exportToDocx}
+            disabled={!htmlPreview}
+          >
+            导出Docx
           </Button>
 
           <Button

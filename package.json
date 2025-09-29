@@ -29,6 +29,8 @@
     "@tanstack/react-router": "^1.132.7",
     "@tanstack/react-router-devtools": "^1.132.11",
     "antd": "^5.27.4",
+    "file-saver": "^2.0.5",
+    "html-docx-js-extends": "^0.1.8",
     "jspdf": "^3.0.3",
     "mammoth": "file:./mammoth",
     "react": "^19.1.1",
