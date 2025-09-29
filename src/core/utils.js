@@ -131,14 +131,16 @@ export default class printMgr {
             body { margin: 0; padding: 0; background: #fff; ${size} color: #000; font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; font-size: 14px; }
             table { border-collapse: collapse; font-family: '宋体', '宋体-简', Avenir, Helvetica, Arial, sans-serif; }
             table thead th { font-weight: bold; -webkit-text-stroke: 0.4px; }
-            th, td { padding: 0 4px; text-align: left; font-size: 14px; }
-            @page { size: A4 ${options.landscape || "portrait"}; ${size} ${showPageSize} ${showPrintTime} }
+            th, td { padding: 0 4px; text-align: left; font-size: 14px; border: 1px solid #000; }
+            @page { size: A4 ${options.landscape || "portrait"}; ${size} ${showPageSize} ${showPrintTime}  margin: 8mm 8mm 16mm 0;}
             .font-500-bold { font-weight: 500; -webkit-text-stroke: 0.2px; }
             .font-600-bold { font-weight: 600; -webkit-text-stroke: 0.3px; }
             .font-700-bold { font-weight: 700; -webkit-text-stroke: 0.4px; }
             .font-800-bold { font-weight: 800; -webkit-text-stroke: 0.5px; }
             .font-900-bold { font-weight: 900; -webkit-text-stroke: 0.6px; }
             .font-bold { font-weight: bold; -webkit-text-stroke: 0.4px; }
+            .no-border { border-left: 0; border-right: 0; border-top: 0  }
+            .d-flex {  display: flex; align-items: center; justify-content: center; gap:8px; }
           </style>
         </head>
         <body>

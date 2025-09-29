@@ -120,27 +120,35 @@ const exampleParams = `{
     { "key": 10, "name": "王十二", "age": 50, "address": "南京", "department": "市场部", "position": "总监", "phone": "13800000010", "email": "wangshier@example.com", "entryDate": "2010-12-01", "jobId": "1010", "status": "在职", "remark": "公司元老" }
   ]
 }`;
-const exampleTemplate = `<div style="text-align:center;font-size:32px;margin-bottom:20px;" class='font-bold'>员工信息表</div>
-    <table border="1" style="width:100%;border-collapse:collapse;">
-      <thead>
-        <tr>
-          <th class='font-600-bold'>序号</th>
-          {{each columns}}
-            <th class='font-600-bold'>{{$value.title}}</th>
-          {{/each}}
-        </tr>
-      </thead>
-      <tbody>
-        {{each dataSource as item, index}}
-          <tr>
-            <td>{{index + 1}}</td>
-            {{each columns as col}}
-              <td>{{item[col.dataIndex]}}</td>
+const exampleTemplate = `<table style="width:100%;">
+        <thead>
+            <tr>
+                <th class='no-border' colspan="{{columns.length+1}}" class='font-600-bold'>
+
+                    <div style="text-align:center;font-size:32px;margin:20px;" class='font-bold  d-flex'>
+                        <img width="36" src="favicon.png"/>员工信息表
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class='font-600-bold'>序号</th>
+                {{each columns}}
+                <th class='font-600-bold'>{{$value.title}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{each dataSource as item, index}}
+            <tr>
+                <td>{{index + 1}}</td>
+                {{each columns as col}}
+                <td>{{item[col.dataIndex]}}</td>
+                {{/each}}
+            </tr>
             {{/each}}
-          </tr>
-        {{/each}}
-      </tbody>
+        </tbody>
     </table>
+
 `;
 
 export default function HtmlTab(props) {
