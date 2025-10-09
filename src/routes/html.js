@@ -297,7 +297,7 @@ export default function HtmlTab(props) {
           <Typography.Text strong>
             模板 (支持&#123;&#123;变量&#125;&#125;、
             <a
-              href="https://goofychris.github.io/art-template/docs/syntax.html#Condition"
+              href="https://goofychris.github.io/art-template/zh-cn/docs/syntax.html"
               target="_blank"
             >
               art-template

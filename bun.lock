@@ -21,7 +21,7 @@
       },
       "devDependencies": {
         "@babel/eslint-parser": "^7.28.4",
-        "@rsbuild/core": "^1.5.6",
+        "@rsbuild/core": "^1.5.14",
         "@rsbuild/plugin-babel": "^1.0.6",
         "@rsbuild/plugin-less": "^1.5.0",
         "@tanstack/router-plugin": "^1.132.7",
@@ -336,7 +336,7 @@
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.52.3", "https://mirrors.huaweicloud.com/repository/npm/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.52.3.tgz", { "os": "win32", "cpu": "x64" }, "sha512-zGIbEVVXVtauFgl3MRwGWEN36P5ZGenHRMgNw88X5wEhEBpq0XrMEZwOn07+ICrwM17XO5xfMZqh0OldCH5VTA=="],
 
-    "@rsbuild/core": ["@rsbuild/core@1.5.12", "https://mirrors.huaweicloud.com/repository/npm/@rsbuild/core/-/core-1.5.12.tgz", { "dependencies": { "@rspack/core": "1.5.7", "@rspack/lite-tapable": "~1.0.1", "@swc/helpers": "^0.5.17", "core-js": "~3.45.1", "jiti": "^2.6.0" }, "bin": { "rsbuild": "bin/rsbuild.js" } }, "sha512-DpinE1If6WRTwQYqH+PRtJo3zshkDYHfIcWq4lTtfsPfPLrXshmRXBam3BS1RRu4v2gGT+LCNiUefftsmcmL0A=="],
+    "@rsbuild/core": ["@rsbuild/core@1.5.14", "https://registry.npmmirror.com/@rsbuild/core/-/core-1.5.14.tgz", { "dependencies": { "@rspack/core": "1.5.8", "@rspack/lite-tapable": "~1.0.1", "@swc/helpers": "^0.5.17", "core-js": "~3.45.1", "jiti": "^2.6.1" }, "bin": { "rsbuild": "bin/rsbuild.js" } }, "sha512-fWxuvqaCnyl/t3mROMF33vrFy9lX5NXNTDpF4hOJ4X0ajTYOKHFk2BYiUfVTJbtDGig+S+NeWwD31su204XwAg=="],
 
     "@rsbuild/plugin-babel": ["@rsbuild/plugin-babel@1.0.6", "https://registry.npmmirror.com/@rsbuild/plugin-babel/-/plugin-babel-1.0.6.tgz", { "dependencies": { "@babel/core": "^7.28.0", "@babel/plugin-proposal-decorators": "^7.28.0", "@babel/plugin-transform-class-properties": "^7.27.1", "@babel/preset-typescript": "^7.27.1", "@types/babel__core": "^7.20.5", "deepmerge": "^4.3.1", "reduce-configs": "^1.1.0", "upath": "2.0.1" }, "peerDependencies": { "@rsbuild/core": "1.x" } }, "sha512-tWnqG938MedKJx7U4F1lHb156VDtNzj7mSsi2ZoxZVBnECQE01/V6QTN1XKw7nWunGyGoETb+nQBGc+fkVZjvw=="],
 
@@ -344,29 +344,29 @@
 
     "@rsbuild/plugin-react": ["@rsbuild/plugin-react@1.4.1", "https://mirrors.huaweicloud.com/repository/npm/@rsbuild/plugin-react/-/plugin-react-1.4.1.tgz", { "dependencies": { "@rspack/plugin-react-refresh": "^1.5.1", "react-refresh": "^0.17.0" }, "peerDependencies": { "@rsbuild/core": "1.x" } }, "sha512-kahvnfRPQTsG0tReR6h0KuVfyjKJfpv/PoU5qW5SDkON7vmbGn8Jx7l3fI+yU3lR/7qDiAO19QnNjkqxPsFT3Q=="],
 
-    "@rspack/binding": ["@rspack/binding@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding/-/binding-1.5.7.tgz", { "optionalDependencies": { "@rspack/binding-darwin-arm64": "1.5.7", "@rspack/binding-darwin-x64": "1.5.7", "@rspack/binding-linux-arm64-gnu": "1.5.7", "@rspack/binding-linux-arm64-musl": "1.5.7", "@rspack/binding-linux-x64-gnu": "1.5.7", "@rspack/binding-linux-x64-musl": "1.5.7", "@rspack/binding-wasm32-wasi": "1.5.7", "@rspack/binding-win32-arm64-msvc": "1.5.7", "@rspack/binding-win32-ia32-msvc": "1.5.7", "@rspack/binding-win32-x64-msvc": "1.5.7" } }, "sha512-/fFrf4Yu8Tc0yXBw33g2++turdld1MDphLiLg05bx92fOVI1MafocwPvm35e3y1z7CtlQJ2Bmvzhi6APJShKxg=="],
+    "@rspack/binding": ["@rspack/binding@1.5.8", "https://registry.npmmirror.com/@rspack/binding/-/binding-1.5.8.tgz", { "optionalDependencies": { "@rspack/binding-darwin-arm64": "1.5.8", "@rspack/binding-darwin-x64": "1.5.8", "@rspack/binding-linux-arm64-gnu": "1.5.8", "@rspack/binding-linux-arm64-musl": "1.5.8", "@rspack/binding-linux-x64-gnu": "1.5.8", "@rspack/binding-linux-x64-musl": "1.5.8", "@rspack/binding-wasm32-wasi": "1.5.8", "@rspack/binding-win32-arm64-msvc": "1.5.8", "@rspack/binding-win32-ia32-msvc": "1.5.8", "@rspack/binding-win32-x64-msvc": "1.5.8" } }, "sha512-/91CzhRl9r5BIQCgGsS7jA6MDbw1I2BQpbfcUUdkdKl2P79K3Zo/Mw/TvKzS86catwLaUQEgkGRmYawOfPg7ow=="],
 
-    "@rspack/binding-darwin-arm64": ["@rspack/binding-darwin-arm64@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-darwin-arm64/-/binding-darwin-arm64-1.5.7.tgz", { "os": "darwin", "cpu": "arm64" }, "sha512-prQ/vgJxOPdlYiR4gVeOEKofTCEOu70JQIQApqFnw8lKM7rd9ag8ogDNqmc2L/GGXGHLAqds28oeKXRlzYf7+Q=="],
+    "@rspack/binding-darwin-arm64": ["@rspack/binding-darwin-arm64@1.5.8", "https://registry.npmmirror.com/@rspack/binding-darwin-arm64/-/binding-darwin-arm64-1.5.8.tgz", { "os": "darwin", "cpu": "arm64" }, "sha512-spJfpOSN3f7V90ic45/ET2NKB2ujAViCNmqb0iGurMNQtFRq+7Kd+jvVKKGXKBHBbsQrFhidSWbbqy2PBPGK8g=="],
 
-    "@rspack/binding-darwin-x64": ["@rspack/binding-darwin-x64@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-darwin-x64/-/binding-darwin-x64-1.5.7.tgz", { "os": "darwin", "cpu": "x64" }, "sha512-FPqiWSbEEerqfJrGnYe68svvl6NyuQFAb3qqFe/Q0MqFhBYmAZwa0R2/ylugCdgFLZxmkFuWqpDgItpvJb/E3Q=="],
+    "@rspack/binding-darwin-x64": ["@rspack/binding-darwin-x64@1.5.8", "https://registry.npmmirror.com/@rspack/binding-darwin-x64/-/binding-darwin-x64-1.5.8.tgz", { "os": "darwin", "cpu": "x64" }, "sha512-YFOzeL1IBknBcri8vjUp43dfUBylCeQnD+9O9p0wZmLAw7DtpN5JEOe2AkGo8kdTqJjYKI+cczJPKIw6lu1LWw=="],
 
-    "@rspack/binding-linux-arm64-gnu": ["@rspack/binding-linux-arm64-gnu@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.5.7.tgz", { "os": "linux", "cpu": "arm64" }, "sha512-fwy+NY+0CHrZqqzDrjPBlTuK53W4dG5EEg/QQFAE7KVM+okRqPk8tg45bJ5628rCNLe13GDmPIE107LmgspNqA=="],
+    "@rspack/binding-linux-arm64-gnu": ["@rspack/binding-linux-arm64-gnu@1.5.8", "https://registry.npmmirror.com/@rspack/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.5.8.tgz", { "os": "linux", "cpu": "arm64" }, "sha512-UAWCsOnpkvy8eAVRo0uipbHXDhnoDq5zmqWTMhpga0/a3yzCp2e+fnjZb/qnFNYb5MeL0O1mwMOYgn1M3oHILQ=="],
 
-    "@rspack/binding-linux-arm64-musl": ["@rspack/binding-linux-arm64-musl@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.5.7.tgz", { "os": "linux", "cpu": "arm64" }, "sha512-576u/0F4ZUzpHckFme4vQ0sSxjE+B/gVP4tNJ+P6bJaclXLFXV4icbjTUQwOIgmA1EQz/JFeKGGJZ4p6mowpBQ=="],
+    "@rspack/binding-linux-arm64-musl": ["@rspack/binding-linux-arm64-musl@1.5.8", "https://registry.npmmirror.com/@rspack/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.5.8.tgz", { "os": "linux", "cpu": "arm64" }, "sha512-GnSvGT4GjokPSD45cTtE+g7LgghuxSP1MRmvd+Vp/I8pnxTVSTsebRod4TAqyiv+l11nuS8yqNveK9qiOkBLWw=="],
 
-    "@rspack/binding-linux-x64-gnu": ["@rspack/binding-linux-x64-gnu@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.5.7.tgz", { "os": "linux", "cpu": "x64" }, "sha512-brSHywXjjeuWkv0ywgxS4VgDgquarEb4XGr+eXhOaPcc8x2rNefyc4hErplrI7+oxPXVuGK5VE4ZH5bj3Yknvg=="],
+    "@rspack/binding-linux-x64-gnu": ["@rspack/binding-linux-x64-gnu@1.5.8", "https://registry.npmmirror.com/@rspack/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.5.8.tgz", { "os": "linux", "cpu": "x64" }, "sha512-XLxh5n/pzUfxsugz/8rVBv+Tx2nqEM+9rharK69kfooDsQNKyz7PANllBQ/v4svJ+W0BRHnDL4qXSGdteZeEjA=="],
 
-    "@rspack/binding-linux-x64-musl": ["@rspack/binding-linux-x64-musl@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-linux-x64-musl/-/binding-linux-x64-musl-1.5.7.tgz", { "os": "linux", "cpu": "x64" }, "sha512-HcS0DzbLlWCwVfYcWMbTgILh4GELD6m4CZoFEhIr4fJCJi0p8NgLYycy1QtDhaUjs8TKalmyMwHrJwGnD141JA=="],
+    "@rspack/binding-linux-x64-musl": ["@rspack/binding-linux-x64-musl@1.5.8", "https://registry.npmmirror.com/@rspack/binding-linux-x64-musl/-/binding-linux-x64-musl-1.5.8.tgz", { "os": "linux", "cpu": "x64" }, "sha512-gE0+MZmwF+01p9/svpEESkzkLpBkVUG2o03YMpwXYC/maeRRhWvF8BJ7R3i/Ls/jFGSE87dKX5NbRLVzqksq/w=="],
 
-    "@rspack/binding-wasm32-wasi": ["@rspack/binding-wasm32-wasi@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-wasm32-wasi/-/binding-wasm32-wasi-1.5.7.tgz", { "dependencies": { "@napi-rs/wasm-runtime": "^1.0.5" }, "cpu": "none" }, "sha512-uTRUEuK+TVlvUBSWXVoxD+6JTN+rvtRqVlO+A7I7VnOY7p9Rpvk1sXcHtEwg/XuDCq4DALnvlzbFLh7G3zILvw=="],
+    "@rspack/binding-wasm32-wasi": ["@rspack/binding-wasm32-wasi@1.5.8", "https://registry.npmmirror.com/@rspack/binding-wasm32-wasi/-/binding-wasm32-wasi-1.5.8.tgz", { "dependencies": { "@napi-rs/wasm-runtime": "^1.0.5" }, "cpu": "none" }, "sha512-cfg3niNHeJuxuml1Vy9VvaJrI/5TakzoaZvKX2g5S24wfzR50Eyy4JAsZ+L2voWQQp1yMJbmPYPmnTCTxdJQBQ=="],
 
-    "@rspack/binding-win32-arm64-msvc": ["@rspack/binding-win32-arm64-msvc@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.5.7.tgz", { "os": "win32", "cpu": "arm64" }, "sha512-dFHrXRUmMTkxEn/Uw2RLbIckKfi0Zmn2NnEXwedWdyRgZW4Vhk7+VBxM22O/CHZmAGt12Ol25yTuVv58ANLEKA=="],
+    "@rspack/binding-win32-arm64-msvc": ["@rspack/binding-win32-arm64-msvc@1.5.8", "https://registry.npmmirror.com/@rspack/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.5.8.tgz", { "os": "win32", "cpu": "arm64" }, "sha512-7i3ZTHFXKfU/9Jm9XhpMkrdkxO7lfeYMNVEGkuU5dyBfRMQj69dRgPL7zJwc2plXiqu9LUOl+TwDNTjap7Q36g=="],
 
-    "@rspack/binding-win32-ia32-msvc": ["@rspack/binding-win32-ia32-msvc@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-win32-ia32-msvc/-/binding-win32-ia32-msvc-1.5.7.tgz", { "os": "win32", "cpu": "ia32" }, "sha512-PNtnOIUzE9p/Fbl6l/1Zs7bhn8ccTlaHTgZgQq0sO/QxjLlbU0WPjRl+YLo27cAningSOAbANuYlN8vAcuimrw=="],
+    "@rspack/binding-win32-ia32-msvc": ["@rspack/binding-win32-ia32-msvc@1.5.8", "https://registry.npmmirror.com/@rspack/binding-win32-ia32-msvc/-/binding-win32-ia32-msvc-1.5.8.tgz", { "os": "win32", "cpu": "ia32" }, "sha512-7ZPPWO11J+soea1+mnfaPpQt7GIodBM7A86dx6PbXgVEoZmetcWPrCF2NBfXxQWOKJ9L3RYltC4z+ZyXRgMOrw=="],
 
-    "@rspack/binding-win32-x64-msvc": ["@rspack/binding-win32-x64-msvc@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.5.7.tgz", { "os": "win32", "cpu": "x64" }, "sha512-22gTaYkwaIUvyXRxf1RVnFTJPqF2hD1pgAQNBIz7kYybe6vvSZ6KInW4WyG4vjYKrJg/cbS4QvtlLn0lYXrdIw=="],
+    "@rspack/binding-win32-x64-msvc": ["@rspack/binding-win32-x64-msvc@1.5.8", "https://registry.npmmirror.com/@rspack/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.5.8.tgz", { "os": "win32", "cpu": "x64" }, "sha512-N/zXQgzIxME3YUzXT8qnyzxjqcnXudWOeDh8CAG9zqTCnCiy16SFfQ/cQgEoLlD9geQntV6jx2GbDDI5kpDGMQ=="],
 
-    "@rspack/core": ["@rspack/core@1.5.7", "https://mirrors.huaweicloud.com/repository/npm/@rspack/core/-/core-1.5.7.tgz", { "dependencies": { "@module-federation/runtime-tools": "0.18.0", "@rspack/binding": "1.5.7", "@rspack/lite-tapable": "1.0.1" }, "peerDependencies": { "@swc/helpers": ">=0.5.1" }, "optionalPeers": ["@swc/helpers"] }, "sha512-57ey3wafK/g+B9zLdCiIrX3eTK8rFEM3yvxBUb2ro3ZtAaCGm4y7xERcXZJNn4D01pjzzCJ/u1ezpQmsZYLP7A=="],
+    "@rspack/core": ["@rspack/core@1.5.8", "https://registry.npmmirror.com/@rspack/core/-/core-1.5.8.tgz", { "dependencies": { "@module-federation/runtime-tools": "0.18.0", "@rspack/binding": "1.5.8", "@rspack/lite-tapable": "1.0.1" }, "peerDependencies": { "@swc/helpers": ">=0.5.1" }, "optionalPeers": ["@swc/helpers"] }, "sha512-sUd2LfiDhqYVfvknuoz0+/c+wSpn693xotnG5g1CSWKZArbtwiYzBIVnNlcHGmuoBRsnj/TkSq8dTQ7gwfBroQ=="],
 
     "@rspack/lite-tapable": ["@rspack/lite-tapable@1.0.1", "https://mirrors.huaweicloud.com/repository/npm/@rspack/lite-tapable/-/lite-tapable-1.0.1.tgz", {}, "sha512-VynGOEsVw2s8TAlLf/uESfrgfrq2+rcXB1muPJYBWbsm1Oa6r5qVQhjA5ggM6z/coYPrsVMgovl3Ff7Q7OCp1w=="],
 
@@ -990,7 +990,7 @@
 
     "jade": ["jade@0.26.3", "https://mirrors.huaweicloud.com/repository/npm/jade/-/jade-0.26.3.tgz", { "dependencies": { "commander": "0.6.1", "mkdirp": "0.3.0" }, "bin": { "jade": "./bin/jade" } }, "sha512-mkk3vzUHFjzKjpCXeu+IjXeZD+QOTjUUdubgmHtHTDwvAO2ZTkMTTVrapts5CWz3JvJryh/4KWZpjeZrCepZ3A=="],
 
-    "jiti": ["jiti@2.6.0", "https://mirrors.huaweicloud.com/repository/npm/jiti/-/jiti-2.6.0.tgz", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-VXe6RjJkBPj0ohtqaO8vSWP3ZhAKo66fKrFNCll4BTcwljPLz03pCbaNKfzGP5MbrCYcbJ7v0nOYYwUzTEIdXQ=="],
+    "jiti": ["jiti@2.6.1", "https://registry.npmmirror.com/jiti/-/jiti-2.6.1.tgz", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ=="],
 
     "js-tokens": ["js-tokens@4.0.0", "https://mirrors.huaweicloud.com/repository/npm/js-tokens/-/js-tokens-4.0.0.tgz", {}, "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="],
 
