@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
-import { Route as ReactRouteImport } from './routes/react'
 import { Route as PrintRouteImport } from './routes/print'
 import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
@@ -20,15 +19,11 @@ import { Route as DocxRouteImport } from './routes/docx'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReactIndexRouteImport } from './routes/react/index'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
-  getParentRoute: () => rootRouteImport,
-})
-const ReactRoute = ReactRouteImport.update({
-  id: '/react',
-  path: '/react',
   getParentRoute: () => rootRouteImport,
 })
 const PrintRoute = PrintRouteImport.update({
@@ -76,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 })
+const ReactIndexRoute = ReactIndexRouteImport.update({
+  id: '/react/',
+  path: '/react/',
+  getParentRoute: () => rootRouteImport,
+})
 
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -87,7 +87,7 @@ const rootRouteChildren = {
   JsonJsRoute: JsonJsRoute,
   PdfRoute: PdfRoute,
   PrintRoute: PrintRoute,
-  ReactRoute: ReactRoute,
   ToolsRoute: ToolsRoute,
+  ReactIndexRoute: ReactIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)
