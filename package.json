@@ -18,6 +18,7 @@
     "@rsbuild/plugin-babel": "^1.0.6",
     "@rsbuild/plugin-less": "^1.5.0",
     "@tanstack/router-plugin": "^1.132.7",
+    "@babel/standalone": "^7.22.10",
     "eslint": "^9.36.0",
     "eslint-plugin-react": "^7.37.5",
     "gh-pages": "^6.3.0"
@@ -25,6 +26,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.2",
     "@ant-design/pro-components": "^2.8.10",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@monaco-editor/react": "^4.7.0",
     "@rsbuild/plugin-react": "^1.4.1",
     "@tanstack/react-router": "^1.132.7",
@@ -36,6 +38,7 @@
     "mammoth": "file:./mammoth",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-schema-render": "^0.0.5",
     "xlsx": "^0.18.5"
   }
 }
