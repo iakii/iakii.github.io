@@ -56,7 +56,7 @@ const initialSchema = `const render = ($root) => {
     const [name, setName] = $root.useState("张三");
     return (
       <ProCard ghost direction='column'>
-        <Button onClick={() => setName("李四")}>{name}</Button>
+
 
         <ProTable
           style={{ margin: "12px 0" }}
@@ -77,23 +77,22 @@ const initialSchema = `const render = ($root) => {
                 };
               }
             },
+            {},
             {
               title: "操作",
               valueType: "option",
+              align: 'right',
               render: (_, record) => {
-                return {
-                  component: 'Button', type: 'link', children: '查看详情', onClick: () => {
-                    alert("查看 " + record.name + " 的详情");
-                  }
-                }
+                return <DrawerForm title='详情' trigger={<a>详情</a>}>{JSON.stringify(record)} </DrawerForm>
               }
             },
           ]}
+          search={{ layout: "vertical" }}
           rowKey="id"
           pagination={false}
-          search={false}
         />
         <ProCard>
+          <Button style={{ marginBottom: 16 }} onClick={() => setName("李四 " + Date.now())}>{name}</Button>
           <Descriptions title='用户信息' layout='vertical' size='small' bordered>
             <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
             <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>

@@ -77,6 +77,5 @@ export default defineConfig({
       new rspack.LightningCssMinimizerRspackPlugin(),
     ],
   },
-  // overall lazyCompilation 开关，开发环境关闭以避免额外扫描
   lazyCompilation: !isDev
 });
