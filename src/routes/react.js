@@ -1,12 +1,28 @@
+// icons
 import { AppstoreOutlined } from "@ant-design/icons";
+
+// pro components
 import { ProCard, ProTable } from "@ant-design/pro-components";
+
+// editor + router
 import { Editor } from "@monaco-editor/react";
 import { createFileRoute } from "@tanstack/react-router";
 
+// runtime babel for JSX -> JS
 import * as Babel from "@babel/standalone";
+
+// antd components
 import { Button, Card, Collapse, Descriptions, Space, Tag } from "antd";
+
+// react
 import React, { useEffect, useMemo, useRef, useState } from "react";
+
+// schema renderer
 import { SchemaProvider, SchemaRender } from "react-schema-render";
+
+// local utils
+import printMgr from "../core/utils";
+
 const { Panel } = Collapse;
 
 const components = {
@@ -36,6 +52,7 @@ const $root = {
   useRef,
   useMemo,
   React,
+  printMgr,
 };
 
 const initialSchema = `const render = ($root) => {
@@ -149,9 +166,7 @@ function RouteComponent() {
       );
       const argValues = [$root, React, ...Object.values(components)];
       const raw = fn(...argValues);
-      console.log("raw schema", raw);
-      const normalized = normalizeSchema(raw);
-      setSchema(normalized);
+      setSchema(raw);
     } catch (e) {
       console.error("render error", e);
       setSchema({ component: "div", children: `渲染错误: ${e.message}` });
