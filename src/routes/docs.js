@@ -81,6 +81,20 @@ const list = [
         date: "2025.05.15",
         icon: "fa-prescription",
       },
+      {
+        title: "签名小工具",
+        url: "https://lazybrush.dulnan.net/",
+        type: "签名",
+        date: "2025.05.30",
+        icon: "fa-check",
+      },
+      {
+        title: "签名小工具2",
+        url: "/html/friction.html",
+        type: "签名",
+        date: "2025.05.30",
+        icon: "fa-check",
+      },
     ],
   },
 ];
