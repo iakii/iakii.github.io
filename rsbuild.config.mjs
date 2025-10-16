@@ -3,6 +3,9 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/rspack";
 import { pluginLess } from "@rsbuild/plugin-less";
 import { pluginBabel } from "@rsbuild/plugin-babel";
+/** @type {import('@rspack/cli').Configuration} */
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 export default defineConfig({
   plugins: [pluginReact(), pluginLess(), pluginBabel()],
@@ -23,6 +26,7 @@ export default defineConfig({
           autoCodeSplitting: true,
           generatedRouteTree: "./src/router.js",
           disableTypes: true,
+          // 在开发模式下禁用路由自动代码生成，减少启动时间
           enableRouteGeneration: true,
         }),
       ],
@@ -31,10 +35,8 @@ export default defineConfig({
   dev: {
     hmr: true,
     progressBar: true,
-    lazyCompilation: {
-      imports: true,
-      entries: true,
-    },
+    // 开发环境限制 lazyCompilation 减少 CPU 消耗
+    lazyCompilation: isDev ? { imports: true, entries: false } : { imports: true, entries: true },
   },
   module: {
     rules: [
@@ -69,9 +71,12 @@ export default defineConfig({
         },
       },
     },
-    minimizer: [
+    // 仅在生产环境使用压缩/最小化，加快 dev
+    minimizer: isDev ? [] : [
       new rspack.SwcJsMinimizerRspackPlugin(),
       new rspack.LightningCssMinimizerRspackPlugin(),
     ],
   },
+  // overall lazyCompilation 开关，开发环境关闭以避免额外扫描
+  lazyCompilation: !isDev
 });
