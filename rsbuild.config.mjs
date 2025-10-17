@@ -3,10 +3,8 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/rspack";
 import { pluginLess } from "@rsbuild/plugin-less";
 import { pluginBabel } from "@rsbuild/plugin-babel";
+const isDev = process.env.NODE_ENV !== "production";
 /** @type {import('@rspack/cli').Configuration} */
-
-const isDev = process.env.NODE_ENV !== 'production';
-
 export default defineConfig({
   plugins: [pluginReact(), pluginLess(), pluginBabel()],
   html: {
@@ -20,13 +18,13 @@ export default defineConfig({
   },
   tools: {
     rspack: {
+      devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
       plugins: [
         tanstackRouter({
           target: "react",
           autoCodeSplitting: true,
           generatedRouteTree: "./src/router.js",
           disableTypes: true,
-          // 在开发模式下禁用路由自动代码生成，减少启动时间
           enableRouteGeneration: true,
         }),
       ],
@@ -35,8 +33,6 @@ export default defineConfig({
   dev: {
     hmr: true,
     progressBar: true,
-    // 开发环境限制 lazyCompilation 减少 CPU 消耗
-    lazyCompilation: isDev ? { imports: true, entries: false } : { imports: true, entries: true },
   },
   module: {
     rules: [
@@ -58,16 +54,48 @@ export default defineConfig({
     ],
   },
   optimization: {
+    runtimeChunk: "single",
     splitChunks: {
+      maxSize: 100 * 1024,
+      maxAsyncSize: 100 * 1024,
+      minSizeReduction: 100 * 1000,
       minSize: 0,
+      chunks: "all",
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
       cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        // 提取 node_modules 中的依赖到独立的 vendor chunk，优先级高
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          priority: 20,
+          enforce: true,
+          reuseExistingChunk: true,
+        },
         "pro-components": {
           test: /\/@ant-design\/pro-components\//,
           name: "pro-components",
+          priority: 30,
+          enforce: true,
+          reuseExistingChunk: true,
         },
         antd_comp: {
           test: /\/antd\//,
           name: "antd",
+          priority: 30,
+          enforce: true,
+          reuseExistingChunk: true,
         },
         // 将 `src/routes/` 下的每个路由文件拆分为单独的 chunk
         // 生成的 chunk 名称基于文件相对路径（例如: routes-react-index -> src-routes-react-index）
@@ -94,5 +122,5 @@ export default defineConfig({
       new rspack.LightningCssMinimizerRspackPlugin(),
     ],
   },
-  lazyCompilation: !isDev
+  lazyCompilation: { imports: true, entries: false },
 });
