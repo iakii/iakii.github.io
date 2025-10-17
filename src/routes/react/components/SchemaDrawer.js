@@ -8,49 +8,76 @@ const initialSchema = `const render = ($root) => {
     const [name, setName] = $root.useState("张三");
     return (
       <ProCard ghost direction='column'>
-
-
         <ProTable
           style={{ margin: "12px 0" }}
           size="small"
           bordered
-          dataSource={[
-            { id: 1, name: "张三", age: 28 },
-            { id: 2, name: "李四", age: 32 },
-            { id: 3, name: "王五", age: 24 },
-          ]}
-          columns={[
-            { title: "ID", dataIndex: "id", key: "id" },
-            { title: "姓名", dataIndex: "name", key: "name" },
-            {
-              title: "年龄", dataIndex: "age", key: "age", render: (_, { age }) => {
-                return {
-                  component: 'Tag', children: age + " 岁"
-                };
-              }
-            },
-            {},
-            {
-              title: "操作",
-              valueType: "option",
-              align: 'right',
-              render: (_, record) => {
-                return <DrawerForm title='详情' trigger={<a>详情</a>}>{JSON.stringify(record)}
-                  <ProCard>
-                    <Button style={{ marginBottom: 16 }} onClick={() => setName("李四 " + Date.now())}>{name}</Button>
-                    <Descriptions title='用户信息' layout='vertical' size='small' bordered>
-                      <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
-                      <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
-                      <Descriptions.Item label="Live">Hangzhou, Zhejiang</Descriptions.Item>
-                      <Descriptions.Item label="Remark">empty</Descriptions.Item>
-                      <Descriptions.Item label="Address">
-                        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-                      </Descriptions.Item>
-                    </Descriptions>
-                  </ProCard>
-                </DrawerForm>
-              }
-            },
+          request={async({current,pageSize})=>{
+            const query = \`page=\${current}&size=\${pageSize}\`;
+            return await fetch(\`https://randomuser.me/api?results=${30 * 2}&\${query}\`)
+                .then((res) => res.json())
+                .then((res) => ({
+                total: res.info.results,
+                success: true,
+                data: res.results.map((x) => {
+                    x.avatar = x.picture?.thumbnail;
+                    x.age = x.dob?.age;
+                    x.name = x.name?.last;
+                    x.state = x.location?.state;
+                    return x;
+                }),
+                }));
+
+            }}
+            columns={[
+                {
+                title: "头像",
+                dataIndex: "avatar",
+                valueType: "avatar",
+                align: "center",
+                width: 48,
+                },
+                {
+                title: "姓名",
+                width: 100,
+                dataIndex: "name",
+                },
+                {
+                title: "年龄",
+                width: 48,
+                dataIndex: "age",
+                },
+                {
+                title: "手机",
+                dataIndex: "phone",
+                width: 132,
+                },
+                {
+                title: "性别",
+                dataIndex: "gender",
+                width: 64,
+                },
+
+                {
+                title: "email",
+                dataIndex: "email",
+                // width: 200,
+                },
+                {
+                title: "cell",
+                dataIndex: "cell",
+                // width: 116,
+                },
+                {
+                title: "国家",
+                dataIndex: "state",
+                // width: 200,
+                },
+                {
+                title: "nat",
+                dataIndex: "nat",
+                width: 22,
+                },
           ]}
           search={{ layout: "vertical" }}
           rowKey="id"
@@ -88,7 +115,12 @@ export default function SchemaDrawer({ components, onFinish }) {
       title="Schema配置"
       width={"100vw"}
       trigger={<a>配置</a>}
-      drawerProps={{ styles: { body: { padding: 0 } }, placement: "bottom",height: '100vh',size: 'large' }}
+      drawerProps={{
+        styles: { body: { padding: 0 } },
+        placement: "bottom",
+        height: "100vh",
+        size: "large",
+      }}
       onFinish={() => {
         onFinish(reactCode);
         return true;

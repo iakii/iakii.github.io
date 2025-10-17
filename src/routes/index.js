@@ -10,6 +10,7 @@ import WordTab from "./docx";
 import HtmlTab from "./html";
 import PdfTab from "./pdf";
 import { PrintV1Compoent } from "./print";
+import PageLayout from "../components/PageLayout";
 
 export const Route = createFileRoute("/")({
   component: Layout,
@@ -112,67 +113,57 @@ export default function Layout() {
   }, []);
 
   return (
-    <ProCard
+    <PageLayout
       title="多功能打印示例"
-      headerBordered
-      tabs={{
-        type: "card",
-        activeKey: activeTab,
-        onChange: handleTabChange,
-        items: [
-          {
-            key: "html",
-            label: "打印Html模板",
-            children: (
-              <HtmlTab
-                htmlParams={htmlParams}
-                setHtmlParams={setHtmlParams}
-                htmlTemplate={htmlTemplate}
-                setHtmlTemplate={setHtmlTemplate}
-                htmlPreview={htmlPreview}
-                onPreview={handleHtmlPreview}
-                onPrint={handleHtmlPrint}
-              />
-            ),
-          },
-          {
-            key: "pdf",
-            label: "打印PDF",
-            children: (
-              <PdfTab
-                pdfUrl={pdfUrl}
-                onFile={handlePdfFile}
-                onPrint={handlePdfPrint}
-              />
-            ),
-          },
-          {
-            key: "word",
-            label: "打印Word",
-            children: (
-              <WordTab
-                wordParams={wordParams}
-                setWordParams={setWordParams}
-                wordPreviewHtml={wordPreviewHtml}
-                onPreview={() => handleWordPreview()}
-                onPrint={handleWordPrint}
-                setWordFile={setWordFile}
-                onWordFilePreview={handleWordFilePreview}
-              />
-            ),
-          },
+      tabList={[
+        {
+          key: "html",
+          label: "打印Html模板",
+          children: (
+            <HtmlTab
+              htmlParams={htmlParams}
+              setHtmlParams={setHtmlParams}
+              htmlTemplate={htmlTemplate}
+              setHtmlTemplate={setHtmlTemplate}
+              htmlPreview={htmlPreview}
+              onPreview={handleHtmlPreview}
+              onPrint={handleHtmlPrint}
+            />
+          ),
+        },
+        {
+          key: "pdf",
+          label: "打印PDF",
+          children: (
+            <PdfTab
+              pdfUrl={pdfUrl}
+              onFile={handlePdfFile}
+              onPrint={handlePdfPrint}
+            />
+          ),
+        },
+        {
+          key: "word",
+          label: "打印Word",
+          children: (
+            <WordTab
+              wordParams={wordParams}
+              setWordParams={setWordParams}
+              wordPreviewHtml={wordPreviewHtml}
+              onPreview={() => handleWordPreview()}
+              onPrint={handleWordPrint}
+              setWordFile={setWordFile}
+              onWordFilePreview={handleWordFilePreview}
+            />
+          ),
+        },
 
-          {
-            key: "v1print",
-            label: "打印v1版本",
-            children: (
-               <PrintV1Compoent />
-            ),
-          },
-
-        ],
-      }}
-      bodyStyle={{ padding: 0 }}
-    />
+        {
+          key: "v1print",
+          label: "打印v1版本",
+          children: <PrintV1Compoent />,
+        },
+      ]}
+    ></PageLayout>
   );
 }

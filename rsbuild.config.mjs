@@ -69,6 +69,23 @@ export default defineConfig({
           test: /\/antd\//,
           name: "antd",
         },
+        // 将 `src/routes/` 下的每个路由文件拆分为单独的 chunk
+        // 生成的 chunk 名称基于文件相对路径（例如: routes-react-index -> src-routes-react-index）
+        routes: {
+          test: /src[\\/]routes[\\/].*\\.(js|jsx|mjs)$/,
+          name(module, chunks, cacheGroupKey) {
+            const resource = module.resource || "";
+            const match = resource.match(/src[\\/](.*)\\.(js|jsx|mjs)$/);
+            if (match && match[1]) {
+              // 将路径中的斜杠替换为短横线，避免生成嵌套文件名
+              return match[1].replace(/[\\/\\\\]+/g, "-");
+            }
+            return cacheGroupKey;
+          },
+          priority: 10,
+          enforce: true,
+          reuseExistingChunk: false,
+        },
       },
     },
     // 仅在生产环境使用压缩/最小化，加快 dev

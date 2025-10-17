@@ -1,7 +1,7 @@
 // 通用 hooks：获取 url 查询参数
 
 import { LogoutOutlined } from "@ant-design/icons";
-import { ProLayout, SettingDrawer } from "@ant-design/pro-components";
+import { ProLayout } from "@ant-design/pro-components";
 import {
   Outlet,
   createRootRoute,
@@ -10,7 +10,8 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { Dropdown } from "antd";
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import KeepAliveLayout from "../components/LayoutTabs/KeepAliveLayout";
 
 export const Route = createRootRoute({
   component: RootAppComponent,
@@ -50,7 +51,7 @@ function RootComponent() {
   };
   const [settings, setSetting] = useState(() => {
     try {
-      const local = localStorage.getItem('pro_layout_settings');
+      const local = localStorage.getItem("pro_layout_settings");
       return local ? JSON.parse(local) : defaultSettings;
     } catch {
       return defaultSettings;
@@ -59,7 +60,7 @@ function RootComponent() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('pro_layout_settings', JSON.stringify(settings));
+      localStorage.setItem("pro_layout_settings", JSON.stringify(settings));
     } catch {}
   }, [settings]);
 
@@ -157,9 +158,10 @@ function RootComponent() {
       {...settings}
       id="test-pro-layout"
     >
-      <Outlet />
-
-      <SettingDrawer
+      <KeepAliveLayout>
+        <Outlet />
+      </KeepAliveLayout>
+      {/* <SettingDrawer
         pathname={pathname}
         enableDarkTheme
         getContainer={() => document.getElementById("test-pro-layout")}
@@ -168,7 +170,7 @@ function RootComponent() {
           setSetting(changeSetting);
         }}
         disableUrlParams={true}
-      />
+      /> */}
     </ProLayout>
   );
 }
