@@ -13,7 +13,6 @@ import { PrintV1Compoent } from "./print";
 
 export const Route = createFileRoute("/")({
   component: Layout,
-
   staticData: {
     name: "打印",
     icon: <PrinterTwoTone />,
