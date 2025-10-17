@@ -19,6 +19,9 @@ import SchemaDrawer from "./components/SchemaDrawer";
 import { antComponents } from "./utils/antcomp";
 import { iconComponents, reactComponents } from "./utils/iconcomp";
 import { proComponents } from "./utils/procomp";
+import localforage from "localforage";
+import * as hooks from "ahooks";
+import AsyncComponent from "../../components/AsyncComponent";
 
 const components = {
   ...proComponents,
@@ -27,10 +30,12 @@ const components = {
   ...reactComponents,
   Fragment,
   lazy,
+  AsyncComponent,
 };
 
 export const Route = createFileRoute("/react/")({
   component: RouteComponent,
+
   staticData: {
     icon: <AppstoreOutlined />,
     name: "React Schema Render示例",
@@ -47,6 +52,8 @@ const $root = {
   printMgr,
   loadsh,
   dayjs,
+  localforage,
+  hooks,
 };
 
 function RouteComponent() {
