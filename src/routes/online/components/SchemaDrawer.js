@@ -3,9 +3,10 @@ import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
 
 export const initialSchema = `const render = ($root) => {
+  const { request, useState, useForm } = $root;
   console.log("$root", $root);
   const App = () => {
-    const [name, setName] = $root.useState("张三");
+    const [name, setName] = useState("张三");
     return (
       <ProCard ghost direction='column'>
         <ProTable
@@ -14,8 +15,7 @@ export const initialSchema = `const render = ($root) => {
           bordered
           request={async({current,pageSize})=>{
             const query = \`page=\${current}&size=\${pageSize}\`;
-            return await fetch(\`https://randomuser.me/api?results=${30 * 2}&\${query}\`)
-                .then((res) => res.json())
+            return await request(\`https://randomuser.me/api?results=${30 * 2}&\${query}\`)
                 .then((res) => ({
                 total: res.info.results,
                 success: true,

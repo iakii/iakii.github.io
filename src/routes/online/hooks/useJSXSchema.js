@@ -1,9 +1,9 @@
 import * as Babel from "@babel/standalone";
 import * as hooks from "ahooks";
-import { Descriptions } from "antd";
 import dayjs from "dayjs";
 import localforage from "localforage";
-import loadsh from "lodash-es";
+import * as loadsh from "lodash-es";
+import * as zustand from "zustand";
 import React, {
   Fragment,
   lazy,
@@ -16,6 +16,8 @@ import AsyncComponent from "../../../components/AsyncComponent";
 import { antComponents } from "../utils/antcomp";
 import { iconComponents, reactComponents } from "../utils/iconcomp";
 import { proComponents } from "../utils/procomp";
+import { ProForm } from "@ant-design/pro-components";
+import { request } from "../../../core/request";
 
 /**
  * useJSXSchema hooks：安全执行 JSX/React 代码，返回渲染 schema、执行函数和组件集合。
@@ -48,7 +50,7 @@ import { proComponents } from "../utils/procomp";
  * @property {AsyncComponent} AsyncComponent - 异步组件
  */
 
-const $root = {
+const inject = {
   React,
   useState,
   useEffect,
@@ -58,8 +60,10 @@ const $root = {
   loadsh,
   dayjs,
   localforage,
-  hooks,
-  // httpClient: fetch,
+  ...hooks,
+  useForm: ProForm.useForm,
+  zustand,
+  request,
 };
 
 const components = {
@@ -81,7 +85,7 @@ const blacklist = [
   /document\b/,
   /eval\b/,
   /Function\b/,
-  // /fetch\b/,
+  /fetch\b/,
   /XMLHttpRequest\b/,
   /importScripts\b/,
   /postMessage\b/,
@@ -178,6 +182,7 @@ export function useJSXSchema() {
       }).code;
       console.timeEnd("babel解析耗时");
       // 注入 $root、React 以及 components 中的变量
+
       const argNames = ["$root", "React", ...Object.keys(components)];
       let raw;
       try {
@@ -185,7 +190,7 @@ export function useJSXSchema() {
           ...argNames,
           `${transformed}; return render($root);`
         );
-        const argValues = [$root, React, ...Object.values(components)];
+        const argValues = [inject, React, ...Object.values(components)];
         // 超时保护（仅对异步代码有效）
         const timeout = 2000; // 2秒
         const execPromise = Promise.resolve(fn(...argValues));
