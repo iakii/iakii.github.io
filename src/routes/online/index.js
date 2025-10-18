@@ -1,12 +1,11 @@
 import { AppstoreTwoTone } from "@ant-design/icons";
 import { ProCard, ProSkeleton } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { SchemaProvider, SchemaRender } from "react-schema-render";
-import SchemaDrawer from "./components/SchemaDrawer";
+import SchemaDrawer, { initialSchema } from "./components/SchemaDrawer";
 import { useJSXSchema } from "./hooks/useJSXSchema";
-
 
 export const Route = createFileRoute("/online/")({
   component: RouteComponent,
@@ -20,6 +19,12 @@ export const Route = createFileRoute("/online/")({
 
 function RouteComponent() {
   const [schema, useJSX, components] = useJSXSchema();
+
+  useEffect(() => {
+    setTimeout(() => {
+      useJSX(initialSchema);
+    }, 100);
+  }, []);
   return (
     <ProCard ghost>
       <ProCard

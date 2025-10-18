@@ -5,12 +5,12 @@ import dayjs from "dayjs";
 import localforage from "localforage";
 import loadsh from "lodash-es";
 import React, {
-    Fragment,
-    lazy,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
+  Fragment,
+  lazy,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 import AsyncComponent from "../../../components/AsyncComponent";
 import { antComponents } from "../utils/antcomp";
@@ -72,7 +72,6 @@ const components = {
   AsyncComponent,
 };
 
-
 /**
  * 黑名单关键字，禁止危险操作。
  * @type {RegExp[]}
@@ -111,9 +110,7 @@ function limitOutput(obj, depth = 1) {
   const MAX_STRLEN = 2000;
   if (depth > MAX_DEPTH) return "[Too deep]";
   if (typeof obj === "string") {
-    return obj.length > MAX_STRLEN
-      ? obj.slice(0, MAX_STRLEN) + "..."
-      : obj;
+    return obj.length > MAX_STRLEN ? obj.slice(0, MAX_STRLEN) + "..." : obj;
   }
   if (Array.isArray(obj)) {
     if (obj.length > MAX_KEYS)
@@ -150,30 +147,10 @@ function limitOutput(obj, depth = 1) {
  * await useJSX('function render($root) { ... }');
  */
 export function useJSXSchema() {
+  // <ProSkeleton type="result" />
   const [schema, setSchema] = useState({
-    component: "ProCard",
-    children: [
-      {
-        component: "Descriptions",
-        title: "User Info",
-        size: "small",
-        bordered: true,
-        layout: "vertical",
-        children: (
-          <>
-            <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
-            <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
-            <Descriptions.Item label="Live">
-              Hangzhou, Zhejiang
-            </Descriptions.Item>
-            <Descriptions.Item label="Remark">empty</Descriptions.Item>
-            <Descriptions.Item label="Address">
-              No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-            </Descriptions.Item>
-          </>
-        ),
-      },
-    ],
+    component: "ProSkeleton",
+    type: "result",
   });
 
   // 预览/执行

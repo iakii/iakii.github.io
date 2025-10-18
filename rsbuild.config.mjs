@@ -75,6 +75,8 @@ export default defineConfig({
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
           reuseExistingChunk: true,
+            name: 'vendors',
+          chunks: 'all'
         },
         default: {
           minChunks: 2,
