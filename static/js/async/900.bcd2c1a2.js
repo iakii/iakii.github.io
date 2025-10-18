@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["900"],{28367:function(n,e,s){s.r(e),s.d(e,{component:()=>i});var c=s(61421);function i(){return(0,c.jsx)("div",{children:'Hello "/quickjs"!'})}}}]);
+//# sourceMappingURL=900.bcd2c1a2.js.map
