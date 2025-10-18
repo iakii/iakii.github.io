@@ -34,3 +34,7 @@ To learn more about Rsbuild, check out the following resources:
 
 - [Rsbuild documentation](https://rsbuild.rs) - explore Rsbuild features and APIs.
 - [Rsbuild GitHub repository](https://github.com/web-infra-dev/rsbuild) - your feedback and contributions are welcome!
+
+
+## 文档
+- [JS 沙盒隔离技术盘点与实战](https://juejin.cn/post/7511254328838045748#heading-22)
