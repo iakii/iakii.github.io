@@ -1,4 +1,4 @@
-import { AppstoreOutlined } from "@ant-design/icons";
+import { AppstoreTwoTone } from "@ant-design/icons";
 import { ProCard, ProSkeleton } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
@@ -8,13 +8,13 @@ import SchemaDrawer from "./components/SchemaDrawer";
 import { useJSXSchema } from "./hooks/useJSXSchema";
 
 
-export const Route = createFileRoute("/react/")({
+export const Route = createFileRoute("/online/")({
   component: RouteComponent,
 
   staticData: {
-    icon: <AppstoreOutlined />,
+    icon: <AppstoreTwoTone />,
     name: "React Schema Render示例",
-    index: -1,
+    index: 8,
   },
 });
 

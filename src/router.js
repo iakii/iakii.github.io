@@ -15,11 +15,12 @@ import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as HtmlRouteImport } from './routes/html'
 import { Route as FlagRouteImport } from './routes/flag'
+import { Route as ExcelRouteImport } from './routes/excel'
 import { Route as DocxRouteImport } from './routes/docx'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ReactIndexRouteImport } from './routes/react/index'
+import { Route as OnlineIndexRouteImport } from './routes/online/index'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -51,6 +52,11 @@ const FlagRoute = FlagRouteImport.update({
   path: '/flag',
   getParentRoute: () => rootRouteImport,
 })
+const ExcelRoute = ExcelRouteImport.update({
+  id: '/excel',
+  path: '/excel',
+  getParentRoute: () => rootRouteImport,
+})
 const DocxRoute = DocxRouteImport.update({
   id: '/docx',
   path: '/docx',
@@ -71,9 +77,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 })
-const ReactIndexRoute = ReactIndexRouteImport.update({
-  id: '/react/',
-  path: '/react/',
+const OnlineIndexRoute = OnlineIndexRouteImport.update({
+  id: '/online/',
+  path: '/online/',
   getParentRoute: () => rootRouteImport,
 })
 
@@ -82,12 +88,13 @@ const rootRouteChildren = {
   AboutRoute: AboutRoute,
   DocsRoute: DocsRoute,
   DocxRoute: DocxRoute,
+  ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
   HtmlRoute: HtmlRoute,
   JsonJsRoute: JsonJsRoute,
   PdfRoute: PdfRoute,
   PrintRoute: PrintRoute,
   ToolsRoute: ToolsRoute,
-  ReactIndexRoute: ReactIndexRoute,
+  OnlineIndexRoute: OnlineIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)
