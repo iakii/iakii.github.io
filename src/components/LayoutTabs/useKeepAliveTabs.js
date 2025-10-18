@@ -19,7 +19,7 @@ export const KeepAliveTabContext = createContext(defaultValue);
 export function useKeepAliveTabs(currentChildren) {
   const history = useNavigate();
   const { pathname } = useLocation();
-  const { routeTree } = useRouter();
+  // const { routeTree } = useRouter();
 
   const [keepAliveTabs, setKeepAliveTabs] = useState([]);
   // activeTabRoutePath 存储当前激活 tab 的 routePath
@@ -28,7 +28,7 @@ export function useKeepAliveTabs(currentChildren) {
   const keepAliveShowEvents = useRef({});
   const keepAliveHiddenEvents = useRef({});
 
-  console.log("routeTree", routeTree, pathname);
+  // console.log("routeTree", routeTree, pathname);
 
   // 从 useMatchRoute 获取当前匹配的路由信息
   const matchRoute = useMatchRoute();

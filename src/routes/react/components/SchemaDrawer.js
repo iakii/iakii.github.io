@@ -2,7 +2,7 @@ import { DrawerForm } from "@ant-design/pro-components";
 import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
 
-const initialSchema = `const render = ($root) => {
+export const initialSchema = `const render = ($root) => {
   console.log("$root", $root);
   const App = () => {
     const [name, setName] = $root.useState("张三");
@@ -27,7 +27,6 @@ const initialSchema = `const render = ($root) => {
                     return x;
                 }),
                 }));
-
             }}
             columns={[
                 {
