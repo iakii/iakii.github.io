@@ -5,8 +5,8 @@
   "type": "module",
   "homepage": "https://iakii.github.io/print-js/",
   "scripts": {
-    "build": "rsbuild build",
-    "dev": "rsbuild dev --open",
+    "build": "bun cli.js && rsbuild build",
+    "dev": "bun cli.js && rsbuild dev --open",
     "preview": "rsbuild preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

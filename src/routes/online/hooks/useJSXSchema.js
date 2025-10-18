@@ -17,6 +17,37 @@ import { antComponents } from "../utils/antcomp";
 import { iconComponents, reactComponents } from "../utils/iconcomp";
 import { proComponents } from "../utils/procomp";
 
+/**
+ * useJSXSchema hooks：安全执行 JSX/React 代码，返回渲染 schema、执行函数和组件集合。
+ * @module useJSXSchema
+ */
+
+/**
+ * 全局注入对象，供沙箱执行环境访问。
+ * @typedef {Object} RootContext
+ * @property {typeof React} React - React 主对象
+ * @property {Function} useState - React useState
+ * @property {Function} useEffect - React useEffect
+ * @property {Function} useRef - React useRef
+ * @property {Function} useMemo - React useMemo
+ * @property {Object} loadsh - lodash-es 工具库
+ * @property {Object} dayjs - 日期处理库
+ * @property {Object} localforage - 本地存储库
+ * @property {Object} hooks - ahooks 工具库
+ */
+
+/**
+ * 组件集合，供 schema 渲染和沙箱执行环境访问。
+ * @typedef {Object} ComponentsMap
+ * @property {Object} proComponents - Pro 组件库
+ * @property {Object} antComponents - Ant Design 组件库
+ * @property {Object} iconComponents - 图标组件库
+ * @property {Object} reactComponents - 其他 React 组件
+ * @property {Fragment} Fragment - React.Fragment
+ * @property {Function} lazy - React.lazy
+ * @property {AsyncComponent} AsyncComponent - 异步组件
+ */
+
 const $root = {
   React,
   useState,
@@ -41,7 +72,11 @@ const components = {
   AsyncComponent,
 };
 
-// 黑名单关键字，禁止危险操作
+
+/**
+ * 黑名单关键字，禁止危险操作。
+ * @type {RegExp[]}
+ */
 const blacklist = [
   /window\b/,
   /document\b/,
@@ -63,7 +98,57 @@ const blacklist = [
   /while\s*\(\s*true\s*\)/, // 禁止 while(true)
   /do\s*{[\s\S]*?}\s*while\s*\(\s*true\s*\)/, // 禁止 do{}while(true)
 ];
-// hooks: useJSXSchema
+
+/**
+ * 限制渲染结果的深度、长度和键数量，防止输出过大或过深。
+ * @param {*} obj - 任意对象或数组
+ * @param {number} [depth=1] - 当前递归深度
+ * @returns {*} 限制后的对象
+ */
+function limitOutput(obj, depth = 1) {
+  const MAX_DEPTH = 5;
+  const MAX_KEYS = 30;
+  const MAX_STRLEN = 2000;
+  if (depth > MAX_DEPTH) return "[Too deep]";
+  if (typeof obj === "string") {
+    return obj.length > MAX_STRLEN
+      ? obj.slice(0, MAX_STRLEN) + "..."
+      : obj;
+  }
+  if (Array.isArray(obj)) {
+    if (obj.length > MAX_KEYS)
+      return obj
+        .slice(0, MAX_KEYS)
+        .map((x) => limitOutput(x, depth + 1))
+        .concat(["[truncated]"]);
+    return obj.map((x) => limitOutput(x, depth + 1));
+  }
+  if (typeof obj === "object" && obj !== null) {
+    const keys = Object.keys(obj);
+    if (keys.length > MAX_KEYS) {
+      const limited = {};
+      keys
+        .slice(0, MAX_KEYS)
+        .forEach((k) => (limited[k] = limitOutput(obj[k], depth + 1)));
+      limited["[truncated]"] = true;
+      return limited;
+    }
+    const limited = {};
+    for (const k of keys) {
+      limited[k] = limitOutput(obj[k], depth + 1);
+    }
+    return limited;
+  }
+  return obj;
+}
+
+/**
+ * useJSXSchema hooks：安全执行 JSX/React 代码，返回渲染 schema、执行函数和组件集合。
+ * @returns {[Object, Function, ComponentsMap]} [schema, useJSX, components]
+ * @example
+ * const [schema, useJSX, components] = useJSXSchema();
+ * await useJSX('function render($root) { ... }');
+ */
 export function useJSXSchema() {
   const [schema, setSchema] = useState({
     component: "ProCard",
@@ -92,6 +177,11 @@ export function useJSXSchema() {
   });
 
   // 预览/执行
+  /**
+   * 安全执行用户输入的 JSX/React 代码，自动注入 $root 和组件。
+   * @param {string} reactCode - 用户输入的 JSX/React 代码字符串
+   * @returns {Promise<void>} - 异步执行，无返回值，直接更新 schema
+   */
   const useJSX = async (reactCode) => {
     try {
       for (const reg of blacklist) {
@@ -137,42 +227,6 @@ export function useJSXSchema() {
         return;
       }
       // 限制渲染结果类型和大小
-      function limitOutput(obj, depth = 1) {
-        const MAX_DEPTH = 5;
-        const MAX_KEYS = 30;
-        const MAX_STRLEN = 2000;
-        if (depth > MAX_DEPTH) return "[Too deep]";
-        if (typeof obj === "string") {
-          return obj.length > MAX_STRLEN
-            ? obj.slice(0, MAX_STRLEN) + "..."
-            : obj;
-        }
-        if (Array.isArray(obj)) {
-          if (obj.length > MAX_KEYS)
-            return obj
-              .slice(0, MAX_KEYS)
-              .map((x) => limitOutput(x, depth + 1))
-              .concat(["[truncated]"]);
-          return obj.map((x) => limitOutput(x, depth + 1));
-        }
-        if (typeof obj === "object" && obj !== null) {
-          const keys = Object.keys(obj);
-          if (keys.length > MAX_KEYS) {
-            const limited = {};
-            keys
-              .slice(0, MAX_KEYS)
-              .forEach((k) => (limited[k] = limitOutput(obj[k], depth + 1)));
-            limited["[truncated]"] = true;
-            return limited;
-          }
-          const limited = {};
-          for (const k of keys) {
-            limited[k] = limitOutput(obj[k], depth + 1);
-          }
-          return limited;
-        }
-        return obj;
-      }
       if (typeof raw !== "object" || raw == null) {
         setSchema({
           component: "Result",

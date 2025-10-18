@@ -80,7 +80,6 @@ export const initialSchema = `const render = ($root) => {
           ]}
           search={{ layout: "vertical" }}
           rowKey="id"
-          pagination={false}
         />
       </ProCard>
     )

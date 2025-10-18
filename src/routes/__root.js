@@ -1,5 +1,3 @@
-// 通用 hooks：获取 url 查询参数
-
 import { LogoutOutlined } from "@ant-design/icons";
 import { ProLayout } from "@ant-design/pro-components";
 import {
@@ -9,9 +7,9 @@ import {
   useNavigate,
   useRouter,
 } from "@tanstack/react-router";
+import { useRequest } from "ahooks";
 import { Dropdown } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import KeepAliveLayout from "../components/LayoutTabs/KeepAliveLayout";
 
 export const Route = createRootRoute({
   component: RootAppComponent,
@@ -65,6 +63,13 @@ function RootComponent() {
   }, [settings]);
 
   const navigate = useNavigate();
+
+  const { data: version = { version: "1.0.0_dev", date: "2025-10-17" } } =
+    useRequest(() => fetch("/version.json").then((res) => res.json()), {
+      refreshOnWindowFocus: false,
+    });
+
+  console.log("version", version);
 
   const menus = useMemo(() => {
     return (routeTree.children || [])
@@ -156,11 +161,24 @@ function RootComponent() {
         },
       }}
       {...settings}
+      footerRender={() => [
+        <div
+          style={{
+            padding: 8,
+            textAlign: "center",
+            fontSize: 12,
+            color: "#999",
+          }}
+        >
+          ©版权所有{new Date().getFullYear()} 版本：v{version.version} 更新时间：{version.date}
+        </div>,
+      ]}
       id="test-pro-layout"
     >
-      <KeepAliveLayout>
+      <Outlet />
+      {/* <KeepAliveLayout>
         <Outlet />
-      </KeepAliveLayout>
+      </KeepAliveLayout> */}
       {/* <SettingDrawer
         pathname={pathname}
         enableDarkTheme
