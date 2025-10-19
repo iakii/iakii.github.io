@@ -4,7 +4,7 @@ import {
   RedoOutlined,
 } from "@ant-design/icons";
 import { PageContainer } from "@ant-design/pro-components";
-import { Space, Tooltip } from "antd";
+import { Card, Space, Tooltip } from "antd";
 import PageErrorBoundary from "./PageErrorBoundary";
 
 /**
@@ -28,33 +28,31 @@ import PageErrorBoundary from "./PageErrorBoundary";
  * - 刷新：调用 location.reload()
  */
 export default function PageLayout({ title = "", children = null, ...props }) {
-
   const onBack = () => history.back();
   const onNext = () => history.go(1);
   const onRedo = () => location.reload();
   return (
     <PageContainer
-      title={
-        <Space size={16} style={{ background: "white" }}>
-          <Tooltip title="后退">
-            <ArrowLeftOutlined onClick={onBack} />
-          </Tooltip>
-          <Tooltip title="前进">
-            <ArrowRightOutlined onClick={onNext} />
-          </Tooltip>
-          <Tooltip title="刷新">
-            <RedoOutlined onClick={onRedo} />
-          </Tooltip>
-          {title}
-        </Space>
-      }
       fixedHeader
-      breadcrumbRender={false}
-      header={{ style: { padding: "5px 15px" } }}
-      className="app-body-container"
+      header={{
+        style: { padding: "0 15px",   },
+        title: (
+          <Space size={16} >
+            <Tooltip title="后退">
+              <ArrowLeftOutlined onClick={onBack} />
+            </Tooltip>
+            <Tooltip title="前进">
+              <ArrowRightOutlined onClick={onNext} />
+            </Tooltip>
+            <Tooltip title="刷新">
+              <RedoOutlined onClick={onRedo} />
+            </Tooltip>
+            {title}
+          </Space>
+        ),
+      }}
+      content={<PageErrorBoundary>{children}</PageErrorBoundary>}
       {...props}
-    >
-      <PageErrorBoundary>{children}</PageErrorBoundary>
-    </PageContainer>
+    ></PageContainer>
   );
 }

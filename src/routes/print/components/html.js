@@ -5,11 +5,11 @@ import Editor from "@monaco-editor/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button, message, Space, Typography } from "antd";
 import { useRef, useState } from "react";
-import template from "../core/template";
-import printMgr, { showPreviewModal } from "../core/utils";
+import template from "../../../core/template";
+import printMgr, { showPreviewModal } from "../../../core/utils";
 import { asBlob } from "html-docx-js-extends";
 
-export const Route = createFileRoute("/html")({
+export const Route = createFileRoute("/print/components/html")({
   component: HtmlTab,
 });
 

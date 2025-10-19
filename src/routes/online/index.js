@@ -1,4 +1,4 @@
-import { AppstoreTwoTone } from "@ant-design/icons";
+import { ReconciliationTwoTone } from "@ant-design/icons";
 import { ProCard, ProSkeleton } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect } from "react";
@@ -11,15 +11,14 @@ export const Route = createFileRoute("/online/")({
   component: RouteComponent,
 
   staticData: {
-    icon: <AppstoreTwoTone />,
-    name: "React Schema Render示例",
+    icon: <ReconciliationTwoTone />,
+    name: "React Schema",
     index: 8,
   },
 });
 
 function RouteComponent() {
   const [schema, useJSX, components] = useJSXSchema();
-
   useEffect(() => {
     setTimeout(() => {
       useJSX(initialSchema);

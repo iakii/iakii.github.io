@@ -9,11 +9,11 @@ import {
 import { ProCard } from "@ant-design/pro-components";
 import Editor from "@monaco-editor/react";
 import { Button, Space, Typography, Upload, message } from "antd";
-import art from "../core/template";
+import art from "../../../core/template";
 import { createFileRoute } from "@tanstack/react-router";
-import printMgr from "../core/utils";
+import printMgr from "../../../core/utils";
 
-export const Route = createFileRoute("/docx")({
+export const Route = createFileRoute("/print/components/docx")({
   component: WordTab,
 });
 

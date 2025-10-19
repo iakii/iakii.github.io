@@ -1,16 +1,24 @@
-import { Dropdown, Tabs } from "antd";
+import { Dropdown, Space, Tabs, Tooltip, Typography } from "antd";
 import { useCallback, useMemo } from "react";
 import "./index.less";
 
-import { useNavigate } from "@tanstack/react-router";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import {
   KeepAliveTab,
   KeepAliveTabContext,
   useKeepAliveTabs,
 } from "./useKeepAliveTabs";
+import {
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
+  RedoOutlined,
+} from "@ant-design/icons";
 
 const KeepAliveLayout = ({ children }) => {
   const history = useNavigate();
+
+  const { pathname } = useLocation();
+
   // const outlet = <Outlet />;
   const {
     keepAliveTabs,
@@ -68,10 +76,10 @@ const KeepAliveLayout = ({ children }) => {
           menu={{ items: menuItems, onClick: (e) => menuClick(e, tab) }}
           trigger={["contextMenu"]}
         >
-          <div style={{ margin: "-12px 0", padding: "12px 0" }}>
+          <Space>
             {tab.icon}
-            {tab.title}
-          </div>
+            {tab.title === "__root__" ? "首页" : tab.title}
+          </Space>
         </Dropdown>
       );
     },
@@ -130,21 +138,62 @@ const KeepAliveLayout = ({ children }) => {
     }),
     [closeTab, closeOtherTab, refreshTab, onHidden, onShow]
   );
+  const onBack = () => history.back();
+  const onNext = () => history.go(1);
+  const onRedo = () => location.reload();
+
+  const title = useMemo(() => {
+    const current = keepAliveTabs.find(
+      (x) =>
+        x.pathname === pathname || x.pathname?.replace(/\/$/, "") === pathname
+    );
+
+    if (!current) return "小小工具箱";
+    return (
+      (current?.title === "__root__" ? "首页" : current.title) || "小小工具箱"
+    );
+  }, [keepAliveTabs, pathname]);
+
+  console.log("keepAliveTabs", keepAliveTabs, title);
 
   return (
-    <div className={'keepAliveTabs'}>
+    <div className={"keepAliveTabs"}>
       <KeepAliveTabContext.Provider value={keepAliveContextValue}>
+        {/* <Space>
+         */}
         <Tabs
+          tabBarExtraContent={{
+            left: (
+              <Typography.Title
+                level={4}
+                style={{ margin: "0 12px 0 0", padding: "8px 24px" }}
+              >
+                <Space size="large">
+                  <Tooltip title="后退">
+                    <ArrowLeftOutlined onClick={onBack} />
+                  </Tooltip>
+                  <Tooltip title="前进">
+                    <ArrowRightOutlined onClick={onNext} />
+                  </Tooltip>
+                  <Tooltip title="刷新">
+                    <RedoOutlined onClick={onRedo} />
+                  </Tooltip>
+                  {title}
+                </Space>
+              </Typography.Title>
+            ),
+          }}
           type="editable-card"
           items={tabItems}
+          // size="small"
           activeKey={activeTabRoutePath}
           onChange={onTabsChange}
-          className="keep-alive-tabs"
           style={{ padding: 0 }}
           hideAdd
           animated={false}
           onEdit={onTabEdit}
         />
+        {/* </Space> */}
       </KeepAliveTabContext.Provider>
     </div>
   );

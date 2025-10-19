@@ -11,18 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
-import { Route as PrintRouteImport } from './routes/print'
-import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
-import { Route as HtmlRouteImport } from './routes/html'
 import { Route as FlagRouteImport } from './routes/flag'
-import { Route as ExcelRouteImport } from './routes/excel'
-import { Route as DocxRouteImport } from './routes/docx'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
+import { Route as PrintIndexRouteImport } from './routes/print/index'
 import { Route as OnlineIndexRouteImport } from './routes/online/index'
+import { Route as PrintComponentsPrintCoreRouteImport } from './routes/print/components/printCore'
+import { Route as PrintComponentsPdfRouteImport } from './routes/print/components/pdf'
+import { Route as PrintComponentsHtmlRouteImport } from './routes/print/components/html'
+import { Route as PrintComponentsExcelRouteImport } from './routes/print/components/excel'
+import { Route as PrintComponentsDocxRouteImport } from './routes/print/components/docx'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -34,39 +35,14 @@ const QuickjsRoute = QuickjsRouteImport.update({
   path: '/quickjs',
   getParentRoute: () => rootRouteImport,
 })
-const PrintRoute = PrintRouteImport.update({
-  id: '/print',
-  path: '/print',
-  getParentRoute: () => rootRouteImport,
-})
-const PdfRoute = PdfRouteImport.update({
-  id: '/pdf',
-  path: '/pdf',
-  getParentRoute: () => rootRouteImport,
-})
 const JsonJsRoute = JsonJsRouteImport.update({
   id: '/jsonJs',
   path: '/jsonJs',
   getParentRoute: () => rootRouteImport,
 })
-const HtmlRoute = HtmlRouteImport.update({
-  id: '/html',
-  path: '/html',
-  getParentRoute: () => rootRouteImport,
-})
 const FlagRoute = FlagRouteImport.update({
   id: '/flag',
   path: '/flag',
-  getParentRoute: () => rootRouteImport,
-})
-const ExcelRoute = ExcelRouteImport.update({
-  id: '/excel',
-  path: '/excel',
-  getParentRoute: () => rootRouteImport,
-})
-const DocxRoute = DocxRouteImport.update({
-  id: '/docx',
-  path: '/docx',
   getParentRoute: () => rootRouteImport,
 })
 const DocsRoute = DocsRouteImport.update({
@@ -89,9 +65,40 @@ const ReactIndexRoute = ReactIndexRouteImport.update({
   path: '/react/',
   getParentRoute: () => rootRouteImport,
 })
+const PrintIndexRoute = PrintIndexRouteImport.update({
+  id: '/print/',
+  path: '/print/',
+  getParentRoute: () => rootRouteImport,
+})
 const OnlineIndexRoute = OnlineIndexRouteImport.update({
   id: '/online/',
   path: '/online/',
+  getParentRoute: () => rootRouteImport,
+})
+const PrintComponentsPrintCoreRoute =
+  PrintComponentsPrintCoreRouteImport.update({
+    id: '/print/components/printCore',
+    path: '/print/components/printCore',
+    getParentRoute: () => rootRouteImport,
+  })
+const PrintComponentsPdfRoute = PrintComponentsPdfRouteImport.update({
+  id: '/print/components/pdf',
+  path: '/print/components/pdf',
+  getParentRoute: () => rootRouteImport,
+})
+const PrintComponentsHtmlRoute = PrintComponentsHtmlRouteImport.update({
+  id: '/print/components/html',
+  path: '/print/components/html',
+  getParentRoute: () => rootRouteImport,
+})
+const PrintComponentsExcelRoute = PrintComponentsExcelRouteImport.update({
+  id: '/print/components/excel',
+  path: '/print/components/excel',
+  getParentRoute: () => rootRouteImport,
+})
+const PrintComponentsDocxRoute = PrintComponentsDocxRouteImport.update({
+  id: '/print/components/docx',
+  path: '/print/components/docx',
   getParentRoute: () => rootRouteImport,
 })
 
@@ -99,16 +106,17 @@ const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   DocsRoute: DocsRoute,
-  DocxRoute: DocxRoute,
-  ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
-  HtmlRoute: HtmlRoute,
   JsonJsRoute: JsonJsRoute,
-  PdfRoute: PdfRoute,
-  PrintRoute: PrintRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
   OnlineIndexRoute: OnlineIndexRoute,
+  PrintIndexRoute: PrintIndexRoute,
   ReactIndexRoute: ReactIndexRoute,
+  PrintComponentsDocxRoute: PrintComponentsDocxRoute,
+  PrintComponentsExcelRoute: PrintComponentsExcelRoute,
+  PrintComponentsHtmlRoute: PrintComponentsHtmlRoute,
+  PrintComponentsPdfRoute: PrintComponentsPdfRoute,
+  PrintComponentsPrintCoreRoute: PrintComponentsPrintCoreRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

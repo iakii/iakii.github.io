@@ -1,10 +1,10 @@
 import { PrinterTwoTone } from "@ant-design/icons";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button, Space } from "antd";
-import { printDoc, printExcel, printHtml, printPdf } from "../core/printCore";
+import { printDoc, printExcel, printHtml, printPdf } from "../../../core/printCore";
 import { ProCard, ProTable } from "@ant-design/pro-components";
 
-export const Route = createFileRoute("/print")({
+export const Route = createFileRoute("/print/components/printCore")({
   component: PrintV1Compoent,
   // staticData: {
   //   icon: <PrinterTwoTone />,

@@ -10,6 +10,9 @@ import {
 import { useRequest } from "ahooks";
 import { Dropdown } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
+import PageLayout from "../components/PageLayout";
+import KeepAliveLayout from "../components/LayoutTabs/KeepAliveLayout";
+import PageErrorBoundary from "../components/PageErrorBoundary";
 
 export const Route = createRootRoute({
   component: RootAppComponent,
@@ -98,6 +101,10 @@ function RootComponent() {
       });
   }, [routeTree]);
 
+  // console.log("menus", menus);
+
+
+
   return (
     <ProLayout
       fixSiderbar
@@ -105,10 +112,9 @@ function RootComponent() {
       menuProps={{
         onClick: (e) => navigate({ to: e.key }),
       }}
-      siderWidth={156}
+      siderWidth={200}
       token={{
         bgLayout: "#f6f6f7",
-
         header: {
           colorBgHeader: "#292f33",
           colorHeaderTitle: "#fff",
@@ -121,15 +127,6 @@ function RootComponent() {
         },
         colorTextAppListIconHover: "#fff",
         colorTextAppListIcon: "#dfdfdf",
-        // sider: {
-        //   colorMenuBackground: "#292f33",
-        //   colorMenuItemDivider: "#dfdfdf",
-        //   colorBgMenuItemHover: "#dfdfdf",
-        //   colorBgMenuItemSelected: "#dfdfdf",
-        //   colorTextMenu: "#dfdfdf",
-        //   colorTextMenuSelected: "#292f33",
-        //   colorTextMenuActive: "#fff",
-        // },
       }}
       contentStyle={{ padding: 0 }}
       title="小小工具箱"
@@ -170,25 +167,16 @@ function RootComponent() {
             color: "#999",
           }}
         >
-          ©版权所有{new Date().getFullYear()} 版本：v{version.version} 更新时间：{version.date}
+          ©版权所有{new Date().getFullYear()} 版本：v{version.version}{" "}
+          更新时间：{version.date}
         </div>,
       ]}
-      id="test-pro-layout"
+      // id="test-pro-layout"
+      // ErrorBoundary={PageErrorBoundary}
     >
-      <Outlet />
-      {/* <KeepAliveLayout>
+      <KeepAliveLayout>
         <Outlet />
-      </KeepAliveLayout> */}
-      {/* <SettingDrawer
-        pathname={pathname}
-        enableDarkTheme
-        getContainer={() => document.getElementById("test-pro-layout")}
-        settings={settings}
-        onSettingChange={(changeSetting) => {
-          setSetting(changeSetting);
-        }}
-        disableUrlParams={true}
-      /> */}
+      </KeepAliveLayout>
     </ProLayout>
   );
 }

@@ -7,7 +7,7 @@ import {
 import { ProCard } from "@ant-design/pro-components";
 import { Button, message, Space, Upload } from "antd";
 
-export const Route = createFileRoute("/pdf")({
+export const Route = createFileRoute("/print/components/pdf")({
   component: PdfTab,
 });
 
