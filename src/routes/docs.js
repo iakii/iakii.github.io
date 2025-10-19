@@ -4,13 +4,19 @@ import {
   CheckCircleOutlined,
   CodeOutlined,
   ExperimentOutlined,
+  FileMarkdownOutlined,
   FileTextOutlined,
   HeartOutlined,
+  JavaOutlined,
+  JavaScriptOutlined,
   MedicineBoxOutlined,
+  PythonOutlined,
   RestTwoTone,
   SettingOutlined,
+  SignatureOutlined,
   SolutionOutlined,
   SwapOutlined,
+  ToolOutlined,
 } from "@ant-design/icons";
 import { ProCard } from "@ant-design/pro-components";
 import { Menu } from "antd";
@@ -27,81 +33,122 @@ export const Route = createFileRoute("/docs")({
   },
 });
 
-const iconMap = {
-  "fa-code": <CodeOutlined />,
-  "fa-file-code": <FileTextOutlined />,
-  "fa-exchange-alt": <SwapOutlined />,
-  "fab fa-android": <AndroidOutlined />,
-  "fa-cog": <SettingOutlined />,
-  "fa-heartbeat": <HeartOutlined />,
-  "fa-check": <CheckCircleOutlined />,
-  "fa-clipboard-check": <AuditOutlined />,
-  "fa-vial": <ExperimentOutlined />,
-  "fa-pills": <MedicineBoxOutlined />,
-  "fa-prescription": <SolutionOutlined />,
-};
-
 const list = [
   {
     title: "医疗常识",
-    icon: "fa-heartbeat",
+    icon: <HeartOutlined />,
     items: [
       {
         title: "护理质量检查",
         url: "/html/护理质量检查.html",
         type: "医疗常识",
         date: "2025.05.30",
-        icon: "fa-check",
+        icon: <CheckCircleOutlined />,
       },
       {
         title: "护理质量检查流程图",
         url: "/html/护理质量检查-流程图.html",
         type: "医疗常识",
         date: "2025.05.30",
-        icon: "fa-clipboard-check",
+        icon: <AuditOutlined />,
       },
       {
         title: "临床采血管功能指南",
         url: "/html/临床采血管功能指南.html",
         type: "医疗常识",
         date: "2025.05.15",
-        icon: "fa-vial",
+        icon: <ExperimentOutlined />,
       },
       {
         title: "给药途径概述与分类",
         url: "/html/给药途径概述与分类.html",
         type: "医疗常识",
         date: "2025.05.15",
-        icon: "fa-pills",
+        icon: <MedicineBoxOutlined />,
       },
       {
         title: "医嘱频次缩写指南",
         url: "/html/医嘱频次缩写指南.html",
         type: "医疗常识",
         date: "2025.05.15",
-        icon: "fa-prescription",
+        icon: <SolutionOutlined />,
       },
+    ],
+  },
+  {
+    title: "工具",
+    icon: <ToolOutlined />,
+    items: [
       {
         title: "签名小工具",
         url: "https://lazybrush.dulnan.net/",
-        type: "签名",
+        type: "工具",
         date: "2025.05.30",
-        icon: "fa-check",
+        icon: <SignatureOutlined />,
       },
       {
-        title: "签名小工具2",
-        url: "/html/friction.html",
-        type: "签名",
+        title: "解析yaml",
+        url: "/tools/parse_yaml/",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <JavaOutlined />,
+      },
+      {
+        title: "JSON转Dart在线工具",
+        url: "/tools/json2dart/",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <PythonOutlined />,
+      },
+      {
+        title: "JSON转TS在线工具",
+        url: "/tools/json2ts/",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <JavaScriptOutlined />,
+      },
+    ],
+  },
+
+  {
+    title: "文档",
+    icon: <FileMarkdownOutlined />,
+    items: [
+      {
+        title: "OpenHarmony API11 设备开发预研与问题解决方案",
+        url: "/md?name=app",
+        type: "文档",
         date: "2025.05.30",
-        icon: "fa-check",
+        icon: <FileMarkdownOutlined />,
+      },
+      {
+        title: "静配中心（PIVAS）流程图",
+        url: "/md?name=2",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <FileMarkdownOutlined />,
+      },
+      {
+        title: "Mermaid中文网",
+        url: "/md?name=3",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <FileMarkdownOutlined />,
+      },
+      {
+        title: "护理质量检查流程图",
+        url: "/md?name=1",
+        type: "工具",
+        date: "2025.10.19",
+        icon: <FileMarkdownOutlined />,
       },
     ],
   },
 ];
 
 function RouteComponent() {
-  const [loading, setLoading] = useState(false);
-  const [iframeSrc, setIframeSrc] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [iframeSrc, setIframeSrc] = useState("/tools/json2ts/");
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -118,20 +165,23 @@ function RouteComponent() {
       direction="row"
       bodyStyle={{ background: "#f6f6f7", padding: 0 }}
     >
-      <ProCard colSpan={"200px"} bodyStyle={{ padding: 0 }}>
+      <ProCard colSpan={"230px"} bodyStyle={{ padding: 0 }}>
         <Menu
           mode="inline"
+          accessKey={iframeSrc}
           items={list.map((group) => ({
             key: group.title,
             label: group.title,
+            icon: group.icon,
             type: "group",
             children: group.items.map((item) => ({
               key: item.url,
-              icon: iconMap[item.icon],
+              icon: item.icon,
               label: item.title,
             })),
           }))}
           onClick={({ key }) => {
+            if (key === iframeSrc) return;
             setLoading(true);
             setIframeSrc(key);
           }}
