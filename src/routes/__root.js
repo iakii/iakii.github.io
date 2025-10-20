@@ -10,9 +10,7 @@ import {
 import { useRequest } from "ahooks";
 import { Dropdown } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import PageLayout from "../components/PageLayout";
 import KeepAliveLayout from "../components/LayoutTabs/KeepAliveLayout";
-import PageErrorBoundary from "../components/PageErrorBoundary";
 
 export const Route = createRootRoute({
   component: RootAppComponent,
@@ -130,7 +128,7 @@ function RootComponent() {
       }}
       contentStyle={{ padding: 0 }}
       title="小小工具箱"
-      logo={"/favicon.png"}
+      logo={"/favicon.svg"}
       style={{ minHeight: "100vh" }}
       location={{
         pathname,
@@ -167,7 +165,7 @@ function RootComponent() {
             color: "#999",
           }}
         >
-          ©版权所有{new Date().getFullYear()} 版本：v{version.version}{" "}
+          ©版权所有{new Date().getFullYear()} 版本信息：v{version.version}{" "}
           更新时间：{version.date}
         </div>,
       ]}

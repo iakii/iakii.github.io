@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV !== "production";
 export default defineConfig({
   plugins: [pluginReact(), pluginLess(), pluginBabel()],
   html: {
-    favicon: "favicon.png",
+    favicon: "favicon.svg",
     title: "小小工具箱",
   },
   source: {
@@ -75,8 +75,8 @@ export default defineConfig({
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
           reuseExistingChunk: true,
-            name: 'vendors',
-          chunks: 'all'
+          name: "vendors",
+          chunks: "all",
         },
         default: {
           minChunks: 2,
