@@ -161,7 +161,7 @@ export function useJSXSchema() {
   /**
    * 安全执行用户输入的 JSX/React 代码，自动注入 $root 和组件。
    * @param {string} reactCode - 用户输入的 JSX/React 代码字符串
-   * @returns {Promise<void>} - 异步执行，无返回值，直接更新 schema
+   * @returns {Promise<string|null>} - 异步执行，无返回值，直接更新 schema
    */
   const useJSX = async (reactCode) => {
     try {
@@ -172,7 +172,7 @@ export function useJSXSchema() {
             status: 403,
             title: "检测到不安全代码，已禁止执行！",
           });
-          return;
+          return null;
         }
       }
       // 使用 Babel 将含 JSX 的代码编译为普通 JS
@@ -206,7 +206,7 @@ export function useJSXSchema() {
           status: 403,
           title: `执行异常: ${e.message}`,
         });
-        return;
+        return null;
       }
       // 限制渲染结果类型和大小
       if (typeof raw !== "object" || raw == null) {
@@ -215,9 +215,10 @@ export function useJSXSchema() {
           status: 403,
           title: "渲染结果无效！",
         });
-        return;
+        return null;
       }
       setSchema(limitOutput(raw));
+      return limitOutput(raw);
     } catch (e) {
       console.error("render error", e);
       setSchema({

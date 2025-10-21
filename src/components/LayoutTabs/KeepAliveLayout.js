@@ -154,7 +154,6 @@ const KeepAliveLayout = ({ children }) => {
     );
   }, [keepAliveTabs, pathname]);
 
-  console.log("keepAliveTabs", keepAliveTabs, title);
 
   return (
     <div className={"keepAliveTabs"}>

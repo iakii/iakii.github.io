@@ -19,11 +19,15 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
 import { Route as PrintIndexRouteImport } from './routes/print/index'
 import { Route as OnlineIndexRouteImport } from './routes/online/index'
+import { Route as AppListRouteImport } from './routes/app/list'
+import { Route as AppCreateRouteImport } from './routes/app/create'
+import { Route as AppIdIndexRouteImport } from './routes/app/$id/index'
 import { Route as PrintComponentsPrintCoreRouteImport } from './routes/print/components/printCore'
 import { Route as PrintComponentsPdfRouteImport } from './routes/print/components/pdf'
 import { Route as PrintComponentsHtmlRouteImport } from './routes/print/components/html'
 import { Route as PrintComponentsExcelRouteImport } from './routes/print/components/excel'
 import { Route as PrintComponentsDocxRouteImport } from './routes/print/components/docx'
+import { Route as AppIdEditRouteImport } from './routes/app/$id/edit'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -75,6 +79,21 @@ const OnlineIndexRoute = OnlineIndexRouteImport.update({
   path: '/online/',
   getParentRoute: () => rootRouteImport,
 })
+const AppListRoute = AppListRouteImport.update({
+  id: '/app/list',
+  path: '/app/list',
+  getParentRoute: () => rootRouteImport,
+})
+const AppCreateRoute = AppCreateRouteImport.update({
+  id: '/app/create',
+  path: '/app/create',
+  getParentRoute: () => rootRouteImport,
+})
+const AppIdIndexRoute = AppIdIndexRouteImport.update({
+  id: '/app/$id/',
+  path: '/app/$id/',
+  getParentRoute: () => rootRouteImport,
+})
 const PrintComponentsPrintCoreRoute =
   PrintComponentsPrintCoreRouteImport.update({
     id: '/print/components/printCore',
@@ -101,6 +120,11 @@ const PrintComponentsDocxRoute = PrintComponentsDocxRouteImport.update({
   path: '/print/components/docx',
   getParentRoute: () => rootRouteImport,
 })
+const AppIdEditRoute = AppIdEditRouteImport.update({
+  id: '/app/$id/edit',
+  path: '/app/$id/edit',
+  getParentRoute: () => rootRouteImport,
+})
 
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -110,13 +134,17 @@ const rootRouteChildren = {
   JsonJsRoute: JsonJsRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
+  AppCreateRoute: AppCreateRoute,
+  AppListRoute: AppListRoute,
   OnlineIndexRoute: OnlineIndexRoute,
   PrintIndexRoute: PrintIndexRoute,
   ReactIndexRoute: ReactIndexRoute,
+  AppIdEditRoute: AppIdEditRoute,
   PrintComponentsDocxRoute: PrintComponentsDocxRoute,
   PrintComponentsExcelRoute: PrintComponentsExcelRoute,
   PrintComponentsHtmlRoute: PrintComponentsHtmlRoute,
   PrintComponentsPdfRoute: PrintComponentsPdfRoute,
   PrintComponentsPrintCoreRoute: PrintComponentsPrintCoreRoute,
+  AppIdIndexRoute: AppIdIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)
