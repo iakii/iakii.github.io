@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Render Jsx</title>
+    <script src="./index.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Render JSX</h1>
+    <script>
+
+
+const schema = {
+  // component 代表组件
+  component: 'collapse',
+  // 其他属性为 component 对应的属性
+  defaultActiveKey: ['1'],
+  // children 支持深度嵌套
+  children: [
+    {
+      component: 'panel',
+      header: '《出塞》',
+      key: '1',
+      // children 为字符串
+      children:
+        '秦时明月汉时关，万里长征人未还。但使龙城飞将在，不教胡马度阴山。',
+    },
+    {
+      component: 'panel',
+      header: '《寻隐者不遇》',
+      key: '2',
+      // children 为 jsx
+      children: (
+        <>
+          <p>松下问童子，言师采药去。</p>
+          <p>只在此山中，云深不知处。</p>
+        </>
+      ),
+    },
+    {
+      component: 'panel',
+      header: '《凉州词》',
+      key: '3',
+      // children 为 schema 数组
+      children: [
+        {
+          component: 'p',
+          key: 1,
+          children: '葡萄美酒夜光杯，欲饮琵琶马上催。',
+        },
+        {
+          component: 'p',
+          key: 2,
+          children: '醉卧沙场君莫笑，古来征战几人回？',
+        },
+      ],
+    },
+  ],
+};
+
+    </script>
+  </body>
+</html>
