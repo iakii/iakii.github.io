@@ -13,6 +13,7 @@ import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as FlagRouteImport } from './routes/flag'
+import { Route as ExcelRouteImport } from './routes/excel'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,7 +26,6 @@ import { Route as AppIdIndexRouteImport } from './routes/app/$id/index'
 import { Route as PrintComponentsPrintCoreRouteImport } from './routes/print/components/printCore'
 import { Route as PrintComponentsPdfRouteImport } from './routes/print/components/pdf'
 import { Route as PrintComponentsHtmlRouteImport } from './routes/print/components/html'
-import { Route as PrintComponentsExcelRouteImport } from './routes/print/components/excel'
 import { Route as PrintComponentsDocxRouteImport } from './routes/print/components/docx'
 import { Route as AppIdEditRouteImport } from './routes/app/$id/edit'
 
@@ -47,6 +47,11 @@ const JsonJsRoute = JsonJsRouteImport.update({
 const FlagRoute = FlagRouteImport.update({
   id: '/flag',
   path: '/flag',
+  getParentRoute: () => rootRouteImport,
+})
+const ExcelRoute = ExcelRouteImport.update({
+  id: '/excel',
+  path: '/excel',
   getParentRoute: () => rootRouteImport,
 })
 const DocsRoute = DocsRouteImport.update({
@@ -110,11 +115,6 @@ const PrintComponentsHtmlRoute = PrintComponentsHtmlRouteImport.update({
   path: '/print/components/html',
   getParentRoute: () => rootRouteImport,
 })
-const PrintComponentsExcelRoute = PrintComponentsExcelRouteImport.update({
-  id: '/print/components/excel',
-  path: '/print/components/excel',
-  getParentRoute: () => rootRouteImport,
-})
 const PrintComponentsDocxRoute = PrintComponentsDocxRouteImport.update({
   id: '/print/components/docx',
   path: '/print/components/docx',
@@ -130,6 +130,7 @@ const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   DocsRoute: DocsRoute,
+  ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
   JsonJsRoute: JsonJsRoute,
   QuickjsRoute: QuickjsRoute,
@@ -141,7 +142,6 @@ const rootRouteChildren = {
   ReactIndexRoute: ReactIndexRoute,
   AppIdEditRoute: AppIdEditRoute,
   PrintComponentsDocxRoute: PrintComponentsDocxRoute,
-  PrintComponentsExcelRoute: PrintComponentsExcelRoute,
   PrintComponentsHtmlRoute: PrintComponentsHtmlRoute,
   PrintComponentsPdfRoute: PrintComponentsPdfRoute,
   PrintComponentsPrintCoreRoute: PrintComponentsPrintCoreRoute,

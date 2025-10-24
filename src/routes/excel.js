@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 
-export const Route = createFileRoute("/print/components/excel")({
+export const Route = createFileRoute("/excel")({
   component: RouteComponent,
   staticData: {
     name: "导出Excel示例",
