@@ -5,11 +5,10 @@ import React, { useEffect } from "react";
 
 import { SchemaProvider, SchemaRender } from "react-schema-render";
 import SchemaDrawer, { initialSchema } from "./components/SchemaDrawer";
-import { useJSXSchema } from "./hooks/useJSXSchema";
+import { AppContext, inject, useJSXSchema } from "./hooks/useJSXSchema";
 
 export const Route = createFileRoute("/online/")({
   component: RouteComponent,
-
   staticData: {
     icon: <ReconciliationTwoTone />,
     name: "React Schema",
@@ -32,11 +31,13 @@ function RouteComponent() {
         bodyStyle={{ padding: 12, background: "#f6f6f7" }}
         extra={<SchemaDrawer components={components} onFinish={useJSX} />}
       >
-        <React.Suspense fallback={<ProSkeleton type="result" />}>
-          <SchemaProvider components={components}>
-            <SchemaRender schema={schema}></SchemaRender>
-          </SchemaProvider>
-        </React.Suspense>
+        <AppContext.Provider value={{ id: 1223, item: { app: 123 } ,...inject}}>
+          <React.Suspense fallback={<ProSkeleton type="result" />}>
+            <SchemaProvider components={components}>
+              <SchemaRender schema={schema}></SchemaRender>
+            </SchemaProvider>
+          </React.Suspense>
+        </AppContext.Provider>
       </ProCard>
     </ProCard>
   );

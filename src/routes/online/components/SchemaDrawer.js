@@ -3,10 +3,12 @@ import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
 
 export const initialSchema = `const render = ($root) => {
-  const { request, useState, useForm } = $root;
+  const { request, useState, useForm, useAppContext } = $root;
   console.log("$root", $root);
   const App = () => {
     const [name, setName] = useState("张三");
+    const app = useAppContext();
+    console.log(1111, app)
     return (
       <ProCard ghost direction='column'>
         <ProTable

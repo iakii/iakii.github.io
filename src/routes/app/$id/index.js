@@ -10,7 +10,7 @@ import {
 } from "../../../core/hooks/useLocalForage";
 import React, { useEffect } from "react";
 import { SchemaProvider, SchemaRender } from "react-schema-render";
-import { useJSXSchema } from "../../online/hooks/useJSXSchema";
+import { AppContext, useJSXSchema } from "../../online/hooks/useJSXSchema";
 import { ProSkeleton } from "@ant-design/pro-components";
 
 export const Route = createFileRoute("/app/$id/")({
@@ -44,10 +44,12 @@ function RouteComponent() {
   }, [item]);
 
   return (
-    <React.Suspense fallback={<ProSkeleton type="result" />}>
-      <SchemaProvider components={components}>
-        <SchemaRender schema={schema}></SchemaRender>
-      </SchemaProvider>
-    </React.Suspense>
+    <AppContext.Provider value={{ id: 1223, item: { app: 123 } }}>
+      <React.Suspense fallback={<ProSkeleton type="result" />}>
+        <SchemaProvider components={components}>
+          <SchemaRender schema={schema}></SchemaRender>
+        </SchemaProvider>
+      </React.Suspense>
+    </AppContext.Provider>
   );
 }

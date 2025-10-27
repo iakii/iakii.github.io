@@ -7,6 +7,7 @@ import * as zustand from "zustand";
 import React, {
   Fragment,
   lazy,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -38,6 +39,10 @@ import { request } from "../../../core/request";
  * @property {Object} hooks - ahooks 工具库
  */
 
+export const AppContext = React.createContext({});
+
+export const useAppContext = () => useContext(AppContext);
+
 /**
  * 组件集合，供 schema 渲染和沙箱执行环境访问。
  * @typedef {Object} ComponentsMap
@@ -50,7 +55,7 @@ import { request } from "../../../core/request";
  * @property {AsyncComponent} AsyncComponent - 异步组件
  */
 
-const inject = {
+export const inject = {
   React,
   useState,
   useEffect,
@@ -64,6 +69,7 @@ const inject = {
   useForm: ProForm.useForm,
   zustand,
   request,
+  useAppContext,
 };
 
 const components = {
