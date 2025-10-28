@@ -33,6 +33,22 @@ export default defineConfig({
   dev: {
     hmr: true,
     progressBar: true,
+    server: {
+      proxy: {
+        "/proxy": {
+          target: "http://tdtest.tdcare.cn:6230/",
+          changeOrigin: true,
+          pathRewrite: { "^/proxy": "" },
+        },
+      },
+      setupMiddlewares: (middlewares, devServer) => {
+        devServer.app.use("/proxy", (req, res, next) => {
+          console.log("[ProxyLog]", req.method, req.originalUrl);
+          next();
+        });
+        return middlewares;
+      },
+    },
   },
   module: {
     rules: [
