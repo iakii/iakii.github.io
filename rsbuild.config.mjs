@@ -34,19 +34,12 @@ export default defineConfig({
     hmr: true,
     progressBar: true,
     server: {
-      proxy: {
+      'metabase-proxy': {
         "/proxy": {
           target: "http://tdtest.tdcare.cn:6230/",
           changeOrigin: true,
-          pathRewrite: { "^/proxy": "" },
+          pathRewrite: { "^/metabase-proxy": "" },
         },
-      },
-      setupMiddlewares: (middlewares, devServer) => {
-        devServer.app.use("/proxy", (req, res, next) => {
-          console.log("[ProxyLog]", req.method, req.originalUrl);
-          next();
-        });
-        return middlewares;
       },
     },
   },

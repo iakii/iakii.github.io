@@ -1,7 +1,6 @@
 {
   "name": "print-js",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
   "main": "main.cjs",
   "homepage": "https://iakii.github.io/print-js/",
@@ -48,6 +47,7 @@
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "mammoth": "file:./mammoth",
+    "qiankun": "^2.10.16",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-schema-render": "^0.0.5",

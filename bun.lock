@@ -22,6 +22,7 @@
         "localforage": "^1.10.0",
         "lodash-es": "^4.17.21",
         "mammoth": "file:./mammoth",
+        "qiankun": "^2.10.16",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "react-schema-render": "^0.0.5",
@@ -1569,6 +1570,8 @@
 
     "import-fresh": ["import-fresh@3.3.1", "https://mirrors.huaweicloud.com/repository/npm/import-fresh/-/import-fresh-3.3.1.tgz", { "dependencies": { "parent-module": "^1.0.0", "resolve-from": "^4.0.0" } }, "sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ=="],
 
+    "import-html-entry": ["import-html-entry@1.17.0", "https://registry.npmmirror.com/import-html-entry/-/import-html-entry-1.17.0.tgz", { "dependencies": { "@babel/runtime": "^7.7.2" } }, "sha512-2SDsRlGlE8bqdnGqsOyiDPEWlzJR0jNW4LWopnZl5QE1Yd0nJ7fykWo2GaKUF7Jq7pR0g3dElhuJHyamTt1gPQ=="],
+
     "imurmurhash": ["imurmurhash@0.1.4", "https://mirrors.huaweicloud.com/repository/npm/imurmurhash/-/imurmurhash-0.1.4.tgz", {}, "sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA=="],
 
     "indexof": ["indexof@0.0.1", "https://mirrors.huaweicloud.com/repository/npm/indexof/-/indexof-0.0.1.tgz", {}, "sha512-i0G7hLJ1z0DE8dsqJa2rycj9dBmNKgXBvotXtZYXakU9oivfB9Uj2ZBC27qqef2U58/ZLwalxa1X/RDCdkHtVg=="],
@@ -2145,6 +2148,8 @@
 
     "q": ["q@0.9.7", "https://mirrors.huaweicloud.com/repository/npm/q/-/q-0.9.7.tgz", {}, "sha512-ijt0LhxWClXBtc1RCt8H0WhlZLAdVX26nWbpsJy+Hblmp81d2F/pFsvlrJhJDDruFHM+ECtxP0H0HzGSrARkwg=="],
 
+    "qiankun": ["qiankun@2.10.16", "https://registry.npmmirror.com/qiankun/-/qiankun-2.10.16.tgz", { "dependencies": { "@babel/runtime": "^7.10.5", "import-html-entry": "^1.15.1", "lodash": "^4.17.11", "single-spa": "^5.9.2" } }, "sha512-Q3tSVUrPnzx8ckEOKIoPnhb5LE28FPKyan/r6jEuGJGqTbIy+3rp6E2/KfU82ZI4yZpef9LFTrnxdj49jAEsmw=="],
+
     "qs": ["qs@6.14.0", "https://mirrors.huaweicloud.com/repository/npm/qs/-/qs-6.14.0.tgz", { "dependencies": { "side-channel": "^1.1.0" } }, "sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w=="],
 
     "query-string": ["query-string@4.3.4", "https://registry.npmmirror.com/query-string/-/query-string-4.3.4.tgz", { "dependencies": { "object-assign": "^4.1.0", "strict-uri-encode": "^1.0.0" } }, "sha512-O2XLNDBIg1DnTOa+2XrIwSiXEV8h2KImXUnjhhn2+UsvZ+Es2uyd5CCRTNQlDGbzUQOW3aYCBx9rVA6dzsiY7Q=="],
@@ -2496,6 +2501,8 @@
     "simple-statistics": ["simple-statistics@3.0.0", "https://registry.npmmirror.com/simple-statistics/-/simple-statistics-3.0.0.tgz", {}, "sha512-jP0Twb0maKoLv23nPRzbn7Pff3F8Wyz7cPhlagrNicSxANlmrcuzWttwdF8ao68ys8Hr3tweOpiMoJzh47TnEA=="],
 
     "simple-swizzle": ["simple-swizzle@0.2.4", "https://registry.npmmirror.com/simple-swizzle/-/simple-swizzle-0.2.4.tgz", { "dependencies": { "is-arrayish": "^0.3.1" } }, "sha512-nAu1WFPQSMNr2Zn9PGSZK9AGn4t/y97lEm+MXTtUDwfP0ksAIX4nO+6ruD9Jwut4C49SB1Ws+fbXsm/yScWOHw=="],
+
+    "single-spa": ["single-spa@5.9.5", "https://registry.npmmirror.com/single-spa/-/single-spa-5.9.5.tgz", {}, "sha512-9SQdmsyz4HSP+3gs6PJzhkaMEg+6zTlu9oxIghnwUX3eq+ajq4ft5egl0iyR55LAmO/UwvU8NgIWs/ZyQMa6dw=="],
 
     "sirv": ["sirv@2.0.4", "https://registry.npmmirror.com/sirv/-/sirv-2.0.4.tgz", { "dependencies": { "@polka/url": "^1.0.0-next.24", "mrmime": "^2.0.0", "totalist": "^3.0.0" } }, "sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ=="],
 
