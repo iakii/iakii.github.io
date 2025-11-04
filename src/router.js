@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
 import { Route as QuestionRouteImport } from './routes/question'
-import { Route as MicroRouteImport } from './routes/micro'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as FlagRouteImport } from './routes/flag'
 import { Route as ExcelRouteImport } from './routes/excel'
@@ -22,8 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
 import { Route as PrintIndexRouteImport } from './routes/print/index'
 import { Route as OnlineIndexRouteImport } from './routes/online/index'
+import { Route as App1IndexRouteImport } from './routes/app1/index'
 import { Route as AppListRouteImport } from './routes/app/list'
 import { Route as AppCreateRouteImport } from './routes/app/create'
+import { Route as MicroAppIndexRouteImport } from './routes/micro/$app/index'
+import { Route as App1AppIndexRouteImport } from './routes/app1/$app/index'
 import { Route as AppIdIndexRouteImport } from './routes/app/$id/index'
 import { Route as PrintComponentsPrintCoreRouteImport } from './routes/print/components/printCore'
 import { Route as PrintComponentsPdfRouteImport } from './routes/print/components/pdf'
@@ -44,11 +46,6 @@ const QuickjsRoute = QuickjsRouteImport.update({
 const QuestionRoute = QuestionRouteImport.update({
   id: '/question',
   path: '/question',
-  getParentRoute: () => rootRouteImport,
-})
-const MicroRoute = MicroRouteImport.update({
-  id: '/micro',
-  path: '/micro',
   getParentRoute: () => rootRouteImport,
 })
 const JsonJsRoute = JsonJsRouteImport.update({
@@ -96,6 +93,11 @@ const OnlineIndexRoute = OnlineIndexRouteImport.update({
   path: '/online/',
   getParentRoute: () => rootRouteImport,
 })
+const App1IndexRoute = App1IndexRouteImport.update({
+  id: '/app1/',
+  path: '/app1/',
+  getParentRoute: () => rootRouteImport,
+})
 const AppListRoute = AppListRouteImport.update({
   id: '/app/list',
   path: '/app/list',
@@ -104,6 +106,16 @@ const AppListRoute = AppListRouteImport.update({
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/app/create',
   path: '/app/create',
+  getParentRoute: () => rootRouteImport,
+})
+const MicroAppIndexRoute = MicroAppIndexRouteImport.update({
+  id: '/micro/$app/',
+  path: '/micro/$app/',
+  getParentRoute: () => rootRouteImport,
+})
+const App1AppIndexRoute = App1AppIndexRouteImport.update({
+  id: '/app1/$app/',
+  path: '/app1/$app/',
   getParentRoute: () => rootRouteImport,
 })
 const AppIdIndexRoute = AppIdIndexRouteImport.update({
@@ -145,12 +157,12 @@ const rootRouteChildren = {
   ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
   JsonJsRoute: JsonJsRoute,
-  MicroRoute: MicroRoute,
   QuestionRoute: QuestionRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
   AppCreateRoute: AppCreateRoute,
   AppListRoute: AppListRoute,
+  App1IndexRoute: App1IndexRoute,
   OnlineIndexRoute: OnlineIndexRoute,
   PrintIndexRoute: PrintIndexRoute,
   ReactIndexRoute: ReactIndexRoute,
@@ -160,5 +172,7 @@ const rootRouteChildren = {
   PrintComponentsPdfRoute: PrintComponentsPdfRoute,
   PrintComponentsPrintCoreRoute: PrintComponentsPrintCoreRoute,
   AppIdIndexRoute: AppIdIndexRoute,
+  App1AppIndexRoute: App1AppIndexRoute,
+  MicroAppIndexRoute: MicroAppIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)
