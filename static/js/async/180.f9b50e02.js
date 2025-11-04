@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["180"],{73703:function(e,t,p){p.r(t),p.d(t,{component:()=>o});var n=p(61421),r=p(12615),s=p(14146),a=p(3638),c=p(77877);function o(){let{id:e}=(0,r.GY)("/app/$id/edit").useLoaderData(),{item:t,loading:p}=(0,s.w)("app",e,e=>(e.code&&(e.code=JSON.parse(window.atob(e.code))),e));return p?(0,n.jsx)(c.v0,{type:"result",active:!p}):(0,n.jsx)(a.H,{type:"edit",record:t||{}})}}}]);
+//# sourceMappingURL=180.f9b50e02.js.map

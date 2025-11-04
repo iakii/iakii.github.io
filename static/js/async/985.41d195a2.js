@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["985"],{32:function(e,n,t){t.r(n),t.d(n,{component:()=>p});var r=t(61421),u=t(72394),s=t(34617),o=t(98409);function p(){let e=(0,s.useRef)(),n=(0,s.useRef)(),{app:t}=o.q.useParams();return console.log("route",t),(0,s.useEffect)(()=>{let t=(0,u.Wz)({name:"app1",entry:{scripts:["/app1/app1.umd.cjs"],html:'<div id="root"></div>'},container:e.current,props:{onRouteCallback:e=>{n.current=e}}});return()=>t.unmount()},[t]),(0,r.jsx)("div",{ref:e})}}}]);
+//# sourceMappingURL=985.41d195a2.js.map
