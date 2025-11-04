@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
-import { Route as QuestionRouteImport } from './routes/question'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as FlagRouteImport } from './routes/flag'
 import { Route as ExcelRouteImport } from './routes/excel'
@@ -41,11 +40,6 @@ const ToolsRoute = ToolsRouteImport.update({
 const QuickjsRoute = QuickjsRouteImport.update({
   id: '/quickjs',
   path: '/quickjs',
-  getParentRoute: () => rootRouteImport,
-})
-const QuestionRoute = QuestionRouteImport.update({
-  id: '/question',
-  path: '/question',
   getParentRoute: () => rootRouteImport,
 })
 const JsonJsRoute = JsonJsRouteImport.update({
@@ -157,7 +151,6 @@ const rootRouteChildren = {
   ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
   JsonJsRoute: JsonJsRoute,
-  QuestionRoute: QuestionRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
   AppCreateRoute: AppCreateRoute,

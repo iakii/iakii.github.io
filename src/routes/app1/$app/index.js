@@ -24,27 +24,11 @@ function RouteComponent() {
       container: containerRef.current,
       props: {
         onRouteCallback: (data) => {
-          console.log("onRouteCallback", data);
           historyRef.current = data;
         },
       },
     });
     return () => microApp.unmount();
   }, [app]);
-  return (
-    <div style={{ padding: 20 }}>
-      <a
-        onClick={() => {
-          historyRef.current({ to: "/app" });
-        }}
-      >
-        app1
-      </a>
-      <h2>主应用 - 子应用加载区</h2>
-      <div
-        ref={containerRef}
-        style={{ marginTop: 10, border: "1px solid #ccc" }}
-      />
-    </div>
-  );
+  return <div ref={containerRef} />;
 }
