@@ -7,7 +7,14 @@ import {
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { routeTree } from "./router";
-import { registerMicroApps, start } from "qiankun";
+// import { registerMicroApps, start } from "qiankun";
+
+import microApp from "@micro-zoe/micro-app";
+
+microApp.start({
+  disableScopecss: true,
+  // shadowDOM: true,
+});
 
 const router = createRouter({
   routeTree,

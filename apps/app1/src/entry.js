@@ -6,6 +6,8 @@ import {
 } from "@tanstack/react-router";
 import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
+
+import ReactDOM from "react-dom"
 import { routeTree } from "./router";
 const base = window.__POWERED_BY_QIANKUN__ ? "/app1" : "/";
 
@@ -58,4 +60,11 @@ export async function unmount(props) {
       ? container.querySelector("#root")
       : document.querySelector("#root")
   ).render(<span />);
+}
+
+
+
+// index.js
+window.unmount = () => {
+  ReactDOM.unmountComponentAtNode(document.getElementById('root'))
 }

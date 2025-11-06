@@ -33,6 +33,7 @@
     "@ant-design/pro-components": "^2.8.10",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@metabase/embedding-sdk-react": "^0.56.5",
+    "@micro-zoe/micro-app": "^1.0.0-rc.27",
     "@monaco-editor/react": "^4.7.0",
     "@rsbuild/plugin-react": "^1.4.1",
     "@tanstack/react-router": "^1.132.7",

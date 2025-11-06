@@ -41,6 +41,13 @@ export default defineConfig({
           pathRewrite: { "^/metabase-proxy": "" },
         },
       },
+      'nms': {
+        "/proxy": {
+          target: "http://localhost:6005/#/",
+          changeOrigin: true,
+          pathRewrite: { "^/nms": "" },
+        },
+      },
     },
   },
   module: {

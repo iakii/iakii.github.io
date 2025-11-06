@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
+import { Route as JdmicroRouteImport } from './routes/jdmicro'
 import { Route as FlagRouteImport } from './routes/flag'
 import { Route as ExcelRouteImport } from './routes/excel'
 import { Route as DocsRouteImport } from './routes/docs'
@@ -45,6 +46,11 @@ const QuickjsRoute = QuickjsRouteImport.update({
 const JsonJsRoute = JsonJsRouteImport.update({
   id: '/jsonJs',
   path: '/jsonJs',
+  getParentRoute: () => rootRouteImport,
+})
+const JdmicroRoute = JdmicroRouteImport.update({
+  id: '/jdmicro',
+  path: '/jdmicro',
   getParentRoute: () => rootRouteImport,
 })
 const FlagRoute = FlagRouteImport.update({
@@ -150,6 +156,7 @@ const rootRouteChildren = {
   DocsRoute: DocsRoute,
   ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
+  JdmicroRoute: JdmicroRoute,
   JsonJsRoute: JsonJsRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,

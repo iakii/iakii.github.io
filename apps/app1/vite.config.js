@@ -32,7 +32,7 @@ export default defineConfig({
       formats: ["umd"],
       fileName: "app1",
     },
-    outDir: "../public/app1",
+    outDir: "../../public/app1",
     rollupOptions: {
       output: {
         globals: {
