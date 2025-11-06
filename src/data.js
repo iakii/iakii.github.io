@@ -1,23 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-/** @jsxRuntime classic */
-/** @jsx jsxCustomEvent */
-//@ts-ignore
-import jsxCustomEvent from "@micro-zoe/micro-app/polyfill/jsx-custom-event";
-import { AppstoreFilled } from "@ant-design/icons";
-import { useState } from "react";
-
-export const Route = createFileRoute("/jdmicro")({
-  component: RouteComponent,
-
-  staticData: {
-    name: "Micro App - 京东微前端",
-    icon: <AppstoreFilled />,
-    index: 99,
-  },
-});
-
-function RouteComponent() {
-  const [microAppData, changeMicroAppData] = useState({
+const data = {
   "v1@CacheOpsThemeStyle":
     '{"navTheme":"light","layout":"mix","contentWidth":"Fluid","primaryColor":"#722ED1","splitMenus":true,"fixSiderbar":true,"headerHeight":48}',
   "v1@CacheNmsThemeStyle":
@@ -50,58 +31,4 @@ function RouteComponent() {
   pna_config:
     '{"schema":"(\'enable506GoPsQ\'~H开关，为true则启用-06OM50M-.0M-，不配置则-8的文字6,目前支持两种JK和*二，如果没有匹配到*J8-K的MOnoInputType53L.37LOcancelDialog5能否BC.true 4，false 不4OautoNext51项.是否1个A框（当多个79填写的时候，医院想要E打开F项的C）\'))*麻精-显示.GH0*药品1E跳转F2类型3不9A4-B按钮5!(\'titleQ6标识7追溯码8默认9需要A输入B取消C弹窗E自动F下一G\'~typeQstring\'~HdescriPQJ2，K*一L的2MiconO\')~PptionQ!\'\\u0001QPOMLKJHGFECBA9876543210.-*_","//":"开关，为true则启用显示麻精药品标识","enable":true,"///":"麻精药品icon显示，不配置则显示默认的文字标识,目前支持两种类型，麻精一和麻精二，如果没有匹配到麻精类型，默认显示麻精一的icon","icon":{"麻精一":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABAAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9P7Gxt5LWFpNxdxnmVuT+dZ+l6ppeowGSTNmTczW0azXBBkMbFWK/Nz90mq/ie3ub3wtDb2InS+YrJBcQpu8llYHJ5HUZHvk1yng+aPUxLfz6fc3diJb6OF1hWRIt0zmRiuSWJAVQAD0PrXmzrOFSMEun+X5fqjllO01FI7K/1PTrLWtM08IZftolPmrcnEewKeRnnOanabSr2LUYbS5Wa4tUIlSKcloyVyM88Vwt9o7ya/os0cBeCFJxLIuhFVUlV25XvnB+ldH4Z8u1tNTs/s9y0qxPJ9tmsBbLIDn5BgDO33/Wop1pSm4yikr+XZfr/kTGblJprT/gHyEvjfxEWAPiDVFBPJ+2ScfrV/Wte8V6FdJDca/qTCSNZopEvZCsiMMqw571z1jdQ2rOZbOG8DDAEzOAvuNrL+teo6PBpZ1XwfpF9pMD6reXUM05ZpHENuwAjiw7HOQdxHQAjvX5Zh1Urpr2jT06vq7W+Z8nTUqmnN+ZyNjr3iW90bUtRHibUY0sTEGRryXL7ywGOe23vV34f+MdfuvHXh+GbW9Rmhkv4FeOS7kZWUyDIIJ5FaFnY6inhnxIg0q1U+dbhEESYYBn689uKspbpaePPhzELG3s5mFrLN5EYUu5nIJbHXoK64U6sXTnzvpffX3rG0VJOLu+nfvY+mtUkuX0CCysZDDe3o8lJh1iB+9J9VXJHviuZ8A+F/7N05pbC5kt7KGe9t5bMkskiiVghAPRhjqOuea7rTkRrO3cqpdUKhscgE8j9B+VZnhrSbrS9EvLecIJ5bm5lUKcjDyMy/oRX6bOjz1Yzfb7tvz/ABPqpQvNSfb/ACOG8D6rbHwfoxlm0ppPsse4z648b52jquw4PtW/8PAn/CE3rptIe5vGykpkX/WuOGPUcda0dC0LUdC8GaXYQfY/7QtLZI3Eylo3YLggEEEc98H6UvhrSLvRfCU0N/5QvJDPPIsBJRS7M+0E9cbsVz0KMoOHMto9vQypwlFxv2/yPirR7q20+VruaJbmWP8A1MEgyhfszeoHXHc47Zr0n/hNTY/ELSZNWkSW1K2Fy9xOMtARGjMy9xnnIHWvJa1/FOqw6zqMU9uGEaWsEB3jB3JEqn8Mg1+V0MTKjT916pp277nyEKsqcfd6NfqdDYR6TJ4S8Tsl7eGNp7YsfsiAj5pMYHm8/pWhp17ZXnj74epY3BuUt1s4XZk2srCcnBGSAcEdzXIafqsFr4Y1mwff9ou5Ldo8D5cIXLZP4irXw4/5KD4b/wCwjb/+jFrop1k5UopLW19/5mzSFS8oJLt+bE1+xuNR8X64kDICl3Mx8yZYwB5h7sQKs6N4IudQt9TlnuoYfstsZk8u7hfc25VCn5+B83X+fSoNU0S98Q+PtT0/T4GuLua+nCRr3+ds/pXR32jzWenT2LoNC0uxgMNzeyQfvryZiGCEcNgsowOwXNEKSnKc5RbSb66X+7pu9RxhzSlJrTUxLbwPczeHL7UHuoVnt54oUiW6hZHDhySW3/KRt/HPtVN/Dl1pttZX0t5ZOJLgRm3hvI5JVwRhiqk8Hnn2q7EtppXguW0urhVvtTljuFiYMRDEgbaxx/E244z0X61W1PwzDodr4fvU1CO6fUR53krGymNRIVByeoOD+VRKnBRTjHVJN6rS77fcLlVlZdO/mfcwhjx9xfyrn9O8SHUrnUootJlkFldPas6MmGIAORkg9GFdEWC7ckDPAyeprjvDlrrWmX/iArYWxiudSknia4uWjZ1KoMgBG449fwr9bqOSlFLbrpfofZzbTVi9eeJZLPWNKsX0WYC/kdPNLpiPau7JGea09biQWSEIAftEHb/pqlYl5bavqHiTQbiWytltraSYySW9yZNuYyBkFF7+ma3NbYNYIQQR9og5H/XZKULtT5vlp5L9RRbfNf8ArQ+JNXWKTx9qST3jafC1/Mr3KKWMal2BOAQTU+u3ukzGK0sb+7uLO2Y+Rai0Cox7sx8zJZsDJx7dhWnqXh3X7Dxtql6vha61KL7XOVjuLGV4nBZsHgc9iKrXlh42u94XRdTtI26x2enPCuPTCqM/jX5RKMoqacXdt9H/AJpHxzi1zK3XszJfWbW80K/t9Qt9+pedHJa3CKFKDkOje2NuB2xWj4rbZceFbc9YNNtwR6FnaT/2en+HPDOrabqEbap4M1HVLEsPNhNnMjkf7LAAg/pUuu6L4k8Q+JTqB8MalaQl41jgWzlKxRqAqrnbzhQOaShUdK7Tu7LZ3sne709A5Zcm2vofVfxIQS6ZpKHO1tWs1O0kHBlAPIqvqukW1t488LtGsgPl3bcyu3IVPU+9XPFMFl4ms7S2edo0hu4blw1u7BwjbivTv0zSJpmhw6vZ6jCskE9qsiKI4WCsHAB3fLz0r9RnT55t2X2evZ3Z9bKPNJvTp+DM/wAH6Zb3kmvvKJC39qzjiVlGMjsDUfgm2jtPh/ZpEpVTeBiCSeftI9at6ToejWMmoSXIF5Ld3clzua2cbQ2ML05xjrU1jbWWjaDa6XZyTTKlxGV3RNnBmVj2xgc/gKVOm42bS0UuvdomEbNN9mf/2Q==","麻精二":"data:image/jpeg;base64,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"},"noInputType":["麻精二"],"cancelDialog":false,"autoNext":true,"twoCheck":true}',
   "v1@selectedText": '{"text":"评估情况"}',
-});
-
-  function handleCreate() {
-    console.log("child-react17 创建了");
-  }
-
-  function handleBeforeMount() {
-    console.log("child-react17 即将被渲染");
-  }
-
-  function handleMount() {
-    console.log("child-react17 已经渲染完成");
-
-    setTimeout(() => {
-      changeMicroAppData({ msg: "来自基座的新数据" + Date.now() });
-    }, 2000);
-  }
-
-  function handleUnmount() {
-    console.log("child-react17 卸载了");
-  }
-
-  function handleError() {
-    console.log("child-react17 加载出错了");
-  }
-
-  function handleDataChange(e) {
-    console.log("来自子应用 child-react17 的数据:", e.detail.data);
-  }
-
-
-  console.log("基座 jdmicro 渲染了",Object.keys(localStorage));
-
-    // disable-memory-router
-    //   keep-router-state
-    //   disable-scopecss={false}
-    //   disable-patch-request
-    //   fiber={true}
-
-  return (
-    <micro-app
-      name="app2"
-      baseroute="/app2/"
-
-      url="/app2/"
-      data={microAppData}
-      onCreated={handleCreate}
-      onBeforemount={handleBeforeMount}
-      onMounted={handleMount}
-      onUnmount={handleUnmount}
-      onError={handleError}
-      onDataChange={handleDataChange}
-    ></micro-app>
-  );
-}
+};

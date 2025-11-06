@@ -73,7 +73,12 @@ function RootComponent() {
   const menus = useMemo(() => {
     return (routeTree.children || [])
       .map((x) => x.options || {})
-      .filter((x) => x.staticData && Object.keys(x.staticData).length && !x.staticData.hiddenInMenu)
+      .filter(
+        (x) =>
+          x.staticData &&
+          Object.keys(x.staticData).length &&
+          !x.staticData.hiddenInMenu
+      )
       .sort((a, b) => {
         const aHasIndex = typeof a.staticData.index === "number";
         const bHasIndex = typeof b.staticData.index === "number";
@@ -98,8 +103,6 @@ function RootComponent() {
   }, [routeTree]);
 
   // console.log("menus", menus);
-
-
 
   return (
     <ProLayout
@@ -156,6 +159,7 @@ function RootComponent() {
       {...settings}
       footerRender={() => [
         <div
+          key="copyright"
           style={{
             padding: 8,
             textAlign: "center",
