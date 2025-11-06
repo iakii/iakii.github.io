@@ -93,7 +93,6 @@ function RouteComponent() {
     <micro-app
       name="app2"
       baseroute="/app2/"
-
       url="/app2/"
       data={microAppData}
       onCreated={handleCreate}
