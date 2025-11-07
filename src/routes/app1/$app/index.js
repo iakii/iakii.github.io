@@ -1,3 +1,4 @@
+import { AppleOutlined } from "@ant-design/icons";
 import { createFileRoute } from "@tanstack/react-router";
 import { loadMicroApp } from "qiankun";
 import { useEffect } from "react";
@@ -5,6 +6,12 @@ import { useRef } from "react";
 
 export const Route = createFileRoute("/app1/$app/")({
   component: RouteComponent,
+  staticData: {
+    name: "乾坤 - 微前端",
+    icon: <AppleOutlined />,
+    index: 97,
+    hiddenInMenu: true,
+  },
 });
 
 function RouteComponent() {

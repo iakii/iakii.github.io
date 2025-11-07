@@ -9,7 +9,7 @@ export const Route = createFileRoute("/app1/")({
   staticData: {
     name: "乾坤 - 微前端",
     icon: <AppleOutlined />,
-    index: 99,
+    index: 97,
   },
 });
 

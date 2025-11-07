@@ -14,6 +14,6 @@ export const Route = createFileRoute("/about")({
   staticData: {
     name: "关于",
     icon: <InfoCircleTwoTone />,
-    index: 99,
+    index: 100,
   },
 });

@@ -34,18 +34,12 @@ export default defineConfig({
     hmr: true,
     progressBar: true,
     server: {
-      'metabase-proxy': {
+      // http://localhost:8001/api/
+      '/proxy-edu': {
         "/proxy": {
-          target: "http://tdtest.tdcare.cn:6230/",
+          target: "https://edu.tdcare.cn/",
           changeOrigin: true,
-          pathRewrite: { "^/metabase-proxy": "" },
-        },
-      },
-      'nms': {
-        "/proxy": {
-          target: "http://localhost:6005/#/",
-          changeOrigin: true,
-          pathRewrite: { "^/nms": "" },
+          pathRewrite: { "^/proxy-edu": "" },
         },
       },
     },

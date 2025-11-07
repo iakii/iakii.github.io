@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WujieRouteImport } from './routes/wujie'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
@@ -33,6 +34,11 @@ import { Route as PrintComponentsHtmlRouteImport } from './routes/print/componen
 import { Route as PrintComponentsDocxRouteImport } from './routes/print/components/docx'
 import { Route as AppIdEditRouteImport } from './routes/app/$id/edit'
 
+const WujieRoute = WujieRouteImport.update({
+  id: '/wujie',
+  path: '/wujie',
+  getParentRoute: () => rootRouteImport,
+})
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
@@ -160,6 +166,7 @@ const rootRouteChildren = {
   JsonJsRoute: JsonJsRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
+  WujieRoute: WujieRoute,
   AppCreateRoute: AppCreateRoute,
   AppListRoute: AppListRoute,
   App1IndexRoute: App1IndexRoute,

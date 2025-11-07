@@ -53,6 +53,7 @@
     "react-dom": "^19.1.1",
     "react-schema-render": "^0.0.5",
     "uuid": "^13.0.0",
+    "wujie-react": "^1.0.29",
     "xlsx": "^0.18.5",
     "zustand": "^5.0.8"
   }
