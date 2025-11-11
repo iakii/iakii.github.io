@@ -4,17 +4,16 @@
     <meta charset="UTF-8" />
     <title>Web Component Test</title>
     <script src="./metabase-web-components.cjs"></script>
+    <base href="./" />
   </head>
   <body>
     <h1>Testing Web Component</h1>
-    <!-- 使用你的 Web Component -->
-    <my-greeting name="World"></my-greeting>
+    <hello-component name="张三"></hello-component>
+    <my-greeting name="张三"> </my-greeting>
     <my-test name="World"></my-test>
-
     <script>
       // 与 Web Component 交互
       const wc = document.querySelector("my-greeting");
-
       // 监听从 WC 派发的事件
       wc.addEventListener("onNameChange", (event) => {
         console.log("Name changed to:", event.detail);

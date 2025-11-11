@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WujieRouteImport } from './routes/wujie'
+import { Route as WcpRouteImport } from './routes/wcp'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
@@ -37,6 +38,11 @@ import { Route as AppIdEditRouteImport } from './routes/app/$id/edit'
 const WujieRoute = WujieRouteImport.update({
   id: '/wujie',
   path: '/wujie',
+  getParentRoute: () => rootRouteImport,
+})
+const WcpRoute = WcpRouteImport.update({
+  id: '/wcp',
+  path: '/wcp',
   getParentRoute: () => rootRouteImport,
 })
 const ToolsRoute = ToolsRouteImport.update({
@@ -166,6 +172,7 @@ const rootRouteChildren = {
   JsonJsRoute: JsonJsRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
+  WcpRoute: WcpRoute,
   WujieRoute: WujieRoute,
   AppCreateRoute: AppCreateRoute,
   AppListRoute: AppListRoute,

@@ -35,11 +35,11 @@ export default defineConfig({
     progressBar: true,
     server: {
       // http://localhost:8001/api/
-      '/proxy-edu': {
-        "/proxy": {
-          target: "https://edu.tdcare.cn/",
+      '/proxy': {
+        "/metabase": {
+          target: "http://58.20.184.66:6005/metabase",
           changeOrigin: true,
-          pathRewrite: { "^/proxy-edu": "" },
+          pathRewrite: { "^/metabase": "" },
         },
       },
     },
