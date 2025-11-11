@@ -69,8 +69,10 @@ function RouteComponent() {
         <>
           <hello-component ref={ref} name="89898"></hello-component>
           <collection-app
-            id={6}
-            url="/metabase"
+            app={JSON.stringify({
+              id: 6,
+              url: "/metabase",
+            })}
           ></collection-app>
         </>
       ) : (

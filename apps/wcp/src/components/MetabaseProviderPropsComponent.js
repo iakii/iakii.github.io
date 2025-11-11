@@ -24,13 +24,13 @@ export function MetaProvider({ children, metabaseInstanceUrl, apiKey, brand }) {
     if (metaBase) metaBase.style.display = "none";
   }, []);
 
-  if (!metabaseInstanceUrl || !apiKey) return <div>加载中...</div>;
+  // if (!metabaseInstanceUrl || !apiKey) return <div>加载中...</div>;
   return (
     <MetabaseProvider
       theme={theme}
       isLocalHost
       locale="zh-cn"
-      loaderComponent={() => <div>加载中...</div>}
+      // loaderComponent={() => <div>加载中...</div>}
       errorComponent={({ error, message }) => (
         <div>
           Oops!!!!!出错了 {message} <br /> {error.toString()}

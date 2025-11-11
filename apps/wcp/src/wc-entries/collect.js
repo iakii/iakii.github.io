@@ -73,10 +73,10 @@ export class CollectionElement extends HTMLElement {
 
   constructor() {
     super();
-    // 创建 Shadow DOM，实现样式隔离
     this.attachShadow({ mode: "open" });
     this._root = null;
     this._props = {};
+    console.log("constructor", this._props);
   }
 
   connectedCallback() {
