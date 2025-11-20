@@ -83,7 +83,6 @@ function JsonJsTool() {
     <ProCard
       title="处理JSON字符串的JavaScript数据"
       direction="row"
-      wrap
       headerBordered
       gutter={[12, 12]}
       bodyStyle={{ padding: 0, background: "#f6f6f7" }}
@@ -143,12 +142,18 @@ function JsonJsTool() {
           }}
           options={{
             fontSize: 16,
-            fontFamily: "monospace",
-            minimap: { enabled: false },
+            minimap: { enabled: true },
+            fontFamily: "Consolas, Courier New, monospace",
             scrollBeyondLastLine: false,
-            wordWrap: "on",
-            automaticLayout: true,
-            theme: "vs",
+            suggestOnTriggerCharacters: true,
+            quickSuggestions: true,
+            wordBasedSuggestions: true,
+            tabCompletion: "on",
+            snippetSuggestions: "inline",
+            parameterHints: { enabled: true },
+            autoClosingBrackets: "always",
+            autoClosingQuotes: "always",
+            autoSurround: "languageDefined",
           }}
           key="source"
         />
@@ -156,7 +161,6 @@ function JsonJsTool() {
       <ProCard
         colSpan={12}
         bodyStyle={{ padding: 0 }}
-        direction="column"
         headerBordered
         title={
           <Button
@@ -192,12 +196,18 @@ function JsonJsTool() {
           }}
           options={{
             fontSize: 16,
-            fontFamily: "monospace",
             minimap: { enabled: true },
+            fontFamily: "Consolas, Courier New, monospace",
             scrollBeyondLastLine: false,
-            wordWrap: "on",
-            automaticLayout: true,
-            theme: "vs",
+            suggestOnTriggerCharacters: true,
+            quickSuggestions: true,
+            wordBasedSuggestions: true,
+            tabCompletion: "on",
+            snippetSuggestions: "inline",
+            parameterHints: { enabled: true },
+            autoClosingBrackets: "always",
+            autoClosingQuotes: "always",
+            autoSurround: "languageDefined",
           }}
           key="out"
         />
