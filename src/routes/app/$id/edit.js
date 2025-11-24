@@ -1,7 +1,8 @@
-import { createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { useLocalForageItemById } from "../../../core/hooks/useLocalForage";
-import { AppFormComponent } from "../components/form";
 import { ProSkeleton } from "@ant-design/pro-components";
+import { createFileRoute, getRouteApi } from "@tanstack/react-router";
+import { useRequest } from "ahooks";
+import { babelCacheDB } from "../../../core/BabelCacheDB";
+import { AppFormComponent } from "../components/form";
 
 export const Route = createFileRoute("/app/$id/edit")({
   component: RouteComponent,
@@ -15,13 +16,17 @@ export const Route = createFileRoute("/app/$id/edit")({
 function RouteComponent() {
   const routeApi = getRouteApi("/app/$id/edit");
   const { id } = routeApi.useLoaderData();
-  const { item, loading } = useLocalForageItemById("app", id, (result) => {
-    if (result.code) result.code = JSON.parse(window.atob(result.code));
-    return result;
-  });
+
+  const { data = {}, loading } = useRequest(
+    () => babelCacheDB.getRecordById(id),
+    {
+      refreshDeps: [id],
+    }
+  );
+
   return loading ? (
     <ProSkeleton type="result" active={!loading} />
   ) : (
-    <AppFormComponent type="edit" record={item || {}} />
+    <AppFormComponent type="edit" record={data || {}} />
   );
 }

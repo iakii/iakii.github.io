@@ -114,7 +114,7 @@ const blacklist = [
  * @param {number} [depth=1] - 当前递归深度
  * @returns {*} 限制后的对象
  */
-function limitOutput(obj, depth = 1) {
+export function limitOutput(obj, depth = 1) {
   const MAX_DEPTH = 5;
   const MAX_KEYS = 30;
   const MAX_STRLEN = 2000;
@@ -237,3 +237,57 @@ export function useJSXSchema() {
 
   return [schema, useJSX, components];
 }
+
+export const parseReact = async (reactCode) => {
+  try {
+    for (const reg of blacklist) {
+      if (reg.test(reactCode)) {
+        alert("检测到不安全代码，已禁止执行！");
+        return null;
+      }
+    }
+    // 使用 Babel 将含 JSX 的代码编译为普通 JS
+    console.time("babel解析耗时");
+    const transformed = Babel.transform(reactCode, {
+      presets: ["react"],
+    }).code;
+
+    return transformed;
+  } catch (e) {
+    console.error("render error", e);
+
+    alert(`渲染错误: ${e.message}`);
+  }
+};
+
+export const forkNode = async (transformed) => {
+  console.timeEnd("babel解析耗时");
+
+  const argNames = ["$root", "React", ...Object.keys(components)];
+  let raw;
+  try {
+    const fn = new Function(
+      ...argNames,
+      `${transformed}; return render($root);`
+    );
+    const argValues = [inject, React, ...Object.values(components)];
+    // 超时保护（仅对异步代码有效）
+    const timeout = 2000; // 2秒
+    const execPromise = Promise.resolve(fn(...argValues));
+    raw = await Promise.race([
+      execPromise,
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("执行超时（2秒）")), timeout)
+      ),
+    ]);
+  } catch (e) {
+    alert(`执行异常: ${e.message}`);
+    return null;
+  }
+  // 限制渲染结果类型和大小
+  if (typeof raw !== "object" || raw == null) {
+    alert("渲染结果无效！");
+    return null;
+  }
+  return limitOutput(raw);
+};

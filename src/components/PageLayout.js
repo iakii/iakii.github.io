@@ -6,6 +6,7 @@ import {
 import { PageContainer } from "@ant-design/pro-components";
 import { Card, Space, Tooltip } from "antd";
 import PageErrorBoundary from "./PageErrorBoundary";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 
 /**
  * PageLayout
@@ -35,9 +36,9 @@ export default function PageLayout({ title = "", children = null, ...props }) {
     <PageContainer
       fixedHeader
       header={{
-        style: { padding: "0 15px",   },
+        style: { padding: "0 15px" },
         title: (
-          <Space size={16} >
+          <Space size={16}>
             <Tooltip title="后退">
               <ArrowLeftOutlined onClick={onBack} />
             </Tooltip>

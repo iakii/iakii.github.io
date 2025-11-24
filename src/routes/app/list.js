@@ -3,6 +3,8 @@ import { ProTable } from "@ant-design/pro-components";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Button } from "antd";
 import { useLocalForage } from "../../core/hooks/useLocalForage";
+import { useRequest } from "ahooks";
+import { babelCacheDB } from "../../core/BabelCacheDB";
 
 export const Route = createFileRoute("/app/list")({
   component: RouteComponent,
@@ -16,9 +18,8 @@ export const Route = createFileRoute("/app/list")({
 function RouteComponent() {
   const navigate = useNavigate();
 
-  const { add, data, loading, error } = useLocalForage("app");
+  const { data, loading } = useRequest(() => babelCacheDB.getAllRecords());
 
-  console.log("data", data, loading, error);
   return (
     <ProTable
       toolBarRender={(action) => [
@@ -30,9 +31,13 @@ function RouteComponent() {
           添加
         </Button>,
       ]}
+      size="small"
+      bordered
       columns={[
         { title: "名称", dataIndex: "name" },
         { title: "版本", dataIndex: "version" },
+        { title: "创建时间", dataIndex: "createTime", valueType: "dateTime" },
+        {},
         {
           title: "操作",
           valueType: "option",

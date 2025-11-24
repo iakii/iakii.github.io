@@ -10,8 +10,14 @@ import {
 } from "../../../core/hooks/useLocalForage";
 import React, { useEffect } from "react";
 import { SchemaProvider, SchemaRender } from "react-schema-render";
-import { AppContext, useJSXSchema } from "../../online/hooks/useJSXSchema";
+import {
+  AppContext,
+  forkNode,
+  useJSXSchema,
+} from "../../online/hooks/useJSXSchema";
 import { ProSkeleton } from "@ant-design/pro-components";
+import { useRequest } from "ahooks";
+import { babelCacheDB } from "../../../core/BabelCacheDB";
 
 export const Route = createFileRoute("/app/$id/")({
   component: RouteComponent,
@@ -31,23 +37,26 @@ export const Route = createFileRoute("/app/$id/")({
 
 function RouteComponent() {
   const routeApi = getRouteApi("/app/$id/");
-  const { data, id } = routeApi.useLoaderData();
-  const { item, loading } = useLocalForageItemById("app", id);
+  const { id } = routeApi.useLoaderData();
+  const [components] = useJSXSchema();
 
-  console.log("item", item, loading);
-  const [schema, useJSX, components] = useJSXSchema();
-
-  useEffect(() => {
-    if (item?.code) {
-      useJSX(item.codeSource);
+  const { data = {} } = useRequest(
+    () =>
+      babelCacheDB.getRecordById(id).then(async (r) => {
+        r.babel = await forkNode(r.babel);
+        return r;
+      }),
+    {
+      refreshDeps: [id],
     }
-  }, [item]);
+  );
+  console.log("data");
 
   return (
-    <AppContext.Provider value={{ id: 1223, item: { app: 123 } }}>
+    <AppContext.Provider value={{ id, data }}>
       <React.Suspense fallback={<ProSkeleton type="result" />}>
         <SchemaProvider components={components}>
-          <SchemaRender schema={schema}></SchemaRender>
+          <SchemaRender schema={data.babel || ""}></SchemaRender>
         </SchemaProvider>
       </React.Suspense>
     </AppContext.Provider>

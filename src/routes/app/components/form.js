@@ -7,10 +7,11 @@ import {
 } from "@ant-design/pro-components";
 import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "@tanstack/react-router";
-import { Card } from "antd";
+import { Card, message } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalForage } from "../../../core/hooks/useLocalForage";
 import { useJSXSchema } from "../../online/hooks/useJSXSchema";
+import { babelCacheDB } from "../../../core/BabelCacheDB";
 
 const codeInitialValue = `const render = ($root) => {
   const { request, useState, useForm } = $root;
@@ -52,42 +53,40 @@ export function AppFormComponent({ type = "create", record = {} }) {
       <Card styles={{ body: { position: "relative" } }} variant="borderless">
         <ProForm
           onFinish={async (values) => {
-            const schema = await useJSX(values.code);
-            const code = window.btoa(JSON.stringify(schema));
+            console.log("values", values);
             if (type === "edit") {
-              const params = {
-                id: record.id,
-                name: values.name,
-                code,
-                codeSource: values.code,
-              };
-              console.log("update params", params, values);
-              update(record.id, params).then(() => {
-                alert("更新成功");
-              });
+              const result = await babelCacheDB.updateRecord(record.id, values);
+              console.log("result", result);
+
+              if (result) {
+                message.success("更新成功");
+              }
               return;
             }
 
-            const params = {
-              id,
-              name: values.name,
-              code,
-              codeSource: values.code,
-            };
             const id = uuidv4();
-            add(params).then(() => {
-              alert("保存成功");
-              history({ to: `/app/${id}/edit` });
-            });
+            const params = {
+              ...values,
+              id,
+            };
+
+            const newRecord = await babelCacheDB.addRecord(
+              params,
+              {} // 自定义 Babel 解析插件
+            );
+            if (newRecord) {
+              message.success("保存成功");
+              history({ to: `/app/${newRecord.id}/edit` });
+            }
+            console.log("newRecord", newRecord);
           }}
           request={() => {
             if (type === "edit") {
               console.log("record", record);
-              return { ...record, code: record.codeSource };
+              return { ...record };
             }
             return { code: codeInitialValue };
           }}
-          //   initialValues={{ code: codeInitialValue, ...record }}
           submitter={{
             render: (_, dom) => <FooterToolbar>{dom}</FooterToolbar>,
           }}
@@ -105,7 +104,6 @@ export function AppFormComponent({ type = "create", record = {} }) {
             rules={[{ message: "请输入代码", required: true }]}
             name="code"
             renderFormItem={(_, { value, onChange }) => {
-              console.log("value", value);
               return (
                 <Editor
                   height="calc(100vh - 308px)"

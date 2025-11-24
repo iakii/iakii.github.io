@@ -111,6 +111,8 @@ export function useLocalForage(key) {
       try {
         const id = item.id || Date.now().toString();
         const itemWithId = { ...item, id };
+        // localforage.setItem(`item_${id}`, item.babel);
+
         await instance.setItem(`item_${id}`, itemWithId);
         await refreshData();
         return itemWithId;
