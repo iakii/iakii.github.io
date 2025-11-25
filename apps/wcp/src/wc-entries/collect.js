@@ -6,6 +6,7 @@ import {
   useMetabaseAuthStatus,
 } from "@metabase/embedding-sdk-react";
 import ReactDOM from "react-dom/client";
+
 export default function Collection({
   brand,
   id,
