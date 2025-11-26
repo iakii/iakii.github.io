@@ -13,12 +13,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-import AsyncComponent from "../../../components/AsyncComponent";
-import { antComponents } from "../utils/antcomp";
-import { iconComponents, reactComponents } from "../utils/iconcomp";
-import { proComponents } from "../utils/procomp";
+import AsyncComponent from "../../components/AsyncComponent";
+import { antComponents } from "./antcomp";
+import { iconComponents, reactComponents } from "./iconcomp";
+import { proComponents } from "./procomp";
 import { ProForm } from "@ant-design/pro-components";
-import { request } from "../../../core/request";
+import { request } from "../request";
 
 /**
  * useJSXSchema hooks：安全执行 JSX/React 代码，返回渲染 schema、执行函数和组件集合。
@@ -81,6 +81,8 @@ const components = {
   lazy,
   AsyncComponent,
 };
+
+export const AppComponents = components;
 
 /**
  * 黑名单关键字，禁止危险操作。
@@ -150,119 +152,35 @@ export function limitOutput(obj, depth = 1) {
 }
 
 /**
- * useJSXSchema hooks：安全执行 JSX/React 代码，返回渲染 schema、执行函数和组件集合。
- * @returns {[Object, Function, ComponentsMap]} [schema, useJSX, components]
- * @example
- * const [schema, useJSX, components] = useJSXSchema();
- * await useJSX('function render($root) { ... }');
+ * 将jsx解析成js
+ * @param {string} reactCode - JSX代码
+ * @returns {string | null | undefined} babel对象字符串
  */
-export function useJSXSchema() {
-  // <ProSkeleton type="result" />
-  const [schema, setSchema] = useState({
-    component: "ProSkeleton",
-    type: "result",
-  });
-
-  // 预览/执行
-  /**
-   * 安全执行用户输入的 JSX/React 代码，自动注入 $root 和组件。
-   * @param {string} reactCode - 用户输入的 JSX/React 代码字符串
-   * @returns {Promise<string|null>} - 异步执行，无返回值，直接更新 schema
-   */
-  const useJSX = async (reactCode) => {
-    try {
-      for (const reg of blacklist) {
-        if (reg.test(reactCode)) {
-          setSchema({
-            component: "Result",
-            status: 403,
-            title: "检测到不安全代码，已禁止执行！",
-          });
-          return null;
-        }
-      }
-      // 使用 Babel 将含 JSX 的代码编译为普通 JS
-      console.time("babel解析耗时");
-      const transformed = Babel.transform(reactCode, {
-        presets: ["react"],
-      }).code;
-      console.timeEnd("babel解析耗时");
-      // 注入 $root、React 以及 components 中的变量
-
-      const argNames = ["$root", "React", ...Object.keys(components)];
-      let raw;
-      try {
-        const fn = new Function(
-          ...argNames,
-          `${transformed}; return render($root);`
-        );
-        const argValues = [inject, React, ...Object.values(components)];
-        // 超时保护（仅对异步代码有效）
-        const timeout = 2000; // 2秒
-        const execPromise = Promise.resolve(fn(...argValues));
-        raw = await Promise.race([
-          execPromise,
-          new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("执行超时（2秒）")), timeout)
-          ),
-        ]);
-      } catch (e) {
-        setSchema({
-          component: "Result",
-          status: 403,
-          title: `执行异常: ${e.message}`,
-        });
-        return null;
-      }
-      // 限制渲染结果类型和大小
-      if (typeof raw !== "object" || raw == null) {
-        setSchema({
-          component: "Result",
-          status: 403,
-          title: "渲染结果无效！",
-        });
-        return null;
-      }
-      setSchema(limitOutput(raw));
-      return limitOutput(raw);
-    } catch (e) {
-      console.error("render error", e);
-      setSchema({
-        component: "Result",
-        status: 403,
-        title: `渲染错误: ${e.message}`,
-      });
-    }
-  };
-
-  return [schema, useJSX, components];
-}
-
-export const parseReact = async (reactCode) => {
+export const babelJsx2Js = async (reactCode) => {
   try {
     for (const reg of blacklist) {
       if (reg.test(reactCode)) {
-        alert("检测到不安全代码，已禁止执行！");
-        return null;
+        throw new Error("不安全代码");
       }
     }
-    // 使用 Babel 将含 JSX 的代码编译为普通 JS
     console.time("babel解析耗时");
     const transformed = Babel.transform(reactCode, {
       presets: ["react"],
     }).code;
-
+    console.timeEnd("babel解析耗时");
     return transformed;
   } catch (e) {
     console.error("render error", e);
-
     alert(`渲染错误: ${e.message}`);
   }
 };
 
-export const forkNode = async (transformed) => {
-  console.timeEnd("babel解析耗时");
-
+/**
+ * 将js代码注入并执行，返回渲染结果
+ * @param {string} transformed - js babel对象字符串
+ * @returns {Record<string,any>} 限制后的对象
+ */
+export const injectScript2Js = async (transformed) => {
   const argNames = ["$root", "React", ...Object.keys(components)];
   let raw;
   try {

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AppFormComponent } from "./components/form";
 import { CodeOutlined } from "@ant-design/icons";
+import { AppFormComponent } from "../../components/CreateApp/form";
 
 export const Route = createFileRoute("/app/create")({
   component: RouteComponent,

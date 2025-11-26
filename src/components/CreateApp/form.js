@@ -9,9 +9,8 @@ import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "@tanstack/react-router";
 import { Card, message } from "antd";
 import { v4 as uuidv4 } from "uuid";
-import { useLocalForage } from "../../../core/hooks/useLocalForage";
-import { useJSXSchema } from "../../online/hooks/useJSXSchema";
-import { babelCacheDB } from "../../../core/BabelCacheDB";
+import { babelCacheDB } from "../../core/BabelCacheDB";
+import { AppComponents } from "../../core/babel/babelTools";
 
 const codeInitialValue = `const render = ($root) => {
   const { request, useState, useForm } = $root;
@@ -27,14 +26,12 @@ const codeInitialValue = `const render = ($root) => {
 }`;
 
 export function AppFormComponent({ type = "create", record = {} }) {
-  const [schema, useJSX, components] = useJSXSchema();
-
-  const { add, update } = useLocalForage("app");
+  // const [components] = useJSXSchema();
 
   // 注册 components 变量到 monaco 的全局类型声明，提升自动补全体验
   const handleEditorWillMount = (monaco) => {
     // 注册 components 到 js/ts
-    const componentKeys = Object.keys(components);
+    const componentKeys = Object.keys(AppComponents);
     const componentTypeDefs = `declare const components: {\n${componentKeys.map((k) => `  ${k}: any;`).join("\n")}\n};`;
     monaco.languages.typescript.javascriptDefaults.addExtraLib(
       componentTypeDefs,

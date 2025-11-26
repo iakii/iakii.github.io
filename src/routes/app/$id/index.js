@@ -1,30 +1,19 @@
 import { CodeOutlined } from "@ant-design/icons";
-import {
-  createFileRoute,
-  getRouteApi,
-  useLoaderData,
-} from "@tanstack/react-router";
-import {
-  useLocalForage,
-  useLocalForageItemById,
-} from "../../../core/hooks/useLocalForage";
-import React, { useEffect } from "react";
+import { ProSkeleton } from "@ant-design/pro-components";
+import { createFileRoute, getRouteApi } from "@tanstack/react-router";
+import { useRequest } from "ahooks";
+import React from "react";
 import { SchemaProvider, SchemaRender } from "react-schema-render";
 import {
+  AppComponents,
   AppContext,
-  forkNode,
-  useJSXSchema,
-} from "../../online/hooks/useJSXSchema";
-import { ProSkeleton } from "@ant-design/pro-components";
-import { useRequest } from "ahooks";
-import { babelCacheDB } from "../../../core/BabelCacheDB";
+  injectScript2Js,
+} from "@core/babel/babelTools";
+import { babelCacheDB } from "@core/BabelCacheDB";
 
 export const Route = createFileRoute("/app/$id/")({
   component: RouteComponent,
   loader: async ({ params }) => {
-    console.log("Edit Loader Params:", params);
-    const result = localStorage.getItem("item_" + params.id);
-    console.log("result", result);
     return { id: params.id };
   },
   staticData: {
@@ -38,13 +27,12 @@ export const Route = createFileRoute("/app/$id/")({
 function RouteComponent() {
   const routeApi = getRouteApi("/app/$id/");
   const { id } = routeApi.useLoaderData();
-  const [components] = useJSXSchema();
-
   const { data = {}, loading } = useRequest(
     () =>
       babelCacheDB.getRecordById(id).then(async (r) => {
-        console.log("fetched babel record:", r);
-        r.babel = await forkNode(r.babel);
+        console.time("fetched babel record");
+        r.babel = await injectScript2Js(r.babel);
+        console.timeEnd("fetched babel record");
         return r;
       }),
     {
@@ -58,7 +46,7 @@ function RouteComponent() {
   ) : (
     <AppContext.Provider value={{ id, ...data }}>
       <React.Suspense fallback={<ProSkeleton type="result" />}>
-        <SchemaProvider components={components}>
+        <SchemaProvider components={AppComponents}>
           <SchemaRender schema={data.babel || ""}></SchemaRender>
         </SchemaProvider>
       </React.Suspense>

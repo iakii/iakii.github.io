@@ -22,7 +22,6 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
 import { Route as PrintIndexRouteImport } from './routes/print/index'
-import { Route as OnlineIndexRouteImport } from './routes/online/index'
 import { Route as App1IndexRouteImport } from './routes/app1/index'
 import { Route as AppListRouteImport } from './routes/app/list'
 import { Route as AppCreateRouteImport } from './routes/app/create'
@@ -100,11 +99,6 @@ const PrintIndexRoute = PrintIndexRouteImport.update({
   path: '/print/',
   getParentRoute: () => rootRouteImport,
 })
-const OnlineIndexRoute = OnlineIndexRouteImport.update({
-  id: '/online/',
-  path: '/online/',
-  getParentRoute: () => rootRouteImport,
-})
 const App1IndexRoute = App1IndexRouteImport.update({
   id: '/app1/',
   path: '/app1/',
@@ -177,7 +171,6 @@ const rootRouteChildren = {
   AppCreateRoute: AppCreateRoute,
   AppListRoute: AppListRoute,
   App1IndexRoute: App1IndexRoute,
-  OnlineIndexRoute: OnlineIndexRoute,
   PrintIndexRoute: PrintIndexRoute,
   ReactIndexRoute: ReactIndexRoute,
   AppIdEditRoute: AppIdEditRoute,

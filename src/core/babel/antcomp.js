@@ -10,8 +10,6 @@ for (const key in components) {
   }
 }
 
-// console.log('antComponents', Object.keys(antComponents));
-
 export { antComponents };
 
 function layload(name) {

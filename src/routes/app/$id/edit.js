@@ -2,7 +2,7 @@ import { ProSkeleton } from "@ant-design/pro-components";
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useRequest } from "ahooks";
 import { babelCacheDB } from "../../../core/BabelCacheDB";
-import { AppFormComponent } from "../components/form";
+import { AppFormComponent } from "../../../components/CreateApp/form";
 
 export const Route = createFileRoute("/app/$id/edit")({
   component: RouteComponent,

@@ -1,5 +1,5 @@
 import * as Babel from "@babel/standalone";
-import { parseReact } from "../routes/online/hooks/useJSXSchema";
+import { babelJsx2Js } from "./babel/babelTools";
 
 /**
  * 黑名单关键字，禁止危险操作。
@@ -75,8 +75,9 @@ class BabelCacheDB {
    */
   #parseCode(code, customOpts = {}) {
     try {
-      return parseReact(code); // 浏览器端 Babel 解析 API
+      return babelJsx2Js(code); // 浏览器端 Babel 解析 API
     } catch (err) {
+      alert("检测到不安全代码，已禁止执行保存！");
       throw new Error(`Babel 解析失败：${err.message}`);
     }
   }
@@ -115,6 +116,8 @@ class BabelCacheDB {
 
     // 解析 code 生成 babel 字段，填充 createTime
     const babel = await this.#parseCode(code, customBabelOpts);
+
+    if (!babel) return;
     console.log("parsed babel", babel);
     const createTime = Date.now();
     const newRecord = { id, name, code, babel, createTime };
@@ -236,9 +239,10 @@ class BabelCacheDB {
       updatedRecord.code = code;
       updatedRecord.babel = await this.#parseCode(code, customBabelOpts);
       console.log("parsed babel", updatedRecord.babel);
+      if (!updatedRecord.babel) return;
     }
     // createTime 保持原时间（如需更新可手动添加：
-    updatedRecord.createTime = Date.now()
+    updatedRecord.createTime = Date.now();
 
     // 写入数据库（put 方法：存在则更新，不存在则新增）
     await new Promise((resolve, reject) => {

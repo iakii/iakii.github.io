@@ -3,6 +3,7 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/rspack";
 import { pluginLess } from "@rsbuild/plugin-less";
 import { pluginBabel } from "@rsbuild/plugin-babel";
+import path from "path";
 const isDev = process.env.NODE_ENV !== "production";
 /** @type {import('@rspack/cli').Configuration} */
 export default defineConfig({
@@ -12,6 +13,13 @@ export default defineConfig({
     title: "小小工具箱",
   },
   server: { port: 3001 },
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "src/components"),
+      "@core": path.resolve(__dirname, "src/core"),
+      "@hooks": path.resolve(__dirname, "src/core/hooks"),
+    },
+  },
   source: {
     entry: {
       index: "./src/index.js",
