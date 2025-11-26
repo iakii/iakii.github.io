@@ -71,6 +71,7 @@ function RouteComponent() {
           setDataSource(data);
           return data;
         }}
+        form={{defaultCollapsed: false}}
         request={async ({ current, pageSize }) => {
           const query = `page=${current}&size=${pageSize}`;
           return await fetch(

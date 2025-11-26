@@ -237,7 +237,8 @@ class BabelCacheDB {
       updatedRecord.babel = await this.#parseCode(code, customBabelOpts);
       console.log("parsed babel", updatedRecord.babel);
     }
-    // createTime 保持原时间（如需更新可手动添加：updatedRecord.createTime = Date.now()）
+    // createTime 保持原时间（如需更新可手动添加：
+    updatedRecord.createTime = Date.now()
 
     // 写入数据库（put 方法：存在则更新，不存在则新增）
     await new Promise((resolve, reject) => {

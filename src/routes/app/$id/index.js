@@ -40,20 +40,23 @@ function RouteComponent() {
   const { id } = routeApi.useLoaderData();
   const [components] = useJSXSchema();
 
-  const { data = {} } = useRequest(
+  const { data = {}, loading } = useRequest(
     () =>
       babelCacheDB.getRecordById(id).then(async (r) => {
+        console.log("fetched babel record:", r);
         r.babel = await forkNode(r.babel);
         return r;
       }),
     {
-      refreshDeps: [id],
+      refreshDeps: [],
     }
   );
-  console.log("data");
+  console.log(908, data, loading);
 
-  return (
-    <AppContext.Provider value={{ id, data }}>
+  return loading ? (
+    <ProSkeleton type="result" />
+  ) : (
+    <AppContext.Provider value={{ id, ...data }}>
       <React.Suspense fallback={<ProSkeleton type="result" />}>
         <SchemaProvider components={components}>
           <SchemaRender schema={data.babel || ""}></SchemaRender>

@@ -11,6 +11,7 @@ export default defineConfig({
     favicon: "favicon.svg",
     title: "小小工具箱",
   },
+  server: { port: 3001 },
   source: {
     entry: {
       index: "./src/index.js",
@@ -35,11 +36,16 @@ export default defineConfig({
     progressBar: true,
     server: {
       // http://localhost:8001/api/
-      '/proxy': {
+      "/proxy": {
         "/metabase": {
           target: "http://58.20.184.66:6005/metabase",
           changeOrigin: true,
           pathRewrite: { "^/metabase": "" },
+        },
+        "/api": {
+          target: "https://randomuser.me",
+          changeOrigin: true,
+          // pathRewrite: { "^/metabase": "" },
         },
       },
     },
