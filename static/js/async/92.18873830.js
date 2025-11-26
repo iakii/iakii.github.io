@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["92"],{37727:function(n,i,p){p.r(i),p.d(i,{component:()=>e});var s=p(39974);function e(){return(0,s.jsxs)("div",{style:{padding:20},children:[(0,s.jsx)("a",{onClick:()=>{window.history.pushState({},"","/app1/app")},children:"app1"}),(0,s.jsx)("h2",{children:"主应用 - 子应用加载区"}),(0,s.jsx)("div",{id:"app1container",style:{marginTop:10,border:"1px solid #ccc"}})]})}}}]);
+//# sourceMappingURL=92.18873830.js.map

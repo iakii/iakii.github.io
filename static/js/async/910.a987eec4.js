@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["910"],{48437:function(n,t,e){e.r(t),e.d(t,{component:()=>c});var s=e(39974),r=e(28812);function c(){return(0,s.jsx)(r.A,{title:"工具箱",children:'Hello "/tools"!'})}}}]);
+//# sourceMappingURL=910.a987eec4.js.map

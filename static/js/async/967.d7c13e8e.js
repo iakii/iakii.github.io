@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["967"],{11482:function(n,e,r){r.r(e),r.d(e,{component:()=>c});var t=r(39974);function c(){return(0,t.jsx)("div",{children:'Hello "/react/"!'})}}}]);
+//# sourceMappingURL=967.d7c13e8e.js.map
