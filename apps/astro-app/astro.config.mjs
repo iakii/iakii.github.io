@@ -6,10 +6,10 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react({ experimentalReactChildren: true })],
-  // outDir: "../../public/render",
   site: "https://iakii.github.io",
-  base: "/render",
-  publicDir: "static",
+  base: "/render", // 保持和你的 GitHub Pages 路径一致
+  // publicDir: "public", // 恢复默认，建议去掉或用 public
+  // outDir: "dist", // 用默认即可
   devToolbar: {
     enabled: false,
   },
