@@ -1,0 +1,27 @@
+{
+  "name": "astro-app",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "@ant-design/pro-components": "^2.8.10",
+    "@astrojs/react": "^4.4.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "ahooks": "^3.9.6",
+    "antd": "^6.0.0",
+    "astro": "^5.16.1",
+    "axios": "^1.13.2",
+    "localforage": "^1.10.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-schema-render": "^0.0.5",
+    "zustand": "^5.0.8"
+  }
+}
