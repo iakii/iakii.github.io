@@ -6,9 +6,10 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react({ experimentalReactChildren: true })],
-  // outDir: "../../public/astro",
-  site: 'https://iakii.github.io',
-  base: "/astro",
+  // outDir: "../../public/render",
+  site: "https://iakii.github.io",
+  base: "/render",
+  publicDir: "static",
   devToolbar: {
     enabled: false,
   },
