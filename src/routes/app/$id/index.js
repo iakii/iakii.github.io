@@ -40,7 +40,6 @@ function RouteComponent() {
     }
   );
   console.log(908, data, loading);
-
   return loading ? (
     <ProSkeleton type="result" />
   ) : (

@@ -5,14 +5,13 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false, // 关闭跨域安全限制
       // preload: path.join(__dirname, "preload.js"),
     },
   });
-  win.loadURL("http://localhost:3000");
+  win.loadURL("http://localhost:3003");
 }
 
 app.whenReady().then(() => {
