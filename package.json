@@ -13,7 +13,8 @@
     "deploy": "gh-pages -d dist",
     "update": "npx taze --include /rsbuild/ -w",
     "rspack": "rspack",
-    "electron": "electron"
+    "electron": "electron",
+    "tauri": "tauri"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.5",
@@ -38,8 +39,9 @@
     "@rsbuild/plugin-react": "^1.4.2",
     "@tanstack/react-router": "^1.140.0",
     "@tanstack/react-router-devtools": "^1.140.0",
+    "@tauri-apps/cli": "^2.9.5",
     "ahooks": "^3.9.6",
-    "antd": "^6.0.1",
+    "antd": "^6.1.0",
     "axios": "^1.13.2",
     "electron": "^39.2.6",
     "file-saver": "^2.0.5",
