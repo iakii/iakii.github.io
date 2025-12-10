@@ -7,7 +7,6 @@
       "dependencies": {
         "@ant-design/icons": "^6.1.0",
         "@ant-design/pro-components": "^2.8.10",
-        "@ant-design/v5-patch-for-react-19": "^1.0.3",
         "@metabase/embedding-sdk-react": "^0.56.6",
         "@micro-zoe/micro-app": "^1.0.0-rc.27",
         "@monaco-editor/react": "^4.7.0",
@@ -85,8 +84,6 @@
     "@ant-design/pro-utils": ["@ant-design/pro-utils@2.18.0", "https://mirrors.huaweicloud.com/repository/npm/@ant-design/pro-utils/-/pro-utils-2.18.0.tgz", { "dependencies": { "@ant-design/icons": "^5.0.0", "@ant-design/pro-provider": "2.16.2", "@babel/runtime": "^7.18.0", "classnames": "^2.3.2", "dayjs": "^1.11.10", "lodash": "^4.17.21", "lodash-es": "^4.17.21", "rc-util": "^5.0.6", "safe-stable-stringify": "^2.4.3", "swr": "^2.0.0" }, "peerDependencies": { "antd": "^4.24.15 || ^5.11.2", "react": ">=17.0.0", "react-dom": ">=17.0.0" } }, "sha512-8+ikyrN8L8a8Ph4oeHTOJEiranTj18+9+WHCHjKNdEfukI7Rjn8xpYdLJWb2AUJkb9d4eoAqjd5+k+7w81Df0w=="],
 
     "@ant-design/react-slick": ["@ant-design/react-slick@2.0.0", "https://registry.npmmirror.com/@ant-design/react-slick/-/react-slick-2.0.0.tgz", { "dependencies": { "@babel/runtime": "^7.28.4", "clsx": "^2.1.1", "json2mq": "^0.2.0", "throttle-debounce": "^5.0.0" }, "peerDependencies": { "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-HMS9sRoEmZey8LsE/Yo6+klhlzU12PisjrVcydW3So7RdklyEd2qehyU6a7Yp+OYN72mgsYs3NFCyP2lCPFVqg=="],
-
-    "@ant-design/v5-patch-for-react-19": ["@ant-design/v5-patch-for-react-19@1.0.3", "https://registry.npmmirror.com/@ant-design/v5-patch-for-react-19/-/v5-patch-for-react-19-1.0.3.tgz", { "peerDependencies": { "antd": ">=5.22.6", "react": ">=19.0.0", "react-dom": ">=19.0.0" } }, "sha512-iWfZuSUl5kuhqLUw7jJXUQFMMkM7XpW7apmKzQBQHU0cpifYW4A79xIBt9YVO5IBajKpPG5UKP87Ft7Yrw1p/w=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.27.1", "https://mirrors.huaweicloud.com/repository/npm/@babel/code-frame/-/code-frame-7.27.1.tgz", { "dependencies": { "@babel/helper-validator-identifier": "^7.27.1", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg=="],
 

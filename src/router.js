@@ -18,6 +18,7 @@ import { Route as JdmicroRouteImport } from './routes/jdmicro'
 import { Route as FlagRouteImport } from './routes/flag'
 import { Route as ExcelRouteImport } from './routes/excel'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as AceRouteImport } from './routes/ace'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
@@ -77,6 +78,11 @@ const ExcelRoute = ExcelRouteImport.update({
 const DocsRoute = DocsRouteImport.update({
   id: '/docs',
   path: '/docs',
+  getParentRoute: () => rootRouteImport,
+})
+const AceRoute = AceRouteImport.update({
+  id: '/ace',
+  path: '/ace',
   getParentRoute: () => rootRouteImport,
 })
 const AboutRoute = AboutRouteImport.update({
@@ -159,6 +165,7 @@ const AppIdEditRoute = AppIdEditRouteImport.update({
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AceRoute: AceRoute,
   DocsRoute: DocsRoute,
   ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,

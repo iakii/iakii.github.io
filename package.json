@@ -32,7 +32,6 @@
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
     "@ant-design/pro-components": "^2.8.10",
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@metabase/embedding-sdk-react": "^0.56.6",
     "@micro-zoe/micro-app": "^1.0.0-rc.27",
     "@monaco-editor/react": "^4.7.0",
