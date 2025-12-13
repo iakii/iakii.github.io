@@ -13,6 +13,7 @@ import { Route as WujieRouteImport } from './routes/wujie'
 import { Route as WcpRouteImport } from './routes/wcp'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
+import { Route as LiteRouteImport } from './routes/lite'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as JdmicroRouteImport } from './routes/jdmicro'
 import { Route as FlagRouteImport } from './routes/flag'
@@ -53,6 +54,11 @@ const ToolsRoute = ToolsRouteImport.update({
 const QuickjsRoute = QuickjsRouteImport.update({
   id: '/quickjs',
   path: '/quickjs',
+  getParentRoute: () => rootRouteImport,
+})
+const LiteRoute = LiteRouteImport.update({
+  id: '/lite',
+  path: '/lite',
   getParentRoute: () => rootRouteImport,
 })
 const JsonJsRoute = JsonJsRouteImport.update({
@@ -171,6 +177,7 @@ const rootRouteChildren = {
   FlagRoute: FlagRoute,
   JdmicroRoute: JdmicroRoute,
   JsonJsRoute: JsonJsRoute,
+  LiteRoute: LiteRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
   WcpRoute: WcpRoute,

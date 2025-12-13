@@ -46,6 +46,7 @@
     "file-saver": "^2.0.5",
     "html-docx-js-extends": "^0.1.8",
     "jspdf": "^3.0.4",
+    "lit": "^3.3.1",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "mammoth": "file:./mammoth",

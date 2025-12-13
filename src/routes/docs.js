@@ -1,5 +1,6 @@
 import {
   AndroidOutlined,
+  AntDesignOutlined,
   AuditOutlined,
   CheckCircleOutlined,
   CodeOutlined,
@@ -85,6 +86,13 @@ const list = [
         type: "工具",
         date: "2025.05.30",
         icon: <SignatureOutlined />,
+      },
+      {
+        title: "React+Antd CDN使用示例",
+        url: "/html/cdn-antd.html",
+        type: "工具",
+        date: "2025.05.30",
+        icon: <AntDesignOutlined />,
       },
       {
         title: "解析yaml",
