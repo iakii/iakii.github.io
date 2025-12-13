@@ -27,7 +27,9 @@ export default defineConfig({
   },
   tools: {
     rspack: {
-      devtool: isDev ? "eval-cheap-module-source-map" : "source-map",
+      // 生产打包不生成 .map
+      // devtool: isDev ? "eval-cheap-module-source-map" : false,
+      devtool: false,
       plugins: [
         tanstackRouter({
           target: "react",
