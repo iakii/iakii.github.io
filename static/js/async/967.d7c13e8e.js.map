@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/async/967.d7c13e8e.js","sources":["../../../../src/routes/react/index.js"],"sourcesContent":["function RouteComponent() {\n  return <div>Hello \"/react/\"!</div>;\n}\nexport { RouteComponent as component };"],"names":["RouteComponent"],"mappings":"2JAAA,SAASA,IACP,MAAO,UAAC,MAAG,C,SAAC,kB,EACd,C"}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Hello World</title>
+    <script src="../js-library/react/react.production.min.js"></script>
+    <script src="../js-library/react/react-dom.production.min.js"></script>
+    <script src="../js-library/antd/babel.min.js"></script>
+    <script src="../js-library/dayjs.min.js"></script>
+    <script src="../js-library/antd/antd.min.js"></script>
+
+    <link rel="stylesheet" href="../js-library/antd/reset.css" />
+    <style>
+      :root {
+        background-color: #f6f6f7;
+      }
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useContext } = React;
+
+      const { Button, Flex, Rate } = antd; // 函数组件，无状态组件
+      const { ProCard, ProTable, DrawerForm } = ProComponents;
+
+      console.log(0, ProComponents);
+
+      function MyApp() {
+        const [count, setCount] = useState(1);
+        const [time, setTime] = useState(new Date().toLocaleString());
+        const [obj, setObj] = useState({ name: "张三", age: "21" });
+        const AllowHalfFn = () => <Rate allowHalf defaultValue={2.5} />;
+        let plus = () => {
+          setInterval(() => {
+            setCount((prevCount) => prevCount + 1);
+            setTime(new Date().toLocaleString());
+          }, 1000);
+          //class 组件的 this.setState会自动合并更新对象 //useState 不会自动合并更新对象，不会把新的 state 和旧的 state 进行合并，更新 state 变量是完全替换。
+          //
+          //所以要object.assign合并对象或者 {...preVal,{name:'李四'}} 手动合并
+          setObj((preVal) => Object.assign(obj, { name: "李四" }));
+        };
+        return (
+          <div>
+            <AllowHalfFn></AllowHalfFn> <h1> {count} </h1> <h2>时间:{time}</h2>{" "}
+            <h3>
+              {" "}
+              姓名：{obj.name} ; 年龄：{obj.age}{" "}
+            </h3>{" "}
+            <Button onClick={plus}>start plus & start time</Button>{" "}
+            <ProCard>hello world</ProCard>
+            <DrawerForm
+              title="测试"
+              trigger={<Button type="primary">Primary Button</Button>}
+            >
+              <ProTable columns={[]} />
+            </DrawerForm>
+          </div>
+        );
+      }
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+    </script>
+  </body>
+  <script crossorigin src="../js-library/antd/pro-components.min.js"></script>
+</html>

@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/async/759.1ff47c42.js","sources":["../../../../src/routes/quickjs.js"],"sourcesContent":["function RouteComponent() {\n  return <div>Hello \"/quickjs\"!</div>;\n}\nexport { RouteComponent as component };"],"names":["RouteComponent"],"mappings":"2JAAA,SAASA,IACP,MAAO,UAAC,MAAG,C,SAAC,mB,EACd,C"}
