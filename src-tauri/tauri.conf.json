@@ -9,6 +9,7 @@
     "beforeDevCommand": "bun dev",
     "beforeBuildCommand": ""
   },
+
   "app": {
     "windows": [
       {
