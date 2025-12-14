@@ -97,9 +97,6 @@ const { ProSkeleton } = ProComponents;
 const { useRequest } = ahooks;
 const ComponentsMap = {};
 window.AntComponents = { ...ProComponents, ...antd, ...icons };
-// Object.keys(Components).map((x) => {
-//   if (/^[A-Z]/.test(x)) ComponentsMap[x] = Components[x];
-// });
 
 console.log("ComponentsMap", ComponentsMap, window);
 function Bootscrap() {
@@ -128,6 +125,9 @@ function Bootscrap() {
   );
 }
 
-const container = document.getElementById("root");
-const root = ReactDOM.createRoot(container);
-root.render(<Bootscrap />);
+window.render = () => {
+  const container = document.getElementById("root");
+  const root = ReactDOM.createRoot(container);
+  root.render(<Bootscrap />);
+  return Promise.resolve();
+};

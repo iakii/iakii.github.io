@@ -41,9 +41,11 @@
       var exports = {};
     </script>
     <script src="/js-library/antd/react-schema-render@0.0.5_index.min.js"></script>
-    <script
-      src="/js-library/antd/icons@5-index.umd.min.js"
-    ></script>
+    <script src="/js-library/antd/icons@5-index.umd.min.js"></script>
+
+    <script src="/cdn-react/babel-bundle.js"></script>
+    <script src="/cdn-react/request-bundle.js"></script>
+    <script type="text/babel" src="/cdn-react/app-bundle.js"></script>
     <style>
       :root {
         background-color: #f6f6f7;
@@ -235,8 +237,7 @@
         </div>
       </div>
     </div>
-    <script src="/html/render/babel-bundle.js"></script>
-    <script src="/html/render/request-bundle.js"></script>
-    <script type="text/babel" src="/html/render/app-bundle.js"></script>
+
+    <script src="/cdn-react/entry.js" entry></script>
   </body>
 </html>
