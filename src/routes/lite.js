@@ -64,6 +64,18 @@ if (!window.customElements.get(tagName)) {
 }
 
 function dynamicLoad(src) {
+
+
+
+    // 判断是否已包含该 src 的 script 标签
+  const exist = Array.from(document.getElementsByTagName('script')).some(
+    (s) => s.src && s.src.indexOf(src) > -1
+  );
+  if (exist) {
+    fn && fn();
+    return;
+  }
+
   const normalize = (url) => {
     if (!url) return "";
     try {
@@ -84,6 +96,9 @@ function dynamicLoad(src) {
   );
 
   return new Promise((resolve, reject) => {
+
+
+
     if (existing) {
       if (
         existing.getAttribute("data-loaded") === "true" ||
