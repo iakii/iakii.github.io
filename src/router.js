@@ -13,11 +13,14 @@ import { Route as WujieRouteImport } from './routes/wujie'
 import { Route as WcpRouteImport } from './routes/wcp'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as QuickjsRouteImport } from './routes/quickjs'
+import { Route as LiteRouteImport } from './routes/lite'
 import { Route as JsonJsRouteImport } from './routes/jsonJs'
 import { Route as JdmicroRouteImport } from './routes/jdmicro'
 import { Route as FlagRouteImport } from './routes/flag'
 import { Route as ExcelRouteImport } from './routes/excel'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as CdnRouteImport } from './routes/cdn'
+import { Route as AceRouteImport } from './routes/ace'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactIndexRouteImport } from './routes/react/index'
@@ -54,6 +57,11 @@ const QuickjsRoute = QuickjsRouteImport.update({
   path: '/quickjs',
   getParentRoute: () => rootRouteImport,
 })
+const LiteRoute = LiteRouteImport.update({
+  id: '/lite',
+  path: '/lite',
+  getParentRoute: () => rootRouteImport,
+})
 const JsonJsRoute = JsonJsRouteImport.update({
   id: '/jsonJs',
   path: '/jsonJs',
@@ -77,6 +85,16 @@ const ExcelRoute = ExcelRouteImport.update({
 const DocsRoute = DocsRouteImport.update({
   id: '/docs',
   path: '/docs',
+  getParentRoute: () => rootRouteImport,
+})
+const CdnRoute = CdnRouteImport.update({
+  id: '/cdn',
+  path: '/cdn',
+  getParentRoute: () => rootRouteImport,
+})
+const AceRoute = AceRouteImport.update({
+  id: '/ace',
+  path: '/ace',
   getParentRoute: () => rootRouteImport,
 })
 const AboutRoute = AboutRouteImport.update({
@@ -159,11 +177,14 @@ const AppIdEditRoute = AppIdEditRouteImport.update({
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AceRoute: AceRoute,
+  CdnRoute: CdnRoute,
   DocsRoute: DocsRoute,
   ExcelRoute: ExcelRoute,
   FlagRoute: FlagRoute,
   JdmicroRoute: JdmicroRoute,
   JsonJsRoute: JsonJsRoute,
+  LiteRoute: LiteRoute,
   QuickjsRoute: QuickjsRoute,
   ToolsRoute: ToolsRoute,
   WcpRoute: WcpRoute,

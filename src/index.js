@@ -1,4 +1,3 @@
-import "@ant-design/v5-patch-for-react-19";
 import {
   RouterProvider,
   createHashHistory,
@@ -10,6 +9,7 @@ import { routeTree } from "./router";
 // import { registerMicroApps, start } from "qiankun";
 
 import microApp from "@micro-zoe/micro-app";
+import { start } from "qiankun";
 
 microApp.start({
   disableScopecss: true,
@@ -54,6 +54,6 @@ render({});
 //   },
 // ]);
 // // // 启动 qiankun
-// start({
-//   sandbox: { strictStyleIsolation: true }, // 样式隔离（可选）
-// });
+start({
+  sandbox: { strictStyleIsolation: true }, // 样式隔离（可选）
+});

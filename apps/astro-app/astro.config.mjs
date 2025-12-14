@@ -13,4 +13,8 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  build: {
+    // 将默认的 '_astro' 修改为你想要的目录名，例如 'assets'
+    assets: "assets",
+  },
 });

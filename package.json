@@ -32,7 +32,6 @@
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
     "@ant-design/pro-components": "^2.8.10",
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@metabase/embedding-sdk-react": "^0.56.6",
     "@micro-zoe/micro-app": "^1.0.0-rc.27",
     "@monaco-editor/react": "^4.7.0",
@@ -48,6 +47,7 @@
     "file-saver": "^2.0.5",
     "html-docx-js-extends": "^0.1.8",
     "jspdf": "^3.0.4",
+    "lit": "^3.3.1",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "mammoth": "file:./mammoth",
