@@ -2,7 +2,7 @@ import { Dropdown, Space, Tabs, Tooltip, Typography } from "antd";
 import { useCallback, useMemo } from "react";
 import "./index.less";
 
-import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useLocation, useNavigate, useRouter } from "@tanstack/react-router";
 import {
   KeepAliveTab,
   KeepAliveTabContext,
@@ -15,7 +15,8 @@ import {
 } from "@ant-design/icons";
 
 const KeepAliveLayout = ({ children }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const router = useRouter();
 
   const { pathname } = useLocation();
 
@@ -109,7 +110,7 @@ const KeepAliveLayout = ({ children }) => {
     (tabRoutePath) => {
       const curTab = keepAliveTabs.find((o) => o.routePath === tabRoutePath);
       if (curTab) {
-        history({ to: curTab?.pathname });
+        navigate({ to: curTab?.pathname });
       }
     },
     [keepAliveTabs]
@@ -138,8 +139,8 @@ const KeepAliveLayout = ({ children }) => {
     }),
     [closeTab, closeOtherTab, refreshTab, onHidden, onShow]
   );
-  const onBack = () => history.back();
-  const onNext = () => history.go(1);
+  const onBack = () => window.history.back();
+  const onNext = () => window.history.forward();
   const onRedo = () => location.reload();
 
   const title = useMemo(() => {
@@ -153,7 +154,6 @@ const KeepAliveLayout = ({ children }) => {
       (current?.title === "__root__" ? "首页" : current.title) || "小小工具箱"
     );
   }, [keepAliveTabs, pathname]);
-
 
   return (
     <div className={"keepAliveTabs"}>

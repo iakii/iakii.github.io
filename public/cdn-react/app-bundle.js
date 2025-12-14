@@ -5,14 +5,17 @@
 const initialSchema = `const render = ($root) => {
   const {useAppContext } = $root;
   console.log("$root", $root);
-  const { ProCard, ProTable,AccountBookFilled} = AntComponents;
+  const { ProCard,Space , ProTable,AccountBookFilled} = AntComponents;
   const App = () => {
     const [name, setName] = useState("张三");
     const app = useAppContext();
     console.log(1111, app)
     return (
-      <ProCard ghost direction='column' title={app.name} >
-      <AccountBookFilled />
+      <ProCard ghost direction='column' title={<Space>
+        <AccountBookFilled />
+        <a href="/cdn-react" target="_blank">{app.name}</a>
+      </Space>} >
+
         <ProTable
           size="small"
           bordered
