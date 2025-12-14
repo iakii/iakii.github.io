@@ -1,6 +1,6 @@
 import { ProCard } from "@ant-design/pro-components";
 import { createFileRoute } from "@tanstack/react-router";
-// import { css, html, LitElement, render } from "lit";
+import { css, html, LitElement, render } from "lit";
 import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/lite")({
@@ -10,33 +10,24 @@ export const Route = createFileRoute("/lite")({
 function RouteComponent() {
   const containerRef = useRef(null);
 
-  //  const [form]= ProForm.useForm()
   useEffect(() => {
     dynamicLoad("/js-library/lit-all.min.js").then(() => {
-
-
-
-      console.log("lit-element loaded",window.LitElement);
+      console.log("lit-element loaded", window.LitElement);
     });
 
-    // import("/js-library/lit-all.min.js").then((lit) => {
-    //   console.log("lit-element loaded", lit);
-    // });
-
-
-    // const content = html`<div>
-    //   <h1>Lite Page</h1>
-    //   <Test></Test>
-    // </div>`;
-    // render(content, containerRef.current);
+    const content = html`<div>
+      <h1>Lite Page</h1>
+      <Test></Test>
+    </div>`;
+    render(content, containerRef.current);
   }, []);
 
   return (
     <ProCard>
       <div ref={containerRef}></div>
-      {/* <simple-greeting name="张三">
+      <simple-greeting name="张三">
         <Test></Test>
-      </simple-greeting> */}
+      </simple-greeting>
     </ProCard>
   );
 }
@@ -45,34 +36,32 @@ const Test = () => {
   return <div> Test</div>;
 };
 
-// export class SimpleGreeting extends LitElement {
-//   // Define scoped styles right with your component, in plain CSS
-//   static styles = css`
-//     :host {
-//       color: blue;
-//     }
-//   `;
+export class SimpleGreeting extends LitElement {
+  // Define scoped styles right with your component, in plain CSS
+  static styles = css`
+    :host {
+      color: blue;
+    }
+  `;
+  name = "World";
+  render() {
+    return html`<style>
+        p {
+          font-size: 20px;
+          font-weight: bold;
+          color: green;
+        }
+      </style>
+      <p>Hello, ${this.name}!</p>
+      <slot></slot>`;
+  }
+}
 
-//   name = "World";
+const tagName = "simple-greeting";
 
-//   render() {
-//     return html`<style>
-//         p {
-//           font-size: 20px;
-//           font-weight: bold;
-//           color: green;
-//         }
-//       </style>
-//       <p>Hello, ${this.name}!</p>
-//       <slot></slot>`;
-//   }
-// }
-
-// const tagName = "simple-greeting";
-
-// if (!window.customElements.get(tagName)) {
-//   window.customElements.define(tagName, SimpleGreeting);
-// }
+if (!window.customElements.get(tagName)) {
+  window.customElements.define(tagName, SimpleGreeting);
+}
 
 function dynamicLoad(src) {
   const normalize = (url) => {
@@ -85,12 +74,14 @@ function dynamicLoad(src) {
   };
 
   const targetUrl = normalize(src);
-  const existing = Array.from(document.getElementsByTagName("script")).find((s) => {
-    const attr = s.getAttribute("src");
-    if (!attr) return false;
-    if (attr === src) return true;
-    return normalize(attr || s.src) === targetUrl;
-  });
+  const existing = Array.from(document.getElementsByTagName("script")).find(
+    (s) => {
+      const attr = s.getAttribute("src");
+      if (!attr) return false;
+      if (attr === src) return true;
+      return normalize(attr || s.src) === targetUrl;
+    }
+  );
 
   return new Promise((resolve, reject) => {
     if (existing) {
