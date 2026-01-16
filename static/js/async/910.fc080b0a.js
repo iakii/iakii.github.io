@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["910"],{48437(e,n,t){t.r(n),t.d(n,{component:()=>l});var s=t(39974),r=t(28812);function l(){return(0,s.jsx)(r.A,{title:"工具箱",children:'Hello "/tools"!'})}}}]);

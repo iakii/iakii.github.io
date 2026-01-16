@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["667"],{8158(n,p,e){e.r(p),e.d(p,{component:()=>t});var r=e(39974),s=e(13757);function t(){return(0,r.jsx)(s.A,{width:"100%",name:"app2",fiber:!0,url:"/app2/"})}}}]);

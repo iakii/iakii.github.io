@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["967"],{11482(e,n,r){r.r(n),r.d(n,{component:()=>t});var s=r(39974);function t(){return(0,s.jsx)("div",{children:'Hello "/react/"!'})}}}]);

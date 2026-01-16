@@ -5,14 +5,17 @@
 const initialSchema = `const render = ($root) => {
   const {useAppContext } = $root;
   console.log("$root", $root);
-  const { ProCard, ProTable,AccountBookFilled} = AntComponents;
+  const { ProCard,Space , ProTable,AccountBookFilled} = AntComponents;
   const App = () => {
     const [name, setName] = useState("张三");
     const app = useAppContext();
     console.log(1111, app)
     return (
-      <ProCard ghost direction='column' title={app.name} >
-      <AccountBookFilled />
+      <ProCard ghost direction='column' title={<Space>
+        <AccountBookFilled />
+        <a href="/cdn-react" target="_blank">{app.name}</a>
+      </Space>} >
+
         <ProTable
           size="small"
           bordered
@@ -97,9 +100,6 @@ const { ProSkeleton } = ProComponents;
 const { useRequest } = ahooks;
 const ComponentsMap = {};
 window.AntComponents = { ...ProComponents, ...antd, ...icons };
-// Object.keys(Components).map((x) => {
-//   if (/^[A-Z]/.test(x)) ComponentsMap[x] = Components[x];
-// });
 
 console.log("ComponentsMap", ComponentsMap, window);
 function Bootscrap() {
@@ -128,6 +128,9 @@ function Bootscrap() {
   );
 }
 
-const container = document.getElementById("root");
-const root = ReactDOM.createRoot(container);
-root.render(<Bootscrap />);
+window.render = () => {
+  const container = document.getElementById("root");
+  const root = ReactDOM.createRoot(container);
+  root.render(<Bootscrap />);
+  return Promise.resolve();
+};

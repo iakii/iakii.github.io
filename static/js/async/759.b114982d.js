@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkprint_js=self.webpackChunkprint_js||[]).push([["759"],{98170(n,e,s){s.r(e),s.d(e,{component:()=>c});var r=s(39974);function c(){return(0,r.jsx)("div",{children:'Hello "/quickjs"!'})}}}]);
