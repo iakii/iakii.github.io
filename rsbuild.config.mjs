@@ -3,11 +3,14 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/rspack";
 import { pluginLess } from "@rsbuild/plugin-less";
 import { pluginBabel } from "@rsbuild/plugin-babel";
+
+import { pluginNodePolyfill } from "@rsbuild/plugin-node-polyfill";
+
 import path from "path";
 const isDev = process.env.NODE_ENV !== "production";
 /** @type {import('@rspack/cli').Configuration} */
 export default defineConfig({
-  plugins: [pluginReact(), pluginLess(), pluginBabel()],
+  plugins: [pluginReact(), pluginLess(), pluginBabel(), pluginNodePolyfill()],
   html: {
     favicon: "favicon.svg",
     title: "小小工具箱",
@@ -45,19 +48,14 @@ export default defineConfig({
     hmr: true,
     progressBar: true,
     server: {
-      // http://localhost:8001/api/
-      "/proxy": {
-        "/metabase": {
-          target: "http://58.20.184.66:6005/metabase",
+      proxy: {
+        "/user": {
+          target: "http://58.20.184.66:6005/",
           changeOrigin: true,
-          pathRewrite: { "^/metabase": "" },
-        },
-        "/api": {
-          target: "https://randomuser.me",
-          changeOrigin: true,
-          // pathRewrite: { "^/metabase": "" },
+          // pathRewrite: { "^/previewServer": "" },
         },
       },
+      // http://localhost:8001/api/
     },
   },
   module: {
