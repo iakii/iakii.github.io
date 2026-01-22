@@ -123,6 +123,13 @@ const list = [
     icon: <FileMarkdownOutlined />,
     items: [
       {
+        title: "代码片段合集",
+        url: "/md?name=snippet",
+        type: "文档",
+        date: "2026.01.22",
+        icon: <FileMarkdownOutlined />,
+      },
+      {
         title: "OpenHarmony API11 设备开发预研与问题解决方案",
         url: "/md?name=app",
         type: "文档",
