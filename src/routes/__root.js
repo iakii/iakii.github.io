@@ -171,8 +171,6 @@ function RootComponent() {
           更新时间：{version.date}
         </div>,
       ]}
-      // id="test-pro-layout"
-      // ErrorBoundary={PageErrorBoundary}
     >
       <KeepAliveLayout>
         <Outlet />

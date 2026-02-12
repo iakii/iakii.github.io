@@ -120,7 +120,7 @@ function JsonJsTool() {
         }
       >
         <Editor
-          height="calc(100vh - 142px)"
+          height="calc(100vh - 240px)"
           defaultLanguage="json"
           language="json"
           defaultValue={defaultJson}
@@ -183,7 +183,7 @@ function JsonJsTool() {
         }
       >
         <Editor
-          height="calc(100vh - 142px)"
+          height="calc(100vh - 240px)"
           defaultLanguage={type}
           language={type}
           onMount={(editor) => {

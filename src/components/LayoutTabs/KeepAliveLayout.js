@@ -13,6 +13,7 @@ import {
   ArrowRightOutlined,
   RedoOutlined,
 } from "@ant-design/icons";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 const KeepAliveLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const KeepAliveLayout = ({ children }) => {
               key: "close-other",
             },
       ].filter((o) => o),
-    [keepAliveTabs]
+    [keepAliveTabs],
   );
 
   const menuClick = useCallback(
@@ -66,7 +67,7 @@ const KeepAliveLayout = ({ children }) => {
         closeOtherTab(tab.routePath);
       }
     },
-    [closeOtherTab, closeTab, refreshTab]
+    [closeOtherTab, closeTab, refreshTab],
   );
 
   /** @type {KeepAliveTab} tab */
@@ -84,7 +85,7 @@ const KeepAliveLayout = ({ children }) => {
         </Dropdown>
       );
     },
-    [menuItems]
+    [menuItems],
   );
 
   const tabItems = useMemo(() => {
@@ -95,7 +96,7 @@ const KeepAliveLayout = ({ children }) => {
         children: (
           <div
             key={tab.routePath}
-            style={{ height: "calc(100vh - 112px)", overflow: "auto" }}
+            style={{ height: "calc(100vh - 90px)", overflow: "auto" }}
           >
             {tab.children}
           </div>
@@ -113,7 +114,7 @@ const KeepAliveLayout = ({ children }) => {
         navigate({ to: curTab?.pathname });
       }
     },
-    [keepAliveTabs]
+    [keepAliveTabs],
   );
 
   /**
@@ -137,16 +138,25 @@ const KeepAliveLayout = ({ children }) => {
       onHidden,
       onShow,
     }),
-    [closeTab, closeOtherTab, refreshTab, onHidden, onShow]
+    [closeTab, closeOtherTab, refreshTab, onHidden, onShow],
   );
   const onBack = () => window.history.back();
   const onNext = () => window.history.forward();
   const onRedo = () => location.reload();
 
+  const handleDrag = useCallback((e) => {
+    if (e.buttons === 1) {
+      const appWindow = getCurrentWindow();
+      e.detail === 2
+        ? appWindow.toggleMaximize() // Maximize on double click
+        : appWindow.startDragging(); // Else start dragging
+    }
+  }, []);
+
   const title = useMemo(() => {
     const current = keepAliveTabs.find(
       (x) =>
-        x.pathname === pathname || x.pathname?.replace(/\/$/, "") === pathname
+        x.pathname === pathname || x.pathname?.replace(/\/$/, "") === pathname,
     );
 
     if (!current) return "小小工具箱";
@@ -158,14 +168,12 @@ const KeepAliveLayout = ({ children }) => {
   return (
     <div className={"keepAliveTabs"}>
       <KeepAliveTabContext.Provider value={keepAliveContextValue}>
-        {/* <Space>
-         */}
         <Tabs
           tabBarExtraContent={{
             left: (
               <Typography.Title
-                level={4}
-                style={{ margin: "0 12px 0 0", padding: "8px 24px" }}
+                level={5}
+                style={{ margin: "0 12px 0 0", padding: "0 24px" }}
               >
                 <Space size="large">
                   <Tooltip title="后退">
@@ -184,7 +192,12 @@ const KeepAliveLayout = ({ children }) => {
           }}
           type="editable-card"
           items={tabItems}
-          // size="small"
+          renderTabBar={(props, DefaultTabBar) => (
+            <div onMouseDown={handleDrag}>
+              <DefaultTabBar {...props} />
+            </div>
+          )}
+          size="small"
           activeKey={activeTabRoutePath}
           onChange={onTabsChange}
           style={{ padding: 0 }}
@@ -192,7 +205,6 @@ const KeepAliveLayout = ({ children }) => {
           animated={false}
           onEdit={onTabEdit}
         />
-        {/* </Space> */}
       </KeepAliveTabContext.Provider>
     </div>
   );
