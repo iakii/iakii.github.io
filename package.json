@@ -18,16 +18,16 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.6",
     "@babel/standalone": "^7.29.1",
-    "@rsbuild/core": "^1.7.3",
-    "@rsbuild/plugin-babel": "^1.1.0",
-    "@rsbuild/plugin-less": "^1.6.0",
+    "@rsbuild/core": "^1.7.5",
+    "@rsbuild/plugin-babel": "^1.2.1",
+    "@rsbuild/plugin-less": "^1.6.4",
+    "@rsbuild/plugin-node-polyfill": "^1.4.6",
     "@rspack/cli": "^1.7.6",
     "@rspack/core": "^1.7.6",
     "@tanstack/router-plugin": "^1.159.5",
     "eslint": "^10.0.0",
     "eslint-plugin-react": "^7.37.5",
-    "gh-pages": "^6.3.0",
-    "@rsbuild/plugin-node-polyfill": "^1.4.4"
+    "gh-pages": "^6.3.0"
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
@@ -36,7 +36,7 @@
     "@metabase/embedding-sdk-react": "^0.58.0",
     "@micro-zoe/micro-app": "^1.0.0-rc.29",
     "@monaco-editor/react": "^4.7.0",
-    "@rsbuild/plugin-react": "^1.4.5",
+    "@rsbuild/plugin-react": "^1.4.6",
     "@tanstack/react-router": "^1.159.5",
     "@tanstack/react-router-devtools": "^1.159.5",
     "@tauri-apps/cli": "^2.10.0",
